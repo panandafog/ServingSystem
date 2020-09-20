@@ -1,3 +1,3 @@
 # ServingSystem
-Serving system simulator for macOS
+Serving system simulator for macOS.
 Educational project
