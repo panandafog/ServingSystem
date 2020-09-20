@@ -13,6 +13,9 @@
 		0B8FE3F125175CAE00E3CB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3EF25175CAE00E3CB46 /* Main.storyboard */; };
 		0B8FE3FD25175CAE00E3CB46 /* ServingSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE3FC25175CAE00E3CB46 /* ServingSystemTests.swift */; };
 		0B8FE40825175CAE00E3CB46 /* ServingSystemUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE40725175CAE00E3CB46 /* ServingSystemUITests.swift */; };
+		0B8FE41A25175D0B00E3CB46 /* TypedNSTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE41925175D0B00E3CB46 /* TypedNSTextField.swift */; };
+		0B8FE42025175D4200E3CB46 /* TextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE41F25175D4200E3CB46 /* TextFieldType.swift */; };
+		0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE42725175D6200E3CB46 /* SimulationMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +49,9 @@
 		0B8FE40325175CAE00E3CB46 /* ServingSystemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServingSystemUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8FE40725175CAE00E3CB46 /* ServingSystemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSystemUITests.swift; sourceTree = "<group>"; };
 		0B8FE40925175CAE00E3CB46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B8FE41925175D0B00E3CB46 /* TypedNSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypedNSTextField.swift; sourceTree = "<group>"; };
+		0B8FE41F25175D4200E3CB46 /* TextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldType.swift; sourceTree = "<group>"; };
+		0B8FE42725175D6200E3CB46 /* SimulationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationMode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,10 +102,11 @@
 		0B8FE3E825175CAD00E3CB46 /* ServingSystem */ = {
 			isa = PBXGroup;
 			children = (
+				0B8FE42C25175DB100E3CB46 /* Storyboard */,
+				0B8FE41825175CEE00E3CB46 /* Interface */,
+				0B8FE41E25175D2900E3CB46 /* Model */,
 				0B8FE3E925175CAD00E3CB46 /* AppDelegate.swift */,
-				0B8FE3EB25175CAD00E3CB46 /* ViewController.swift */,
 				0B8FE3ED25175CAE00E3CB46 /* Assets.xcassets */,
-				0B8FE3EF25175CAE00E3CB46 /* Main.storyboard */,
 				0B8FE3F225175CAE00E3CB46 /* Info.plist */,
 				0B8FE3F325175CAE00E3CB46 /* ServingSystem.entitlements */,
 			);
@@ -122,6 +129,32 @@
 				0B8FE40925175CAE00E3CB46 /* Info.plist */,
 			);
 			path = ServingSystemUITests;
+			sourceTree = "<group>";
+		};
+		0B8FE41825175CEE00E3CB46 /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				0B8FE3EB25175CAD00E3CB46 /* ViewController.swift */,
+				0B8FE41925175D0B00E3CB46 /* TypedNSTextField.swift */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		0B8FE41E25175D2900E3CB46 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B8FE41F25175D4200E3CB46 /* TextFieldType.swift */,
+				0B8FE42725175D6200E3CB46 /* SimulationMode.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B8FE42C25175DB100E3CB46 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				0B8FE3EF25175CAE00E3CB46 /* Main.storyboard */,
+			);
+			path = Storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,8 +286,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B8FE41A25175D0B00E3CB46 /* TypedNSTextField.swift in Sources */,
+				0B8FE42025175D4200E3CB46 /* TextFieldType.swift in Sources */,
 				0B8FE3EC25175CAD00E3CB46 /* ViewController.swift in Sources */,
 				0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */,
+				0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
