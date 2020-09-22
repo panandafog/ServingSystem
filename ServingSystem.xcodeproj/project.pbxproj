@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07B7AF2519FDAD00B03D46 /* Simulator.swift */; };
+		0B6C958D25192E03006DC0DD /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C958C25192E03006DC0DD /* Request.swift */; };
+		0B6C959325192F46006DC0DD /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C959225192F46006DC0DD /* Generator.swift */; };
+		0B6C95982519325C006DC0DD /* SpecialConditioned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95972519325C006DC0DD /* SpecialConditioned.swift */; };
+		0B6C95A025193478006DC0DD /* BufferInserter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C959F25193478006DC0DD /* BufferInserter.swift */; };
+		0B6C95A52519348F006DC0DD /* BufferPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95A42519348F006DC0DD /* BufferPicker.swift */; };
+		0B6C95AA251934A9006DC0DD /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95A9251934A9006DC0DD /* Buffer.swift */; };
+		0B6C95AF2519501A006DC0DD /* Processor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95AE2519501A006DC0DD /* Processor.swift */; };
 		0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE3E925175CAD00E3CB46 /* AppDelegate.swift */; };
 		0B8FE3EC25175CAD00E3CB46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE3EB25175CAD00E3CB46 /* ViewController.swift */; };
 		0B8FE3EE25175CAE00E3CB46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3ED25175CAE00E3CB46 /* Assets.xcassets */; };
@@ -36,6 +44,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B07B7AF2519FDAD00B03D46 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
+		0B6C958C25192E03006DC0DD /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		0B6C959225192F46006DC0DD /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
+		0B6C95972519325C006DC0DD /* SpecialConditioned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialConditioned.swift; sourceTree = "<group>"; };
+		0B6C959F25193478006DC0DD /* BufferInserter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferInserter.swift; sourceTree = "<group>"; };
+		0B6C95A42519348F006DC0DD /* BufferPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferPicker.swift; sourceTree = "<group>"; };
+		0B6C95A9251934A9006DC0DD /* Buffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
+		0B6C95AE2519501A006DC0DD /* Processor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Processor.swift; sourceTree = "<group>"; };
 		0B8FE3E625175CAD00E3CB46 /* ServingSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServingSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8FE3E925175CAD00E3CB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B8FE3EB25175CAD00E3CB46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +95,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B07B7AE2519FD8800B03D46 /* Buffer */ = {
+			isa = PBXGroup;
+			children = (
+				0B6C959F25193478006DC0DD /* BufferInserter.swift */,
+				0B6C95A42519348F006DC0DD /* BufferPicker.swift */,
+				0B6C95A9251934A9006DC0DD /* Buffer.swift */,
+			);
+			path = Buffer;
+			sourceTree = "<group>";
+		};
+		0B6C958B25192DB3006DC0DD /* Simulator */ = {
+			isa = PBXGroup;
+			children = (
+				0B07B7AF2519FDAD00B03D46 /* Simulator.swift */,
+				0B07B7AE2519FD8800B03D46 /* Buffer */,
+				0B6C95972519325C006DC0DD /* SpecialConditioned.swift */,
+				0B6C959225192F46006DC0DD /* Generator.swift */,
+				0B6C95AE2519501A006DC0DD /* Processor.swift */,
+				0B6C958C25192E03006DC0DD /* Request.swift */,
+			);
+			path = Simulator;
+			sourceTree = "<group>";
+		};
 		0B8FE3DD25175CAD00E3CB46 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +144,7 @@
 				0B8FE42C25175DB100E3CB46 /* Storyboard */,
 				0B8FE41825175CEE00E3CB46 /* Interface */,
 				0B8FE41E25175D2900E3CB46 /* Model */,
+				0B6C958B25192DB3006DC0DD /* Simulator */,
 				0B8FE3E925175CAD00E3CB46 /* AppDelegate.swift */,
 				0B8FE3ED25175CAE00E3CB46 /* Assets.xcassets */,
 				0B8FE3F225175CAE00E3CB46 /* Info.plist */,
@@ -286,9 +326,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */,
 				0B8FE41A25175D0B00E3CB46 /* TypedNSTextField.swift in Sources */,
+				0B6C95A52519348F006DC0DD /* BufferPicker.swift in Sources */,
+				0B6C958D25192E03006DC0DD /* Request.swift in Sources */,
 				0B8FE42025175D4200E3CB46 /* TextFieldType.swift in Sources */,
 				0B8FE3EC25175CAD00E3CB46 /* ViewController.swift in Sources */,
+				0B6C95982519325C006DC0DD /* SpecialConditioned.swift in Sources */,
+				0B6C95A025193478006DC0DD /* BufferInserter.swift in Sources */,
+				0B6C95AA251934A9006DC0DD /* Buffer.swift in Sources */,
+				0B6C959325192F46006DC0DD /* Generator.swift in Sources */,
+				0B6C95AF2519501A006DC0DD /* Processor.swift in Sources */,
 				0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */,
 				0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */,
 			);
