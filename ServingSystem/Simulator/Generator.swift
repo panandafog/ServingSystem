@@ -31,6 +31,11 @@ class Generator {
         let request = Request(name: String(priority) + "." + String(requestsCount), creatorNumber: priority, creationTime: time)
         bufferInserter.insert(request: request)
     }
+
+    func print() {
+        Swift.print("  Generator " + String(priority) + ":")
+        Swift.print("    time: " + String(time) + ", req count: " + String(requestsCount) + ", cooldown: " + String(cooldown))
+    }
 }
 
 

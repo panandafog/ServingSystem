@@ -18,4 +18,12 @@ class Buffer {
             queue.append(nil)
         }
     }
+
+    func print() {
+        Swift.print("  Buffer: ")
+
+        for index in 0...queue.count - 1 {
+            Swift.print("    " + String(index) + ": " + String(queue[Int(index)]?.name ?? "null"))
+        }
+    }
 }

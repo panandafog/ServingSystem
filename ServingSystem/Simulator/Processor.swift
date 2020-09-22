@@ -42,6 +42,19 @@ class Processor {
         time += cooldown
         requestsCount += 1
     }
+
+    func print() {
+
+        Swift.print("      time: " + String(time) + ", cooldown: " + String(cooldown) + ", req count: " + String(requestsCount))
+
+        let str1 = "      req: " + String(request?.name ?? "null")
+        var str2 = ""
+
+        if request != nil {
+            str2 = ", creation time: " + String(request!.creationTime)
+        }
+        Swift.print(str1 + str2)
+    }
 }
 
 

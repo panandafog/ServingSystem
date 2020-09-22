@@ -95,7 +95,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
                 if self.autoSimulator == nil {
                     break
                 }
-                self.autoSimulator?.makeStep()
+                self.autoSimulator?.makeStep(debug: true)
                 DispatchQueue.main.async {
                     self.autoSimulationProgressIndicator.increment(by: 1)
                 }
@@ -161,8 +161,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         let valid = mainSettingsAreValid()
         makeStepButton.isEnabled = (stepsSimulator == nil && valid) || stepsSimulator != nil
         stopStepsSimulationButton.isEnabled = stepsSimulator != nil
-
-        // TODO: validate selected mode settings
     }
 }
 

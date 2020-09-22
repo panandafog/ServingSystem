@@ -38,6 +38,22 @@ class Simulator {
             makeStep()
         }
     }
+
+    func getRejectedRequests() -> [Request] {
+        return bufferInserter.bin
+    }
+
+    func print() {
+
+        for index in 0...generators.count - 1 {
+            generators[index].print()
+        }
+        buffer.print()
+        for index in 0...processors.count - 1 {
+            Swift.print("  Processor " + String(index + 1) + ":")
+            processors[index].print()
+        }
+    }
 }
 
 extension Simulator: SpecialConditioned {
@@ -62,6 +78,10 @@ extension Simulator: SpecialConditioned {
     }
 
     func makeStep() {
+        makeStep(debug: false)
+    }
+
+    func makeStep(debug: Bool) {
         isEnabled = true
 
         var nextSCTime = Double.infinity
@@ -94,7 +114,20 @@ extension Simulator: SpecialConditioned {
             })
         }
         stepsCounter += 1
+
+        if debug {
+
+            var tmp = " –––––––– Step #" + String(stepsCounter) + " –––––––– "
+            tmp += "rejected: " + String(getRejectedRequests().count)
+            if nextSCObjectIsGenerator {
+                tmp += " –––––––– current SC: generator  –––––––– "
+            } else {
+                tmp += " –––––––– current SC: processor  –––––––– "
+            }
+            Swift.print(tmp)
+            self.print()
+            Swift.print()
+        }
     }
 }
-
 

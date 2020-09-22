@@ -15,20 +15,26 @@ class BufferPicker {
 
     func pick() -> Request? {
 
-        var res: Request? = nil
+        var result: Request?
+        var resultIndex: Int?
 
         for index in 0...Int(buffer.capacity) - 1 {
 
             if buffer.queue[index] == nil { continue }
 
-            if (res == nil) ||
-                (res!.creatorNumber > buffer.queue[index]!.creatorNumber) ||
-                (res!.creatorNumber == buffer.queue[index]!.creatorNumber
-                    && res!.creationTime > buffer.queue[index]!.creationTime) {
+            if (result == nil) ||
+                (result!.creatorNumber > buffer.queue[index]!.creatorNumber) ||
+                (result!.creatorNumber == buffer.queue[index]!.creatorNumber
+                    && result!.creationTime > buffer.queue[index]!.creationTime) {
 
-                res = buffer.queue[index]
+                result = buffer.queue[index]
+                resultIndex = index
             }
         }
-        return res
+        
+        if resultIndex != nil {
+            buffer.queue[resultIndex!] = nil
+        }
+        return result
     }
 }
