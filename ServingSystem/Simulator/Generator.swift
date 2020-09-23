@@ -12,8 +12,8 @@ class Generator {
 
     private let bufferInserter: BufferInserter
 
-    private var time = 0.0
-    private var requestsCount = 0
+    private(set) var time = 0.0
+    private(set) var requestsCount = 0
 
     init(priority: Int, cooldown: Double, bufferInserter: BufferInserter) {
         self.cooldown = cooldown

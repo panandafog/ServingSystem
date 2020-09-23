@@ -10,19 +10,19 @@ import Cocoa
 
 class ViewController: NSViewController, NSTextFieldDelegate {
 
-    // MARK: - Launch mode
+    // MARK: Launch mode
 
     @IBOutlet var modeSelector: NSPopUpButton!
     @IBOutlet var modeTab: NSTabView!
     @IBOutlet var modeSettingsTab: NSTabView!
 
-    // MARK: - General settings
+    // MARK: General settings
 
     @IBOutlet var sourcesAmountField: TypedNSTextField!
     @IBOutlet var bufferCapacityField: TypedNSTextField!
     @IBOutlet var handlersAmountField: TypedNSTextField!
 
-    // MARK: - Automatic mode
+    // MARK: Automatic mode
 
     @IBOutlet var autoSimulationIterationsField: TypedNSTextField!
 
@@ -31,10 +31,12 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
     @IBOutlet var autoSimulationProgressIndicator: NSProgressIndicator!
 
-    // MARK: - Step by step mode
+    // MARK: Step by step mode
 
     @IBOutlet var makeStepButton: NSButton!
     @IBOutlet var stopStepsSimulationButton: NSButton!
+
+    @IBOutlet var generatorsTable: NSTableView!
 
     var autoSimulator: Simulator?
     var stepsSimulator: Simulator?
@@ -59,6 +61,8 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         handlersAmountField.type = .positiveInt
 
         handlersAmountField.delegate = self
+        generatorsTable.delegate = self
+        generatorsTable.dataSource = self
 
         autoSimulationProgressIndicator.doubleValue = 0
         autoSimulationProgressIndicator.isHidden = true
@@ -131,14 +135,18 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         }
 
         makeStepButton.isEnabled = false
-        stepsSimulator?.makeStep()
+        stepsSimulator?.makeStep(debug: true)
         makeStepButton.isEnabled = true
         stopStepsSimulationButton.isEnabled = true
+
+        generatorsTable.reloadData()
     }
 
     @objc func stopStepsSimulation(_ sender: NSButton) {
         stepsSimulator = nil
         validateStepsSettings()
+
+        generatorsTable.reloadData()
     }
 
     // MARK: - Validation
@@ -164,3 +172,51 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
 }
 
+// MARK: - NSTableViewDelegate
+extension ViewController: NSTableViewDelegate {
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+
+        if tableView.identifier?.rawValue ?? "" != "generatorsTable" { return nil }
+        if stepsSimulator == nil { return nil }
+        if (stepsSimulator?.generators.count)! - 1 < row { return nil }
+
+        switch tableColumn?.identifier.rawValue {
+        case "numberColumn":
+            let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "numberCell")
+            guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = stepsSimulator?.generators[row].priority ?? 0
+            return cellView
+        case "timeColumn":
+            let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "timeCell")
+            guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.doubleValue = stepsSimulator?.generators[row].time ?? 0
+            return cellView
+        case "cooldownColumn":
+            let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "cooldownCell")
+            guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.doubleValue = stepsSimulator?.generators[row].cooldown ?? 0
+            return cellView
+        case "requestsCountColumn":
+            let cellIdentifier = NSUserInterfaceItemIdentifier(rawValue: "requestsCountCell")
+            guard let cellView = tableView.makeView(withIdentifier: cellIdentifier, owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = stepsSimulator?.generators[row].requestsCount ?? 0
+            return cellView
+
+        default:
+            return nil
+        }
+    }
+}
+
+// MARK: - NSTableViewDataSource
+extension ViewController: NSTableViewDataSource {
+
+    func numberOfRows(in tableView: NSTableView) -> Int {
+
+        guard let stepsSimulator = self.stepsSimulator else {
+            return 0
+        }
+        return stepsSimulator.generators.count
+    }
+}
