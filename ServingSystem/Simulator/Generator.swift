@@ -15,6 +15,8 @@ class Generator {
     private(set) var time = 0.0
     private(set) var requestsCount = 0
 
+    private var writeToLog: ((String) -> ())?
+
     init(priority: Int, cooldown: Double, bufferInserter: BufferInserter) {
         self.cooldown = cooldown
         self.priority = priority
@@ -22,8 +24,19 @@ class Generator {
     }
 
     convenience init(priority: Int, cooldown: Double, bufferInserter: BufferInserter, initialTime: Double) {
-        self.init(priority: priority, cooldown: initialTime, bufferInserter: bufferInserter)
+        self.init(priority: priority, cooldown: cooldown, bufferInserter: bufferInserter)
         self.time = initialTime
+    }
+
+    convenience init(priority: Int, cooldown: Double, bufferInserter: BufferInserter, writeToLog: @escaping ((String) -> ())) {
+        self.init(priority: priority, cooldown: cooldown, bufferInserter: bufferInserter)
+        self.writeToLog = writeToLog
+    }
+
+    convenience init(priority: Int, cooldown: Double, bufferInserter: BufferInserter, initialTime: Double, writeToLog: @escaping ((String) -> ())) {
+        self.init(priority: priority, cooldown: cooldown, bufferInserter: bufferInserter)
+        self.time = initialTime
+        self.writeToLog = writeToLog
     }
 
     private func generateRequest() {
@@ -48,5 +61,12 @@ extension Generator: SpecialConditioned {
     func makeStep() {
         generateRequest()
         time += cooldown
+
+
+        writeToLog?("Generator #" + String(priority)
+                        + " generated request #"
+                        + String(requestsCount)
+                        + " at " + String(time))
+
     }
 }

@@ -16,6 +16,7 @@ class Simulator {
     private var bufferInserter: BufferInserter
 
     private(set) var stepsCounter = 0
+    private(set) var eventLog = ""
     private(set) var isEnabled = false
 
     init(generatorsCount: UInt, generatorsCooldown: Double, processorsCount: UInt, processorsCooldown: Double,  bufferCapacity: UInt) {
@@ -25,11 +26,11 @@ class Simulator {
         bufferInserter = BufferInserter(buffer: buffer, generatorsCount: generatorsCount)
 
         for index in 1...generatorsCount {
-            generators.append(Generator(priority: Int(index), cooldown: generatorsCooldown + 0.1 * Double(index), bufferInserter: bufferInserter))
+            generators.append(Generator(priority: Int(index), cooldown: generatorsCooldown + 0.1 * Double(index), bufferInserter: bufferInserter, writeToLog: self.writeToLog(_:)))
         }
 
         for index in 1...processorsCount {
-            processors.append(Processor(initialCooldown: processorsCooldown + 0.1 * Double(index), bufferPicker: bufferPicker))
+            processors.append(Processor(number: index, initialCooldown: processorsCooldown + 0.1 * Double(index), bufferPicker: bufferPicker, writeToLog: self.writeToLog(_:)))
         }
     }
 
@@ -51,6 +52,10 @@ class Simulator {
 
     func getRejectedRequests() -> [[Request]] {
         return bufferInserter.bin
+    }
+
+    func writeToLog(_ string: String) {
+        eventLog.append(string + "\n")
     }
 
     func print() {

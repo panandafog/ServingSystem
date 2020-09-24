@@ -11,6 +11,7 @@ class Processor {
 
     private let bufferPicker: BufferPicker
 
+    private(set) var number: UInt = 0
     private(set) var time = 0.0
     private(set) var cooldown: Double
     private(set) var requestsCount = 0
@@ -18,14 +19,28 @@ class Processor {
     private(set) var request: Request? = nil
     private(set) var completedRequests = [Request]()
 
-    init(initialCooldown: Double, bufferPicker: BufferPicker) {
+    private var writeToLog: ((String) -> ())?
+
+    init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker) {
         self.cooldown = initialCooldown
         self.bufferPicker = bufferPicker
+        self.number = number
     }
 
-    convenience init(initialCooldown: Double, bufferPicker: BufferPicker, initialTime: Double) {
-        self.init(initialCooldown: initialCooldown, bufferPicker: bufferPicker)
+    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, initialTime: Double) {
+        self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
         self.time = initialTime
+    }
+
+    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, writeToLog: @escaping ((String) -> ())) {
+        self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
+        self.writeToLog = writeToLog
+    }
+
+    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, initialTime: Double, writeToLog: @escaping ((String) -> ())) {
+        self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
+        self.time = initialTime
+        self.writeToLog = writeToLog
     }
 
     private func getRequest() {
@@ -70,16 +85,35 @@ extension Processor: SpecialConditioned {
 
     func makeStep() {
 
-        if request == nil { return }
+        guard self.request != nil else { return }
 
         completeRequest()
         getRequest()
+
+        if request != nil {
+            writeToLog?("Processor #" + String(number)
+                            + " got request "
+                            + String(request?.name ?? "––")
+                            + " at " + String(time))
+        } else {
+            writeToLog?("Processor #" + String(number)
+                            + " gone to sleep"
+                            + " at " + String(time))
+        }
     }
 
     func makeStep(time: Double) {
 
         if request != nil { return }
 
+        self.time = time
         getRequest()
+
+        if request != nil {
+            writeToLog?("Processor #" + String(number)
+                            + " woke up and got request "
+                            + String(request?.name ?? "––")
+                            + " at " + String(time))
+        }
     }
 }

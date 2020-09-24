@@ -38,9 +38,9 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
     @IBOutlet var generatorsTable: NSTableView!
     @IBOutlet var processorsTable: NSTableView!
-    
     @IBOutlet var bufferTable: NSTableView!
-    
+    @IBOutlet var eventLog: NSTextView!
+
     var autoSimulator: Simulator?
     var stepsSimulator: Simulator?
 
@@ -151,12 +151,16 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         generatorsTable.reloadData()
         processorsTable.reloadData()
         bufferTable.reloadData()
+        eventLog.string = stepsSimulator?.eventLog ?? ""
+        let range = NSMakeRange(eventLog.string.count, 0)
+        eventLog.scrollRangeToVisible(range)
     }
 
     @objc func stopStepsSimulation(_ sender: NSButton) {
         stepsSimulator = nil
         validateStepsSettings()
 
+        eventLog.string = ""
         generatorsTable.reloadData()
         processorsTable.reloadData()
         bufferTable.reloadData()
@@ -234,7 +238,7 @@ extension ViewController: NSTableViewDelegate {
 
             case "numberColumn":
                 guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = row + 1
+                cellView.textField?.integerValue = Int(stepsSimulator?.processors[row].number ?? 0)
                 return cellView
 
             case "timeColumn":
