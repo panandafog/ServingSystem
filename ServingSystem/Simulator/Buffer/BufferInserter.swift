@@ -9,10 +9,14 @@ class BufferInserter {
 
     let buffer: Buffer
 
-    private(set) var bin = [Request]()
+    private(set) var bin = [[Request]]()
 
-    init(buffer: Buffer) {
+    init(buffer: Buffer, generatorsCount: UInt) {
         self.buffer = buffer
+
+        for _ in 1...generatorsCount {
+            bin.append([Request]())
+        }
     }
 
     func insert(request: Request) {
@@ -22,7 +26,7 @@ class BufferInserter {
         if ind != nil {
             buffer.queue[ind!] = request
         } else {
-            bin.append(request)
+            bin[request.creatorNumber - 1].append(request)
         }
     }
 }

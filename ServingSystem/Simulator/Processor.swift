@@ -11,9 +11,9 @@ class Processor {
 
     private let bufferPicker: BufferPicker
 
-    private var time = 0.0
-    private var cooldown: Double
-    private var requestsCount = 0
+    private(set) var time = 0.0
+    private(set) var cooldown: Double
+    private(set) var requestsCount = 0
 
     private(set) var request: Request? = nil
     private(set) var completedRequests = [Request]()

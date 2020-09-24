@@ -22,7 +22,7 @@ class Simulator {
 
         buffer = Buffer(capacity: bufferCapacity)
         bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserter(buffer: buffer)
+        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: generatorsCount)
 
         for index in 1...generatorsCount {
             generators.append(Generator(priority: Int(index), cooldown: generatorsCooldown + 0.1 * Double(index), bufferInserter: bufferInserter))
@@ -39,7 +39,17 @@ class Simulator {
         }
     }
 
-    func getRejectedRequests() -> [Request] {
+    func getAllRejectedRequests() -> [Request] {
+        var res = [Request]()
+        bufferInserter.bin.forEach({
+            $0.forEach({
+                res.append($0)
+            })
+        })
+        return res
+    }
+
+    func getRejectedRequests() -> [[Request]] {
         return bufferInserter.bin
     }
 
@@ -118,7 +128,7 @@ extension Simulator: SpecialConditioned {
         if debug {
 
             var tmp = " –––––––– Step #" + String(stepsCounter) + " –––––––– "
-            tmp += "rejected: " + String(getRejectedRequests().count)
+            tmp += "rejected: " + String(getAllRejectedRequests().count)
             if nextSCObjectIsGenerator {
                 tmp += " –––––––– current SC: generator  –––––––– "
             } else {
