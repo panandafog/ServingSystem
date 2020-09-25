@@ -97,6 +97,7 @@ extension Simulator: SpecialConditioned {
     }
 
     func makeStep(debug: Bool) {
+
         isEnabled = true
 
         var nextSCTime = Double.infinity
@@ -121,12 +122,16 @@ extension Simulator: SpecialConditioned {
 
         nextSCObject?.makeStep()
 
-        if nextSCObjectIsGenerator {
-            processors.forEach({
-                if $0.request == nil {
-                    $0.makeStep(time: nextSCTime)
+        if nextSCObjectIsGenerator && buffer.hasRequests() {
+            for index in 0...processors.count - 1 {
+                if buffer.hasRequests() {
+                    if processors[index].request == nil {
+                        processors[index].makeStep(time: nextSCTime)
+                    }
+                } else {
+                    break
                 }
-            })
+            }
         }
         stepsCounter += 1
 

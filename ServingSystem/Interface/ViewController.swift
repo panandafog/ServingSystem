@@ -18,9 +18,9 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
     // MARK: General properties
 
-    @IBOutlet var sourcesAmountField: TypedNSTextField!
+    @IBOutlet var generatorsAmountField: TypedNSTextField!
     @IBOutlet var bufferCapacityField: TypedNSTextField!
-    @IBOutlet var handlersAmountField: TypedNSTextField!
+    @IBOutlet var processorsAmountField: TypedNSTextField!
 
     // MARK: Automatic mode properties
 
@@ -41,10 +41,13 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     @IBOutlet var bufferTable: NSTableView!
     @IBOutlet var eventLog: NSTextView!
 
+    @IBOutlet var stepsSimulationProgressIndicator: NSProgressIndicator!
+
     var autoSimulator: Simulator?
     var stepsSimulator: Simulator?
 
     private let emptyString = " ––– "
+    private let debug = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,17 +58,17 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         makeStepButton.action = #selector(self.makeStep(_:))
         stopStepsSimulationButton.action = #selector(self.stopStepsSimulation(_:))
 
-        sourcesAmountField.action = #selector(self.textFieldDidChange(_:))
+        generatorsAmountField.action = #selector(self.textFieldDidChange(_:))
         bufferCapacityField.action = #selector(self.textFieldDidChange(_:))
-        handlersAmountField.action = #selector(self.textFieldDidChange(_:))
+        processorsAmountField.action = #selector(self.textFieldDidChange(_:))
 
         autoSimulationIterationsField.action = #selector(self.textFieldDidChange(_:))
 
-        sourcesAmountField.type = .positiveInt
+        generatorsAmountField.type = .positiveInt
         bufferCapacityField.type = .positiveInt
-        handlersAmountField.type = .positiveInt
+        processorsAmountField.type = .positiveInt
 
-        handlersAmountField.delegate = self
+        processorsAmountField.delegate = self
         generatorsTable.delegate = self
         generatorsTable.dataSource = self
         processorsTable.delegate = self
@@ -91,7 +94,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     @objc func startAutoSimulation(_ sender: NSButton) {
         let generatorsCooldown = 1.0
 
-        guard let generatorsCount = UInt(sourcesAmountField.stringValue), let processorsCount = UInt(handlersAmountField.stringValue), let bufferCapacity = UInt(bufferCapacityField.stringValue), let iterationsCount = UInt(autoSimulationIterationsField.stringValue) else {
+        guard let generatorsCount = UInt(generatorsAmountField.stringValue), let processorsCount = UInt(processorsAmountField.stringValue), let bufferCapacity = UInt(bufferCapacityField.stringValue), let iterationsCount = UInt(autoSimulationIterationsField.stringValue) else {
             return
         }
 
@@ -108,7 +111,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
                 if self.autoSimulator == nil {
                     break
                 }
-                self.autoSimulator?.makeStep(debug: true)
+                self.autoSimulator?.makeStep(debug: false)
                 DispatchQueue.main.async {
                     self.autoSimulationProgressIndicator.increment(by: 1)
                 }
@@ -135,7 +138,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
         let generatorsCooldown = 1.0
 
-        guard let generatorsCount = UInt(sourcesAmountField.stringValue), let processorsCount = UInt(handlersAmountField.stringValue), let bufferCapacity = UInt(bufferCapacityField.stringValue) else {
+        guard let generatorsCount = UInt(generatorsAmountField.stringValue), let processorsCount = UInt(processorsAmountField.stringValue), let bufferCapacity = UInt(bufferCapacityField.stringValue) else {
             return
         }
 
@@ -144,16 +147,24 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         }
 
         makeStepButton.isEnabled = false
-        stepsSimulator?.makeStep(debug: true)
-        makeStepButton.isEnabled = true
-        stopStepsSimulationButton.isEnabled = true
+        stopStepsSimulationButton.isEnabled = false
+        stepsSimulationProgressIndicator.startAnimation(self)
 
-        generatorsTable.reloadData()
-        processorsTable.reloadData()
-        bufferTable.reloadData()
-        eventLog.string = stepsSimulator?.eventLog ?? ""
-        let range = NSMakeRange(eventLog.string.count, 0)
-        eventLog.scrollRangeToVisible(range)
+        DispatchQueue.global(qos: .background).async {
+            self.stepsSimulator?.makeStep(debug: self.debug)
+            DispatchQueue.main.async {
+                self.makeStepButton.isEnabled = true
+                self.stopStepsSimulationButton.isEnabled = true
+                self.stepsSimulationProgressIndicator.stopAnimation(self)
+
+                self.generatorsTable.reloadData()
+                self.processorsTable.reloadData()
+                self.bufferTable.reloadData()
+                self.eventLog.string = self.stepsSimulator?.eventLog ?? ""
+                let range = NSMakeRange(self.eventLog.string.count, 0)
+                self.eventLog.scrollRangeToVisible(range)
+            }
+        }
     }
 
     @objc func stopStepsSimulation(_ sender: NSButton) {
@@ -174,7 +185,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
 
     func mainSettingsAreValid() -> Bool {
-        return sourcesAmountField.validateType() && bufferCapacityField.validateType() && handlersAmountField.validateType()
+        return generatorsAmountField.validateType() && bufferCapacityField.validateType() && processorsAmountField.validateType()
     }
 
     func validateAutoSettings() {

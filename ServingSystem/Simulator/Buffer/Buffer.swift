@@ -26,4 +26,15 @@ class Buffer {
             Swift.print("    " + String(index) + ": " + String(queue[Int(index)]?.name ?? "null"))
         }
     }
+
+    func hasRequests() -> Bool {
+
+        for index in 1...capacity {
+            if queue[Int(index - 1)] != nil {
+                return true
+            }
+        }
+
+        return false
+    }
 }
