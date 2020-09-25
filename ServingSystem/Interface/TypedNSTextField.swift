@@ -18,10 +18,10 @@ class TypedNSTextField: NSTextField {
     func validateType() -> Bool {
         let value = self.stringValue
 
-        if value == "" {
+        if value.isEmpty {
             return false
         }
-        switch (type) {
+        switch type {
         case .positiveInt:
             guard let validatedValue = Int(value) else {
                 return false

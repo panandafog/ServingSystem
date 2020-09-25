@@ -15,7 +15,6 @@ struct Request {
 
 extension Request: Equatable {
     static func == (lhs: Request, rhs: Request) -> Bool {
-        return
             lhs.name == rhs.name &&
             lhs.creatorNumber == rhs.creatorNumber &&
             lhs.creationTime == rhs.creationTime

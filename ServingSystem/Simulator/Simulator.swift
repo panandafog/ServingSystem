@@ -19,18 +19,24 @@ class Simulator {
     private(set) var eventLog = ""
     private(set) var isEnabled = false
 
-    init(generatorsCount: UInt, generatorsCooldown: Double, processorsCount: UInt, processorsCooldown: Double,  bufferCapacity: UInt) {
+    init(generatorsCount: UInt, generatorsCooldown: Double, processorsCount: UInt, processorsCooldown: Double, bufferCapacity: UInt) {
 
         buffer = Buffer(capacity: bufferCapacity)
         bufferPicker = BufferPicker(buffer: buffer)
         bufferInserter = BufferInserter(buffer: buffer, generatorsCount: generatorsCount)
 
         for index in 1...generatorsCount {
-            generators.append(Generator(priority: Int(index), cooldown: generatorsCooldown + 0.1 * Double(index), bufferInserter: bufferInserter, writeToLog: self.writeToLog(_:)))
+            generators.append(Generator(priority: Int(index),
+                                        cooldown: generatorsCooldown + 0.1 * Double(index),
+                                        bufferInserter: bufferInserter,
+                                        writeToLog: self.writeToLog(_:)))
         }
 
         for index in 1...processorsCount {
-            processors.append(Processor(number: index, initialCooldown: processorsCooldown + 0.1 * Double(index), bufferPicker: bufferPicker, writeToLog: self.writeToLog(_:)))
+            processors.append(Processor(number: index,
+                                        initialCooldown: processorsCooldown + 0.1 * Double(index),
+                                        bufferPicker: bufferPicker,
+                                        writeToLog: self.writeToLog(_:)))
         }
     }
 
@@ -51,7 +57,7 @@ class Simulator {
     }
 
     func getRejectedRequests() -> [[Request]] {
-        return bufferInserter.bin
+        bufferInserter.bin
     }
 
     func writeToLog(_ string: String) {
@@ -143,4 +149,3 @@ extension Simulator: SpecialConditioned {
         }
     }
 }
-

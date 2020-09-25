@@ -16,10 +16,10 @@ class Processor {
     private(set) var cooldown: Double
     private(set) var requestsCount = 0
 
-    private(set) var request: Request? = nil
+    private(set) var request: Request?
     private(set) var completedRequests = [Request]()
 
-    private var writeToLog: ((String) -> ())?
+    private var writeToLog: ((String) -> Void)?
 
     init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker) {
         self.cooldown = initialCooldown
@@ -32,12 +32,12 @@ class Processor {
         self.time = initialTime
     }
 
-    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, writeToLog: @escaping ((String) -> ())) {
+    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, writeToLog: @escaping ((String) -> Void)) {
         self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
         self.writeToLog = writeToLog
     }
 
-    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, initialTime: Double, writeToLog: @escaping ((String) -> ())) {
+    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, initialTime: Double, writeToLog: @escaping ((String) -> Void)) {
         self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
         self.time = initialTime
         self.writeToLog = writeToLog
@@ -71,7 +71,6 @@ class Processor {
     }
 }
 
-
 extension Processor: SpecialConditioned {
 
     func getNextSCTime() -> Double {
@@ -100,7 +99,9 @@ extension Processor: SpecialConditioned {
     }
 
     func makeStep(time: Double) {
-        if request != nil { return }
+        if request != nil {
+            return
+        }
         self.time = time
         getRequest()
 

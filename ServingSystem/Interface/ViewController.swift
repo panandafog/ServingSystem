@@ -10,44 +10,46 @@ import Cocoa
 
 class ViewController: NSViewController, NSTextFieldDelegate {
 
-    // MARK: Launch mode
-
-    @IBOutlet var modeSelector: NSPopUpButton!
-    @IBOutlet var modeTab: NSTabView!
-    @IBOutlet var modeSettingsTab: NSTabView!
-
     // MARK: General properties
-
-    @IBOutlet var generatorsAmountField: TypedNSTextField!
-    @IBOutlet var bufferCapacityField: TypedNSTextField!
-    @IBOutlet var processorsAmountField: TypedNSTextField!
-
-    // MARK: Automatic mode properties
-
-    @IBOutlet var autoSimulationIterationsField: TypedNSTextField!
-
-    @IBOutlet var startAutoSimulationButton: NSButton!
-    @IBOutlet var stopAutoSimulationButton: NSButton!
-
-    @IBOutlet var autoSimulationProgressIndicator: NSProgressIndicator!
-
-    // MARK: Step by step mode properties
-
-    @IBOutlet var makeStepButton: NSButton!
-    @IBOutlet var stopStepsSimulationButton: NSButton!
-
-    @IBOutlet var generatorsTable: NSTableView!
-    @IBOutlet var processorsTable: NSTableView!
-    @IBOutlet var bufferTable: NSTableView!
-    @IBOutlet var eventLog: NSTextView!
-
-    @IBOutlet var stepsSimulationProgressIndicator: NSProgressIndicator!
 
     var autoSimulator: Simulator?
     var stepsSimulator: Simulator?
 
     private let emptyString = " ––– "
     private let debug = false
+
+    // MARK: Launch mode
+
+    @IBOutlet private var modeSelector: NSPopUpButton!
+    @IBOutlet private var modeTab: NSTabView!
+    @IBOutlet private var modeSettingsTab: NSTabView!
+
+    // MARK: General properties
+
+    @IBOutlet private var generatorsAmountField: TypedNSTextField!
+    @IBOutlet private var bufferCapacityField: TypedNSTextField!
+    @IBOutlet private var processorsAmountField: TypedNSTextField!
+
+    // MARK: Automatic mode properties
+
+    @IBOutlet private var autoSimulationIterationsField: TypedNSTextField!
+
+    @IBOutlet private var startAutoSimulationButton: NSButton!
+    @IBOutlet private var stopAutoSimulationButton: NSButton!
+
+    @IBOutlet private var autoSimulationProgressIndicator: NSProgressIndicator!
+
+    // MARK: Step by step mode properties
+
+    @IBOutlet private var makeStepButton: NSButton!
+    @IBOutlet private var stopStepsSimulationButton: NSButton!
+
+    @IBOutlet private var generatorsTable: NSTableView!
+    @IBOutlet private var processorsTable: NSTableView!
+    @IBOutlet private var bufferTable: NSTableView!
+    @IBOutlet private var eventLog: NSTextView!
+
+    @IBOutlet private var stepsSimulationProgressIndicator: NSProgressIndicator!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,11 +82,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         autoSimulationProgressIndicator.isHidden = true
     }
 
-    override var representedObject: Any? {
-        didSet { }
-    }
-
-    @IBAction func modeChanged(_ sender: NSPopUpButton) {
+    @IBAction private  func modeChanged(_ sender: NSPopUpButton) {
         modeTab.selectTabViewItem(at: sender.indexOfSelectedItem)
         modeSettingsTab.selectTabViewItem(at: sender.indexOfSelectedItem)
     }
@@ -94,11 +92,18 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     @objc func startAutoSimulation(_ sender: NSButton) {
         let generatorsCooldown = 1.0
 
-        guard let generatorsCount = UInt(generatorsAmountField.stringValue), let processorsCount = UInt(processorsAmountField.stringValue), let bufferCapacity = UInt(bufferCapacityField.stringValue), let iterationsCount = UInt(autoSimulationIterationsField.stringValue) else {
+        guard let generatorsCount = UInt(generatorsAmountField.stringValue),
+              let processorsCount = UInt(processorsAmountField.stringValue),
+              let bufferCapacity = UInt(bufferCapacityField.stringValue),
+              let iterationsCount = UInt(autoSimulationIterationsField.stringValue) else {
             return
         }
 
-        autoSimulator = Simulator(generatorsCount: generatorsCount, generatorsCooldown: generatorsCooldown, processorsCount: processorsCount, processorsCooldown: 1.0, bufferCapacity: bufferCapacity)
+        autoSimulator = Simulator(generatorsCount: generatorsCount,
+                                  generatorsCooldown: generatorsCooldown,
+                                  processorsCount: processorsCount,
+                                  processorsCooldown: 1.0,
+                                  bufferCapacity: bufferCapacity)
 
         startAutoSimulationButton.isEnabled = false
         stopAutoSimulationButton.isEnabled = true
@@ -137,7 +142,9 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     @objc func makeStep(_ sender: NSButton) {
         let generatorsCooldown = 1.0
 
-        guard let generatorsCount = UInt(generatorsAmountField.stringValue), let processorsCount = UInt(processorsAmountField.stringValue), let bufferCapacity = UInt(bufferCapacityField.stringValue) else {
+        guard let generatorsCount = UInt(generatorsAmountField.stringValue),
+              let processorsCount = UInt(processorsAmountField.stringValue),
+              let bufferCapacity = UInt(bufferCapacityField.stringValue) else {
             return
         }
 
@@ -147,7 +154,11 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
         DispatchQueue.global(qos: .background).async {
             if self.stepsSimulator == nil {
-                self.stepsSimulator = Simulator(generatorsCount: generatorsCount, generatorsCooldown: generatorsCooldown, processorsCount: processorsCount, processorsCooldown: 1.0, bufferCapacity: bufferCapacity)
+                self.stepsSimulator = Simulator(generatorsCount: generatorsCount,
+                                                generatorsCooldown: generatorsCooldown,
+                                                processorsCount: processorsCount,
+                                                processorsCooldown: 1.0,
+                                                bufferCapacity: bufferCapacity)
             }
             self.stepsSimulator?.makeStep(debug: self.debug)
             DispatchQueue.main.async {
@@ -159,7 +170,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
                 self.processorsTable.reloadData()
                 self.bufferTable.reloadData()
                 self.eventLog.string = self.stepsSimulator?.eventLog ?? ""
-                let range = NSMakeRange(self.eventLog.string.count, 0)
+                let range = NSRange(location: self.eventLog.string.count, length: 0)
                 self.eventLog.scrollRangeToVisible(range)
             }
         }
@@ -183,7 +194,9 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
 
     func mainSettingsAreValid() -> Bool {
-        return generatorsAmountField.validateType() && bufferCapacityField.validateType() && processorsAmountField.validateType()
+        generatorsAmountField.validateType()
+            && bufferCapacityField.validateType()
+            && processorsAmountField.validateType()
     }
 
     func validateAutoSettings() {
@@ -201,108 +214,148 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 // MARK: - NSTableViewDelegate
 extension ViewController: NSTableViewDelegate {
 
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        if tableView.identifier?.rawValue ?? "" == "generatorsTable" {
-            if stepsSimulator == nil { return nil }
-            if (stepsSimulator?.generators.count)! - 1 < row { return nil }
+    func viewForGeneratorsTable(columnId: String?, row: Int) -> NSView? {
+        guard let stepsSimulator = self.stepsSimulator else {
+            return nil
+        }
+        if (stepsSimulator.generators.count) - 1 < row {
+            return nil
+        }
 
-            switch tableColumn?.identifier.rawValue {
+        switch columnId {
 
-            case "numberColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = stepsSimulator?.generators[row].priority ?? 0
-                return cellView
+        case "numberColumn":
+            guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = stepsSimulator.generators[row].priority
+            return cellView
 
-            case "timeColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "timeCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.doubleValue = stepsSimulator?.generators[row].time ?? 0
-                return cellView
+        case "timeColumn":
+            guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "timeCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.doubleValue = stepsSimulator.generators[row].time
+            return cellView
 
-            case "cooldownColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cooldownCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.doubleValue = stepsSimulator?.generators[row].cooldown ?? 0
-                return cellView
+        case "cooldownColumn":
+            guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cooldownCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.doubleValue = stepsSimulator.generators[row].cooldown
+            return cellView
 
-            case "requestsGeneratedColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestsGeneratedCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = stepsSimulator?.generators[row].requestsCount ?? 0
-                return cellView
+        case "requestsGeneratedColumn":
+            guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestsGeneratedCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = stepsSimulator.generators[row].requestsCount
+            return cellView
 
-            case "requestsRejectedColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestsRejectedCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = stepsSimulator?.getRejectedRequests()[row].count ?? 0
-                return cellView
+        case "requestsRejectedColumn":
+            guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestsRejectedCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = stepsSimulator.getRejectedRequests()[row].count
+            return cellView
 
-            default:
+        default:
+            return nil
+        }
+    }
+
+    func viewForProcessorsTable(columnId: String?, row: Int) -> NSView? {
+        guard let stepsSimulator = self.stepsSimulator else {
+            return nil
+        }
+        if (stepsSimulator.processors.count) - 1 < row {
+            return nil
+        }
+
+        switch columnId {
+
+        case "numberColumn":
+            guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = Int(stepsSimulator.processors[row].number )
+            return cellView
+
+        case "timeColumn":
+            guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "timeCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.doubleValue = stepsSimulator.processors[row].time
+            return cellView
+
+        case "cooldownColumn":
+            guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cooldownCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.doubleValue = stepsSimulator.processors[row].cooldown
+            return cellView
+
+        case "currentRequestColumn":
+            guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "currentRequestCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.stringValue = stepsSimulator.processors[row].request?.name ?? emptyString
+            return cellView
+
+        case "requestsProcessedColumn":
+            guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestsProcessedCell"),
+                                                          owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = stepsSimulator.processors[row].requestsCount
+            return cellView
+
+        default:
+            return nil
+        }
+    }
+
+    func viewForBufferTable(columnId: String?, row: Int) -> NSView? {
+        guard let stepsSimulator = self.stepsSimulator else {
+            return nil
+        }
+        if (stepsSimulator.buffer.queue.count) - 1 < row {
+            return nil
+        }
+
+        switch columnId {
+
+        case "numberColumn":
+            guard let cellView = bufferTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"),
+                                                      owner: self) as? NSTableCellView else {
                 return nil
             }
+            cellView.textField?.integerValue = row + 1
+            return cellView
+
+        case "requestNameColumn":
+            guard let cellView = bufferTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestNameCell"),
+                                                      owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.stringValue = stepsSimulator.buffer.queue[row]?.name ?? emptyString
+            return cellView
+
+        case "requestCreatorColumn":
+            guard let cellView = bufferTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestCreatorCell"),
+                                                      owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.integerValue = stepsSimulator.buffer.queue[row]?.creatorNumber ?? 0
+            return cellView
+
+        case "requestCreationTimeColumn":
+            guard let cellView = bufferTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestCreationTimeCell"),
+                                                      owner: self) as? NSTableCellView else { return nil }
+            cellView.textField?.doubleValue = stepsSimulator.buffer.queue[row]?.creationTime ?? 0
+            return cellView
+
+        default:
+            return nil
+        }
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        if tableView.identifier?.rawValue ?? "" == "generatorsTable" {
+            return viewForGeneratorsTable(columnId: tableColumn?.identifier.rawValue, row: row)
         }
 
         if tableView.identifier?.rawValue ?? "" == "processorsTable" {
-            if stepsSimulator == nil { return nil }
-            if (stepsSimulator?.processors.count)! - 1 < row { return nil }
-
-            switch tableColumn?.identifier.rawValue {
-
-            case "numberColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = Int(stepsSimulator?.processors[row].number ?? 0)
-                return cellView
-
-            case "timeColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "timeCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.doubleValue = stepsSimulator?.processors[row].time ?? 0
-                return cellView
-
-            case "cooldownColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cooldownCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.doubleValue = stepsSimulator?.processors[row].cooldown ?? 0
-                return cellView
-
-            case "currentRequestColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "currentRequestCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.stringValue = stepsSimulator?.processors[row].request?.name ?? emptyString
-                return cellView
-
-            case "requestsProcessedColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestsProcessedCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = stepsSimulator?.processors[row].requestsCount ?? 0
-                return cellView
-
-            default:
-                return nil
-            }
+            return viewForProcessorsTable(columnId: tableColumn?.identifier.rawValue, row: row)
         }
 
         if tableView.identifier?.rawValue ?? "" == "bufferTable" {
-            if stepsSimulator == nil { return nil }
-            if (stepsSimulator?.buffer.queue.count)! - 1 < row { return nil }
-
-            switch tableColumn?.identifier.rawValue {
-
-            case "numberColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = row + 1
-                return cellView
-
-            case "requestNameColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestNameCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.stringValue = stepsSimulator?.buffer.queue[row]?.name ?? emptyString
-                return cellView
-
-            case "requestCreatorColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestCreatorCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.integerValue = stepsSimulator?.buffer.queue[row]?.creatorNumber ?? 0
-                return cellView
-
-            case "requestCreationTimeColumn":
-                guard let cellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestCreationTimeCell"), owner: self) as? NSTableCellView else { return nil }
-                cellView.textField?.doubleValue = stepsSimulator?.buffer.queue[row]?.creationTime ?? 0
-                return cellView
-
-            default:
-                return nil
-            }
+            return viewForBufferTable(columnId: tableColumn?.identifier.rawValue, row: row)
         }
 
         return nil
