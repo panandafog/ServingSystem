@@ -54,8 +54,7 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     // MARK: Touch bar properties
 
     @IBOutlet private var makeStepTouchBarButton: NSButton!
-
-    @IBOutlet var stopStepsSimulationTouchBarButton: NSButton!
+    @IBOutlet private var stopStepsSimulationTouchBarButton: NSButton!
 
     // MARK: - View did load
     override func viewDidLoad() {
