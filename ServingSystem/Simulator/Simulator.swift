@@ -59,7 +59,6 @@ class Simulator {
     }
 
     func print() {
-
         for index in 0...generators.count - 1 {
             generators[index].print()
         }
@@ -74,7 +73,6 @@ class Simulator {
 extension Simulator: SpecialConditioned {
 
     func getNextSCTime() -> Double {
-
         var nextSCTime = Double.infinity
 
         processors.forEach({
@@ -82,13 +80,11 @@ extension Simulator: SpecialConditioned {
                 nextSCTime = $0.getNextSCTime()
             }
         })
-
         generators.forEach({
             if $0.getNextSCTime() < nextSCTime {
                 nextSCTime = $0.getNextSCTime()
             }
         })
-
         return nextSCTime
     }
 
@@ -97,7 +93,6 @@ extension Simulator: SpecialConditioned {
     }
 
     func makeStep(debug: Bool) {
-
         isEnabled = true
 
         var nextSCTime = Double.infinity
@@ -109,7 +104,6 @@ extension Simulator: SpecialConditioned {
                 nextSCObject = $0
             }
         })
-
         var nextSCObjectIsGenerator = false
 
         generators.forEach({
@@ -119,7 +113,6 @@ extension Simulator: SpecialConditioned {
                 nextSCObjectIsGenerator = true
             }
         })
-
         nextSCObject?.makeStep()
 
         if nextSCObjectIsGenerator && buffer.hasRequests() {

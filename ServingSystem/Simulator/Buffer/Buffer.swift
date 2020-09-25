@@ -11,7 +11,6 @@ class Buffer {
     var queue = [Request?]()
 
     init(capacity: UInt) {
-
         self.capacity = capacity
 
         for _ in 1...capacity {
@@ -28,7 +27,6 @@ class Buffer {
     }
 
     func hasRequests() -> Bool {
-
         for index in 1...capacity {
             if queue[Int(index - 1)] != nil {
                 return true

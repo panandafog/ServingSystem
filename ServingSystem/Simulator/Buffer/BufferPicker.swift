@@ -14,7 +14,6 @@ class BufferPicker {
     }
 
     func pick() -> Request? {
-
         var result: Request?
         var resultIndex: Int?
 

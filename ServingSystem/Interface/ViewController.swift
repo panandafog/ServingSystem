@@ -135,15 +135,10 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     // MARK: - Step by step mode
 
     @objc func makeStep(_ sender: NSButton) {
-
         let generatorsCooldown = 1.0
 
         guard let generatorsCount = UInt(generatorsAmountField.stringValue), let processorsCount = UInt(processorsAmountField.stringValue), let bufferCapacity = UInt(bufferCapacityField.stringValue) else {
             return
-        }
-
-        if stepsSimulator == nil {
-            stepsSimulator = Simulator(generatorsCount: generatorsCount, generatorsCooldown: generatorsCooldown, processorsCount: processorsCount, processorsCooldown: 1.0, bufferCapacity: bufferCapacity)
         }
 
         makeStepButton.isEnabled = false
@@ -151,6 +146,9 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         stepsSimulationProgressIndicator.startAnimation(self)
 
         DispatchQueue.global(qos: .background).async {
+            if self.stepsSimulator == nil {
+                self.stepsSimulator = Simulator(generatorsCount: generatorsCount, generatorsCooldown: generatorsCooldown, processorsCount: processorsCount, processorsCooldown: 1.0, bufferCapacity: bufferCapacity)
+            }
             self.stepsSimulator?.makeStep(debug: self.debug)
             DispatchQueue.main.async {
                 self.makeStepButton.isEnabled = true
@@ -204,7 +202,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 extension ViewController: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-
         if tableView.identifier?.rawValue ?? "" == "generatorsTable" {
             if stepsSimulator == nil { return nil }
             if (stepsSimulator?.generators.count)! - 1 < row { return nil }
@@ -316,7 +313,6 @@ extension ViewController: NSTableViewDelegate {
 extension ViewController: NSTableViewDataSource {
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-
         guard let stepsSimulator = self.stepsSimulator else {
             return 0
         }

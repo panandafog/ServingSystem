@@ -62,7 +62,6 @@ extension Generator: SpecialConditioned {
         generateRequest()
         time += cooldown
 
-
         writeToLog?("Generator #" + String(priority)
                         + " generated request #"
                         + String(requestsCount)

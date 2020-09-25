@@ -27,7 +27,6 @@ class BufferInserter {
     }
 
     func insert(request: Request) {
-
         let ind = buffer.queue.firstIndex(of: nil)
 
         if ind != nil {

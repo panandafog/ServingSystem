@@ -59,7 +59,6 @@ class Processor {
     }
 
     func print() {
-
         Swift.print("      time: " + String(time) + ", cooldown: " + String(cooldown) + ", req count: " + String(requestsCount))
 
         let str1 = "      req: " + String(request?.name ?? "null")
@@ -76,7 +75,6 @@ class Processor {
 extension Processor: SpecialConditioned {
 
     func getNextSCTime() -> Double {
-
         if request != nil {
             return time + cooldown
         }
@@ -84,7 +82,6 @@ extension Processor: SpecialConditioned {
     }
 
     func makeStep() {
-
         guard self.request != nil else { return }
 
         completeRequest()
@@ -103,9 +100,7 @@ extension Processor: SpecialConditioned {
     }
 
     func makeStep(time: Double) {
-
         if request != nil { return }
-
         self.time = time
         getRequest()
 

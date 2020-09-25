@@ -6,7 +6,6 @@
 //
 
 protocol SpecialConditioned {
-
     func getNextSCTime() -> Double
     func makeStep()
 }
