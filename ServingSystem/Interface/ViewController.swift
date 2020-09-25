@@ -51,6 +51,13 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
     @IBOutlet private var stepsSimulationProgressIndicator: NSProgressIndicator!
 
+    // MARK: Touch bar properties
+
+    @IBOutlet private var makeStepTouchBarButton: NSButton!
+
+    @IBOutlet var stopStepsSimulationTouchBarButton: NSButton!
+
+    // MARK: - View did load
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +66,9 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
         makeStepButton.action = #selector(self.makeStep(_:))
         stopStepsSimulationButton.action = #selector(self.stopStepsSimulation(_:))
+
+        makeStepTouchBarButton.action = makeStepButton.action
+        stopStepsSimulationTouchBarButton.action = stopStepsSimulationButton.action
 
         generatorsAmountField.action = #selector(self.textFieldDidChange(_:))
         bufferCapacityField.action = #selector(self.textFieldDidChange(_:))
@@ -82,9 +92,16 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         autoSimulationProgressIndicator.isHidden = true
     }
 
-    @IBAction private  func modeChanged(_ sender: NSPopUpButton) {
+    @IBAction private func modeChanged(_ sender: NSPopUpButton) {
         modeTab.selectTabViewItem(at: sender.indexOfSelectedItem)
         modeSettingsTab.selectTabViewItem(at: sender.indexOfSelectedItem)
+    }
+
+    // MARK: - Make touch bar
+    override func makeTouchBar() -> NSTouchBar? {
+        let touchBar = NSTouchBar()
+        touchBar.delegate = self
+        return touchBar
     }
 
     // MARK: - Automatic mode
@@ -150,6 +167,8 @@ class ViewController: NSViewController, NSTextFieldDelegate {
 
         makeStepButton.isEnabled = false
         stopStepsSimulationButton.isEnabled = false
+        makeStepTouchBarButton.isEnabled = false
+        stopStepsSimulationTouchBarButton.isEnabled = false
         stepsSimulationProgressIndicator.startAnimation(self)
 
         DispatchQueue.global(qos: .background).async {
@@ -164,6 +183,8 @@ class ViewController: NSViewController, NSTextFieldDelegate {
             DispatchQueue.main.async {
                 self.makeStepButton.isEnabled = true
                 self.stopStepsSimulationButton.isEnabled = true
+                self.makeStepTouchBarButton.isEnabled = true
+                self.stopStepsSimulationTouchBarButton.isEnabled = true
                 self.stepsSimulationProgressIndicator.stopAnimation(self)
 
                 self.generatorsTable.reloadData()
@@ -208,6 +229,9 @@ class ViewController: NSViewController, NSTextFieldDelegate {
         let valid = mainSettingsAreValid()
         makeStepButton.isEnabled = (stepsSimulator == nil && valid) || stepsSimulator != nil
         stopStepsSimulationButton.isEnabled = stepsSimulator != nil
+
+        makeStepTouchBarButton.isEnabled = makeStepButton.isEnabled
+        stopStepsSimulationTouchBarButton.isEnabled = stopStepsSimulationButton.isEnabled
     }
 }
 
@@ -384,5 +408,18 @@ extension ViewController: NSTableViewDataSource {
         default:
             return 0
         }
+    }
+}
+
+// MARK: - NSTouchBarDelegate
+extension ViewController: NSTouchBarDelegate {
+    
+    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
+        guard identifier.rawValue == "startButton" else { return nil }
+
+        let services = NSSharingServicePickerTouchBarItem(identifier: identifier)
+//        services.delegate = self
+
+        return services
     }
 }
