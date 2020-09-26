@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController, NSTextFieldDelegate {
+class ViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDelegate {
 
     // MARK: General properties
 
@@ -104,7 +104,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
 
     // MARK: - Automatic mode
-
     @objc func startAutoSimulation(_ sender: NSButton) {
         let generatorsCooldown = 1.0
 
@@ -154,7 +153,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
 
     // MARK: - Step by step mode
-
     @objc func makeStep(_ sender: NSButton) {
         let generatorsCooldown = 1.0
 
@@ -207,7 +205,6 @@ class ViewController: NSViewController, NSTextFieldDelegate {
     }
 
     // MARK: - Validation
-
     @objc func textFieldDidChange(_ sender: TypedNSTextField) {
         validateAutoSettings()
         validateStepsSettings()
@@ -407,18 +404,5 @@ extension ViewController: NSTableViewDataSource {
         default:
             return 0
         }
-    }
-}
-
-// MARK: - NSTouchBarDelegate
-extension ViewController: NSTouchBarDelegate {
-    
-    func touchBar(_ touchBar: NSTouchBar, makeItemForIdentifier identifier: NSTouchBarItem.Identifier) -> NSTouchBarItem? {
-        guard identifier.rawValue == "startButton" else { return nil }
-
-        let services = NSSharingServicePickerTouchBarItem(identifier: identifier)
-//        services.delegate = self
-
-        return services
     }
 }
