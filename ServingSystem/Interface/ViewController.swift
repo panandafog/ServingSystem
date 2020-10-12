@@ -421,13 +421,27 @@ extension ViewController: NSTableViewDelegate {
         case "waitingTimeDispersionColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "waitingTimeDispersionCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = 0.0
+            let requests = autoSimulator.getCompletedRequests(from: UInt(row))
+            var waitingTime = [Double]()
+
+            for request in requests where request.pickTime != nil {
+                waitingTime.append(request.pickTime! - request.creationTime)
+            }
+
+            cellView.textField?.doubleValue = Maths.dispersion(of: waitingTime)
             return cellView
 
         case "processingTimeDispersionColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "processingTimeDispersionCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = 0.0
+            let requests = autoSimulator.getCompletedRequests(from: UInt(row))
+            var processingTime = [Double]()
+
+            for request in requests where (request.pickTime != nil && request.completionTime != nil) {
+                processingTime.append(request.completionTime! - request.pickTime!)
+            }
+
+            cellView.textField?.doubleValue = Maths.dispersion(of: processingTime)
             return cellView
 
         default:

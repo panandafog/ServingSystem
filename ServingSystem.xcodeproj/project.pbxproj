@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07B7AF2519FDAD00B03D46 /* Simulator.swift */; };
+		0B459AB7253504E200351FBA /* Maths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459AB6253504E200351FBA /* Maths.swift */; };
 		0B6C958D25192E03006DC0DD /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C958C25192E03006DC0DD /* Request.swift */; };
 		0B6C959325192F46006DC0DD /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C959225192F46006DC0DD /* Generator.swift */; };
 		0B6C95982519325C006DC0DD /* SpecialConditioned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95972519325C006DC0DD /* SpecialConditioned.swift */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		0B07B7AF2519FDAD00B03D46 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
+		0B459AB6253504E200351FBA /* Maths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maths.swift; sourceTree = "<group>"; };
 		0B6C958C25192E03006DC0DD /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		0B6C959225192F46006DC0DD /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		0B6C95972519325C006DC0DD /* SpecialConditioned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialConditioned.swift; sourceTree = "<group>"; };
@@ -120,9 +122,18 @@
 			path = Buffer;
 			sourceTree = "<group>";
 		};
+		0B459AB5253504D300351FBA /* Maths */ = {
+			isa = PBXGroup;
+			children = (
+				0B459AB6253504E200351FBA /* Maths.swift */,
+			);
+			path = Maths;
+			sourceTree = "<group>";
+		};
 		0B6C958B25192DB3006DC0DD /* Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				0B459AB5253504D300351FBA /* Maths */,
 				0B07B7AF2519FDAD00B03D46 /* Simulator.swift */,
 				0B07B7AE2519FD8800B03D46 /* Buffer */,
 				0B6C95972519325C006DC0DD /* SpecialConditioned.swift */,
@@ -456,6 +467,7 @@
 				0B6C95AA251934A9006DC0DD /* Buffer.swift in Sources */,
 				0B6C959325192F46006DC0DD /* Generator.swift in Sources */,
 				0B6C95AF2519501A006DC0DD /* Processor.swift in Sources */,
+				0B459AB7253504E200351FBA /* Maths.swift in Sources */,
 				0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */,
 				0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */,
 			);
