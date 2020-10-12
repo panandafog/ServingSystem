@@ -46,7 +46,7 @@ class Processor {
     private func getRequest() {
         request = bufferPicker.pick()
         if request != nil {
-            self.cooldown = exp(Double(requestsCount))
+            self.cooldown = exp(Double.random(in: 0.0..<1.0))
         }
     }
 

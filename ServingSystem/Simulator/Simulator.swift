@@ -46,9 +46,62 @@ class Simulator {
         }
     }
 
+    func startAutoSimulation(initialRequestsAmount: UInt) {
+        var previousRequestAmount = initialRequestsAmount
+        var currentRequestsAmount = previousRequestAmount
+
+        makeSteps(currentRequestsAmount)
+        var currentRejectProbability = getRejectProbability()
+        var previousRejectProbability = currentRejectProbability
+
+        repeat {
+            previousRequestAmount = currentRequestsAmount
+            if currentRejectProbability == 0 {
+                break
+            }
+            currentRequestsAmount = previousRequestAmount + UInt((2.699_449 * (1.0 - currentRejectProbability)) / (currentRejectProbability * 0.01))
+
+            Swift.print("req amount: " + String(currentRequestsAmount))
+            Swift.print("rej prob:   " + String(currentRejectProbability))
+            makeSteps(currentRequestsAmount)
+
+            previousRejectProbability = currentRejectProbability
+            currentRejectProbability = getRejectProbability()
+        } while abs(previousRejectProbability - currentRejectProbability) >= (0.1 * previousRejectProbability)
+
+//        Swift.print("End auto simulation")
+//        Swift.print(String(previousRejectProbability))
+//        Swift.print(String(currentRejectProbability))
+//        Swift.print(String(previousRequestAmount))
+    }
+
+    func getRejectProbability() -> Double {
+        Double(getRejectedRequestsAmount()) / Double(getGeneratedRequestsAmount())
+    }
+
+    func getCompletedRequestsAmount() -> UInt {
+        var res = 0 as UInt
+        processors.forEach({
+            res += UInt($0.requestsCount)
+        })
+        return res
+    }
+
+    func getGeneratedRequestsAmount() -> UInt {
+        var res = 0 as UInt
+        generators.forEach({
+            res += UInt($0.requestsCount)
+        })
+        return res
+    }
+
+    func getRejectedRequestsAmount() -> UInt {
+        bufferInserter.getRejectedRequestsAmount()
+    }
+
     func getAllRejectedRequests() -> [Request] {
         var res = [Request]()
-        bufferInserter.bin.forEach({
+        bufferInserter.rejectedRequests.forEach({
             $0.forEach({
                 res.append($0)
             })
@@ -57,7 +110,7 @@ class Simulator {
     }
 
     func getRejectedRequests() -> [[Request]] {
-        bufferInserter.bin
+        bufferInserter.rejectedRequests
     }
 
     func writeToLog(_ string: String) {

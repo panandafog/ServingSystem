@@ -86,9 +86,6 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDelegate 
         processorsTable.dataSource = self
         bufferTable.delegate = self
         bufferTable.dataSource = self
-
-        autoSimulationProgressIndicator.doubleValue = 0
-        autoSimulationProgressIndicator.isHidden = true
     }
 
     @IBAction private func modeChanged(_ sender: NSPopUpButton) {
@@ -122,24 +119,17 @@ class ViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDelegate 
 
         startAutoSimulationButton.isEnabled = false
         stopAutoSimulationButton.isEnabled = true
-        autoSimulationProgressIndicator.doubleValue = 0.0
-        autoSimulationProgressIndicator.maxValue = Double(iterationsCount)
-        autoSimulationProgressIndicator.isHidden = false
+        autoSimulationProgressIndicator.startAnimation(self)
 
         DispatchQueue.global(qos: .background).async {
-            for _ in 1...iterationsCount {
-                if self.autoSimulator == nil {
-                    break
-                }
-                self.autoSimulator?.makeStep(debug: false)
-                DispatchQueue.main.async {
-                    self.autoSimulationProgressIndicator.increment(by: 1)
-                }
+            guard let simulator = self.autoSimulator else {
+                return
             }
+            simulator.startAutoSimulation(initialRequestsAmount: iterationsCount)
             DispatchQueue.main.async {
                 self.startAutoSimulationButton.isEnabled = true
                 self.stopAutoSimulationButton.isEnabled = false
-                self.autoSimulationProgressIndicator.isHidden = true
+                self.autoSimulationProgressIndicator.stopAnimation(self)
             }
         }
     }
