@@ -11,6 +11,8 @@ struct Request {
     let creatorNumber: Int
     let creationTime: Double
     var isCompleted = false
+    var pickTime: Double?
+    var completionTime: Double?
 }
 
 extension Request: Equatable {

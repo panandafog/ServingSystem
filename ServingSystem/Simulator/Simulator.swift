@@ -16,6 +16,7 @@ class Simulator {
     private var bufferInserter: BufferInserter
 
     private(set) var stepsCounter = 0
+    private(set) var realisationTime = 0.0
     private(set) var eventLog = ""
     private(set) var isEnabled = false
 
@@ -79,6 +80,18 @@ class Simulator {
         Double(getRejectedRequestsAmount()) / Double(getGeneratedRequestsAmount())
     }
 
+    func getCompletedRequests(from generator: UInt) -> [Request] {
+        var requests = [Request]()
+        for processor in processors {
+            processor.completedRequests.forEach({
+                if $0.creatorNumber == generator {
+                    requests.append($0)
+                }
+            })
+        }
+        return requests
+    }
+
     func getCompletedRequestsAmount() -> UInt {
         var res = 0 as UInt
         processors.forEach({
@@ -99,6 +112,10 @@ class Simulator {
         bufferInserter.getRejectedRequestsAmount()
     }
 
+    func getRejectedRequestsAmount(processorNumber: UInt) -> UInt {
+        bufferInserter.getRejectedRequestsAmount(processorNumber: processorNumber)
+    }
+
     func getAllRejectedRequests() -> [Request] {
         var res = [Request]()
         bufferInserter.rejectedRequests.forEach({
@@ -111,6 +128,45 @@ class Simulator {
 
     func getRejectedRequests() -> [[Request]] {
         bufferInserter.rejectedRequests
+    }
+
+    func getAverageRequestStayTime(generatorNumber: UInt) -> Double {
+        let requests = getCompletedRequests(from: generatorNumber)
+
+        var totalTime = 0.0
+
+        requests.forEach({
+            if $0.completionTime != nil {
+                totalTime += ($0.completionTime! - $0.creationTime)
+            }
+        })
+        return totalTime / Double(requests.count)
+    }
+
+    func getAverageRequestWaitingTime(generatorNumber: UInt) -> Double {
+        let requests = getCompletedRequests(from: generatorNumber)
+
+        var totalTime = 0.0
+
+        requests.forEach({
+            if $0.pickTime != nil {
+                totalTime += ($0.pickTime! - $0.creationTime)
+            }
+        })
+        return totalTime / Double(requests.count)
+    }
+
+    func getAverageRequestProcessingTime(generatorNumber: UInt) -> Double {
+        let requests = getCompletedRequests(from: generatorNumber)
+
+        var totalTime = 0.0
+
+        requests.forEach({
+            if $0.pickTime != nil && $0.completionTime != nil {
+                totalTime += ($0.completionTime! - $0.pickTime!)
+            }
+        })
+        return totalTime / Double(requests.count)
     }
 
     func writeToLog(_ string: String) {
@@ -172,6 +228,7 @@ extension Simulator: SpecialConditioned {
                 nextSCObjectIsGenerator = true
             }
         })
+        realisationTime = nextSCObject?.getNextSCTime() ?? realisationTime
         nextSCObject?.makeStep()
 
         if nextSCObjectIsGenerator && buffer.hasRequests() {

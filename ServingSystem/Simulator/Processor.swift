@@ -13,6 +13,7 @@ class Processor {
 
     private(set) var number: UInt = 0
     private(set) var time = 0.0
+    private(set) var bisyTime = 0.0
     private(set) var cooldown: Double
     private(set) var requestsCount = 0
 
@@ -46,16 +47,20 @@ class Processor {
     private func getRequest() {
         request = bufferPicker.pick()
         if request != nil {
+            request?.pickTime = self.time
             self.cooldown = exp(Double.random(in: 0.0..<1.0))
         }
     }
 
     private func completeRequest() {
-        completedRequests.append(request!)
-        request!.isCompleted = true
-        request = nil
         time += cooldown
+        bisyTime += cooldown
         requestsCount += 1
+        request!.isCompleted = true
+        request!.completionTime = time
+        completedRequests.append(request!)
+
+        request = nil
     }
 
     func print() {
