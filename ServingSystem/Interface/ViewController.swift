@@ -421,7 +421,7 @@ extension ViewController: NSTableViewDelegate {
         case "waitingTimeDispersionColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "waitingTimeDispersionCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            let requests = autoSimulator.getCompletedRequests(from: UInt(row))
+            let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
             var waitingTime = [Double]()
 
             for request in requests where request.pickTime != nil {
@@ -434,7 +434,7 @@ extension ViewController: NSTableViewDelegate {
         case "processingTimeDispersionColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "processingTimeDispersionCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            let requests = autoSimulator.getCompletedRequests(from: UInt(row))
+            let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
             var processingTime = [Double]()
 
             for request in requests where (request.pickTime != nil && request.completionTime != nil) {
