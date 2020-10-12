@@ -5,6 +5,8 @@
 //  Created by panandafog on 22.09.2020.
 //
 
+import Cocoa
+
 class Simulator {
 
     var generators = [Generator]()
@@ -70,6 +72,7 @@ class Simulator {
             currentRejectProbability = getRejectProbability()
         } while abs(previousRejectProbability - currentRejectProbability) >= (0.1 * previousRejectProbability)
 
+        showCompletionAlert(iterations: currentRequestsAmount)
 //        Swift.print("End auto simulation")
 //        Swift.print(String(previousRejectProbability))
 //        Swift.print(String(currentRejectProbability))
@@ -181,6 +184,19 @@ class Simulator {
         for index in 0...processors.count - 1 {
             Swift.print("  Processor " + String(index + 1) + ":")
             processors[index].print()
+        }
+    }
+
+    private func showCompletionAlert(iterations: UInt) {
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText = "Simulation finished"
+            alert.informativeText = "Automatic simulation finished after "
+                + String(iterations)
+                + " iterations"
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
         }
     }
 }
