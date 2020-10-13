@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07B7AF2519FDAD00B03D46 /* Simulator.swift */; };
 		0B459AB7253504E200351FBA /* Maths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459AB6253504E200351FBA /* Maths.swift */; };
+		0B584E432535E3D00089B37E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E422535E3D00089B37E /* SettingsViewController.swift */; };
+		0B584E4D2535E7010089B37E /* AutoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E4C2535E7010089B37E /* AutoViewController.swift */; };
+		0B584E522535E71E0089B37E /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E512535E71E0089B37E /* StepsViewController.swift */; };
+		0B584E572535E7310089B37E /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E562535E7310089B37E /* SidebarViewController.swift */; };
+		0B584E612535E8560089B37E /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E602535E8560089B37E /* SplitViewController.swift */; };
 		0B6C958D25192E03006DC0DD /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C958C25192E03006DC0DD /* Request.swift */; };
 		0B6C959325192F46006DC0DD /* Generator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C959225192F46006DC0DD /* Generator.swift */; };
 		0B6C95982519325C006DC0DD /* SpecialConditioned.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95972519325C006DC0DD /* SpecialConditioned.swift */; };
@@ -17,7 +22,6 @@
 		0B6C95AA251934A9006DC0DD /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95A9251934A9006DC0DD /* Buffer.swift */; };
 		0B6C95AF2519501A006DC0DD /* Processor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95AE2519501A006DC0DD /* Processor.swift */; };
 		0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE3E925175CAD00E3CB46 /* AppDelegate.swift */; };
-		0B8FE3EC25175CAD00E3CB46 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE3EB25175CAD00E3CB46 /* ViewController.swift */; };
 		0B8FE3EE25175CAE00E3CB46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3ED25175CAE00E3CB46 /* Assets.xcassets */; };
 		0B8FE3F125175CAE00E3CB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3EF25175CAE00E3CB46 /* Main.storyboard */; };
 		0B8FE3FD25175CAE00E3CB46 /* ServingSystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE3FC25175CAE00E3CB46 /* ServingSystemTests.swift */; };
@@ -50,6 +54,11 @@
 /* Begin PBXFileReference section */
 		0B07B7AF2519FDAD00B03D46 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
 		0B459AB6253504E200351FBA /* Maths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maths.swift; sourceTree = "<group>"; };
+		0B584E422535E3D00089B37E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		0B584E4C2535E7010089B37E /* AutoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoViewController.swift; sourceTree = "<group>"; };
+		0B584E512535E71E0089B37E /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
+		0B584E562535E7310089B37E /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		0B584E602535E8560089B37E /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		0B6C958C25192E03006DC0DD /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		0B6C959225192F46006DC0DD /* Generator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generator.swift; sourceTree = "<group>"; };
 		0B6C95972519325C006DC0DD /* SpecialConditioned.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialConditioned.swift; sourceTree = "<group>"; };
@@ -59,7 +68,6 @@
 		0B6C95AE2519501A006DC0DD /* Processor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Processor.swift; sourceTree = "<group>"; };
 		0B8FE3E625175CAD00E3CB46 /* ServingSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServingSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B8FE3E925175CAD00E3CB46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0B8FE3EB25175CAD00E3CB46 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0B8FE3ED25175CAE00E3CB46 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0B8FE3F025175CAE00E3CB46 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0B8FE3F225175CAE00E3CB46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -202,7 +210,11 @@
 		0B8FE41825175CEE00E3CB46 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				0B8FE3EB25175CAD00E3CB46 /* ViewController.swift */,
+				0B584E4C2535E7010089B37E /* AutoViewController.swift */,
+				0B584E422535E3D00089B37E /* SettingsViewController.swift */,
+				0B584E562535E7310089B37E /* SidebarViewController.swift */,
+				0B584E602535E8560089B37E /* SplitViewController.swift */,
+				0B584E512535E71E0089B37E /* StepsViewController.swift */,
 				0B8FE41925175D0B00E3CB46 /* TypedNSTextField.swift */,
 			);
 			path = Interface;
@@ -259,7 +271,7 @@
 				0B8FE3E225175CAD00E3CB46 /* Sources */,
 				0B8FE3E325175CAD00E3CB46 /* Frameworks */,
 				0B8FE3E425175CAD00E3CB46 /* Resources */,
-				0B5FED86251E66D400004359 /* SwiftLint */,
+				0B584EBA25365BD80089B37E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -377,7 +389,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0B5FED86251E66D400004359 /* SwiftLint */ = {
+		0B584EBA25365BD80089B37E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -386,14 +398,13 @@
 			);
 			inputPaths = (
 			);
-			name = SwiftLint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		737EA764BF53592366EA40F3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -461,14 +472,18 @@
 				0B6C95A52519348F006DC0DD /* BufferPicker.swift in Sources */,
 				0B6C958D25192E03006DC0DD /* Request.swift in Sources */,
 				0B8FE42025175D4200E3CB46 /* TextFieldType.swift in Sources */,
-				0B8FE3EC25175CAD00E3CB46 /* ViewController.swift in Sources */,
 				0B6C95982519325C006DC0DD /* SpecialConditioned.swift in Sources */,
+				0B584E612535E8560089B37E /* SplitViewController.swift in Sources */,
 				0B6C95A025193478006DC0DD /* BufferInserter.swift in Sources */,
+				0B584E572535E7310089B37E /* SidebarViewController.swift in Sources */,
+				0B584E432535E3D00089B37E /* SettingsViewController.swift in Sources */,
+				0B584E522535E71E0089B37E /* StepsViewController.swift in Sources */,
 				0B6C95AA251934A9006DC0DD /* Buffer.swift in Sources */,
 				0B6C959325192F46006DC0DD /* Generator.swift in Sources */,
 				0B6C95AF2519501A006DC0DD /* Processor.swift in Sources */,
 				0B459AB7253504E200351FBA /* Maths.swift in Sources */,
 				0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */,
+				0B584E4D2535E7010089B37E /* AutoViewController.swift in Sources */,
 				0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
