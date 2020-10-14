@@ -47,10 +47,10 @@ class BufferInserter {
         return res
     }
 
-    func getRejectedRequestsAmount(processorNumber: UInt) -> UInt {
-        if processorNumber < 1 {
+    func getRejectedRequestsAmount(creatorNumber: UInt) -> UInt {
+        if creatorNumber < 1 {
             return 0
         }
-        return UInt(rejectedRequests[Int(processorNumber) - 1].count)
+        return UInt(rejectedRequests[Int(creatorNumber) - 1].count)
     }
 }

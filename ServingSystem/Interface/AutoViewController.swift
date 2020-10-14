@@ -175,8 +175,8 @@ extension AutoViewController: NSTableViewDelegate {
         case "rejectProbabilityColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "rejectProbabilityCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = Double(autoSimulator.getRejectedRequestsAmount(processorNumber: UInt(autoSimulator.generators[row].priority)))
-                / Double( autoSimulator.generators[row].requestsCount)
+            cellView.textField?.doubleValue = Double(autoSimulator.getRejectedRequestsAmount(creatorNumber: UInt(autoSimulator.generators[row].priority)))
+                / Double(autoSimulator.generators[row].requestsCount)
             return cellView
 
         case "stayTimeColumn":

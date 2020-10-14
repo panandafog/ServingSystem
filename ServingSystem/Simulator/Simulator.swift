@@ -45,7 +45,7 @@ class Simulator {
 
     func makeSteps(_ steps: UInt) {
         for _ in 1...steps {
-            makeStep()
+            makeStep(debug: false)
         }
     }
 
@@ -115,8 +115,8 @@ class Simulator {
         bufferInserter.getRejectedRequestsAmount()
     }
 
-    func getRejectedRequestsAmount(processorNumber: UInt) -> UInt {
-        bufferInserter.getRejectedRequestsAmount(processorNumber: processorNumber)
+    func getRejectedRequestsAmount(creatorNumber: UInt) -> UInt {
+        bufferInserter.getRejectedRequestsAmount(creatorNumber: creatorNumber)
     }
 
     func getAllRejectedRequests() -> [Request] {
