@@ -15,12 +15,16 @@ class SimulationProperties {
     private (set) var commonProcessingProperties: ProcessingProperties?
 
     private let initialGenerationProperties = GenerationProperties(cooldown: 1.0, function: .linear)
+    private let initialGeneratorsAmount = 5
+
     private let initialProcessingProperties = ProcessingProperties(minTime: 0.0, maxTime: 1.0, function: .randomWithExponent)
+    private let initialProcessorsAmount = 3
 
     private (set) var currentGenerationProperties = [GenerationProperties]()
     private (set) var currentProcessingProperties = [ProcessingProperties]()
 
     var bufferCapacity = UInt(2)
+
     var generatorsAmount: UInt {
         UInt(currentGenerationProperties.count)
     }
@@ -40,11 +44,11 @@ class SimulationProperties {
             return
         }
 
-        for _ in currentGenerationProperties {
+        for _ in 1 ... initialGeneratorsAmount {
             currentGenerationProperties.append(commonGenerationProperties)
         }
 
-        for _ in currentProcessingProperties {
+        for _ in 1 ... initialProcessorsAmount {
             currentProcessingProperties.append(commonProcessingProperties)
         }
     }
@@ -105,6 +109,15 @@ class SimulationProperties {
         }
     }
 
+    func replaceGeneratorProperties(with newProperties: GenerationProperties, at index: UInt) {
+        if index < currentGenerationProperties.count {
+            if index == currentGenerationProperties.count - 1 {
+                commonGenerationProperties = newProperties
+            }
+            currentGenerationProperties[Int(index)] = newProperties
+        }
+    }
+
     // MARK: - Processors
 
     func getProcessingCooldown(processorNumber: UInt) -> Double? {
@@ -158,6 +171,15 @@ class SimulationProperties {
     func removeProcessorProperties(index: UInt) {
         if index < currentProcessingProperties.count {
             currentProcessingProperties.remove(at: Int(index))
+        }
+    }
+
+    func replaceProcessorProperties(with newProperties: ProcessingProperties, at index: UInt) {
+        if index < currentProcessingProperties.count {
+            if index == currentProcessingProperties.count - 1 {
+                commonProcessingProperties = newProperties
+            }
+            currentProcessingProperties[Int(index)] = newProperties
         }
     }
 }
