@@ -105,13 +105,6 @@ extension Processor: SpecialConditioned {
                             + " woke up and got request "
                             + String(request?.name ?? "––")
                             + " at " + String(time))
-            Swift.print("Processor #" + String(number)
-                    + " woke up and got request "
-                    + String(request?.name ?? "––")
-                    + " at " + String(time))
-        } else {
-            Swift.print("Processor #" + String(number)
-                    + " woke up but didnt got any req")
         }
     }
 }
