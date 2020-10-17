@@ -826,7 +826,7 @@
                                     <action selector="stopAutoSimulation:" target="OnO-ou-0ED" id="oOM-ht-YjX"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c4C-9i-aYS" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c4C-9i-aYS">
                                 <rect key="frame" x="1094" y="19" width="75" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="T3Y-Gm-k5X"/>
@@ -841,7 +841,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" target="OnO-ou-0ED" id="aQg-io-65K"/>
+                                    <action selector="iterationsCountTextFieldValueChanged:" target="OnO-ou-0ED" id="aQg-io-65K"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Jor-ct-tju">
@@ -1262,7 +1262,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ta1-j4-HAz" userLabel="Generators Amount Field" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ta1-j4-HAz" userLabel="Generators Amount Field">
                                 <rect key="frame" x="148" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="bfn-jZ-zzr"/>
@@ -1276,10 +1276,10 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" target="OnO-ou-0ED" id="VpP-lD-Lko"/>
+                                    <action selector="generatorsAmountFieldValueChanged:" target="OnO-ou-0ED" id="cdz-xd-Rhh"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lF3-Pk-D3P" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lF3-Pk-D3P">
                                 <rect key="frame" x="411" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="dGu-J1-Cap"/>
@@ -1293,7 +1293,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" target="OnO-ou-0ED" id="5wN-L5-hcM"/>
+                                    <action selector="bufferCapacityFieldValueChanged:" target="OnO-ou-0ED" id="C7B-aR-7kC"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tEQ-wv-68w">
@@ -1307,7 +1307,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="93f-Yy-obR" userLabel="Processors Amount Field" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="93f-Yy-obR" userLabel="Processors Amount Field">
                                 <rect key="frame" x="693" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="5Kb-HE-jow"/>
@@ -1321,7 +1321,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" target="OnO-ou-0ED" id="kfV-DR-cQw"/>
+                                    <action selector="processorsAmountFieldValueChanged:" target="OnO-ou-0ED" id="FT6-QR-B81"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nwE-fv-7tU">
@@ -1434,10 +1434,10 @@
                     <connections>
                         <outlet property="autoGeneratorsTable" destination="YnL-Sw-Dh3" id="sPU-lK-Nxs"/>
                         <outlet property="autoProcessorsTable" destination="kYO-e7-AuA" id="TeE-m3-f17"/>
-                        <outlet property="autoSimulationIterationsField" destination="c4C-9i-aYS" id="nv0-SB-LLg"/>
                         <outlet property="autoSimulationProgressIndicator" destination="p6T-3e-jIS" id="Z6W-Eb-eis"/>
                         <outlet property="bufferCapacityField" destination="lF3-Pk-D3P" id="8J7-N0-go0"/>
                         <outlet property="generatorsAmountField" destination="ta1-j4-HAz" id="JrL-6M-Wen"/>
+                        <outlet property="iterationsCountField" destination="c4C-9i-aYS" id="nv0-SB-LLg"/>
                         <outlet property="processorsAmountField" destination="93f-Yy-obR" id="mAS-IG-0Hk"/>
                         <outlet property="startAutoSimulationButton" destination="1H4-X7-NWI" id="b0P-mP-PHt"/>
                         <outlet property="startAutoSimulationTouchBarButton" destination="b5K-3E-B63" id="u9O-dB-3hu"/>
@@ -2112,7 +2112,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="13j-TY-6Xu" userLabel="Generators Amount Field" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="13j-TY-6Xu" userLabel="Generators Amount Field">
                                 <rect key="frame" x="148" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="Pw0-SO-Xky"/>
@@ -2126,7 +2126,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" target="CUJ-5H-EVa" id="yob-Qb-t8B"/>
+                                    <action selector="generatorsAmountFieldValueChanged:" target="CUJ-5H-EVa" id="EI7-lI-tL4"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nx1-dx-27A">
@@ -2140,7 +2140,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6iY-GP-FXR" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6iY-GP-FXR">
                                 <rect key="frame" x="411" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="w0P-5u-54r"/>
@@ -2154,7 +2154,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" target="CUJ-5H-EVa" id="WRD-oQ-qXe"/>
+                                    <action selector="bufferCapacityFieldValueChanged:" target="CUJ-5H-EVa" id="rTh-Lw-ODj"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ka-ne-iu8">
@@ -2168,7 +2168,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N3r-Pl-hai" userLabel="Processors Amount Field" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N3r-Pl-hai" userLabel="Processors Amount Field">
                                 <rect key="frame" x="693" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="K2M-tk-Vqo"/>
@@ -2182,7 +2182,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="textFieldValueChanged:" target="CUJ-5H-EVa" id="p8I-kL-5dt"/>
+                                    <action selector="processorsAmountFieldValueChanged:" target="CUJ-5H-EVa" id="xKd-LS-df2"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -2478,7 +2478,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M7l-iQ-zby" userLabel="Generators Amount Field" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M7l-iQ-zby" userLabel="Generators Amount Field">
                                 <rect key="frame" x="193" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="8QC-Ly-5hT"/>
@@ -2686,7 +2686,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zpq-IT-bDn" userLabel="Processors Amount Field" customClass="TypedNSTextField" customModule="ServingSystem" customModuleProvider="target">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zpq-IT-bDn" userLabel="Processors Amount Field">
                                 <rect key="frame" x="822" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="TXE-bG-BxH"/>

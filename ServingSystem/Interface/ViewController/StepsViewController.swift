@@ -18,9 +18,9 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
 
     // MARK: Text fields
 
-    @IBOutlet private var generatorsAmountField: TypedNSTextField!
-    @IBOutlet private var bufferCapacityField: TypedNSTextField!
-    @IBOutlet private var processorsAmountField: TypedNSTextField!
+    @IBOutlet private var generatorsAmountField: NSTextField!
+    @IBOutlet private var bufferCapacityField: NSTextField!
+    @IBOutlet private var processorsAmountField: NSTextField!
 
     // MARK: Buttons
 
@@ -50,10 +50,6 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
         makeStepTouchBarButton.action = makeStepButton.action
         stopStepsSimulationTouchBarButton.action = stopStepsSimulationButton.action
 
-        generatorsAmountField.type = .positiveInt
-        bufferCapacityField.type = .positiveInt
-        processorsAmountField.type = .positiveInt
-
         processorsAmountField.delegate = self
 
         stepsGeneratorsTable.delegate = self
@@ -64,8 +60,44 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
         stepsBufferTable.dataSource = self
     }
 
-    @IBAction private func textFieldValueChanged(_ sender: Any) {
-        validateStepsSettings()
+    // MARK: - View will appear
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        let properties = SimulationProperties.shared
+
+        generatorsAmountField.stringValue = String(properties.generatorsAmount)
+        processorsAmountField.stringValue = String(properties.processorsAmount)
+        bufferCapacityField.stringValue = String(properties.bufferCapacity)
+
+        validateSettings()
+    }
+
+    // MARK: - Text Fields
+
+    @IBAction private func generatorsAmountFieldValueChanged(_ sender: NSTextField) {
+        guard sender.integerValue > 0 else {
+            return
+        }
+        SimulationProperties.shared.setGeneratorsAmount(UInt(sender.integerValue))
+        validateSettings()
+    }
+
+    @IBAction private func processorsAmountFieldValueChanged(_ sender: NSTextField) {
+        guard sender.integerValue > 0 else {
+            return
+        }
+        SimulationProperties.shared.setProcessorsAmount(UInt(sender.integerValue))
+        validateSettings()
+    }
+
+    @IBAction private func bufferCapacityFieldValueChanged(_ sender: NSTextField) {
+        guard sender.integerValue > 0 else {
+            return
+        }
+        SimulationProperties.shared.bufferCapacity = UInt(sender.integerValue)
+        validateSettings()
     }
 
     // MARK: - Step by step mode
@@ -113,7 +145,6 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
 
     @IBAction private func stopStepsSimulation(_ sender: Any) {
         stepsSimulator = nil
-        validateStepsSettings()
 
         eventLog.string = ""
         stepsGeneratorsTable.reloadData()
@@ -129,19 +160,18 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
     }
 
     // MARK: - Validation
-    func mainSettingsAreValid() -> Bool {
-        generatorsAmountField.validateType()
-            && bufferCapacityField.validateType()
-            && processorsAmountField.validateType()
-    }
 
-    func validateStepsSettings() {
-        let valid = mainSettingsAreValid()
-        makeStepButton.isEnabled = (stepsSimulator == nil && valid) || stepsSimulator != nil
-        stopStepsSimulationButton.isEnabled = stepsSimulator != nil
-
-        makeStepTouchBarButton.isEnabled = makeStepButton.isEnabled
-        stopStepsSimulationTouchBarButton.isEnabled = stopStepsSimulationButton.isEnabled
+    func validateSettings() {
+        var valid = true
+        let textFields = [generatorsAmountField, processorsAmountField, bufferCapacityField]
+        for textField in textFields {
+            if textField?.integerValue == nil {
+                valid = false
+                break
+            }
+        }
+        makeStepButton.isEnabled = valid
+        stopStepsSimulationButton.isEnabled = valid
     }
 }
 

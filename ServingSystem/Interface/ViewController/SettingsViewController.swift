@@ -12,7 +12,7 @@ class SettingsViewController: NSViewController {
     // MARK: Generators settings
 
     @IBOutlet private var applyToAllGeneratorsButton: NSButton!
-    @IBOutlet private var generatorsAmountField: TypedNSTextField!
+    @IBOutlet private var generatorsAmountField: NSTextField!
 
     @IBOutlet private var deleteGeneratorButton: NSButton!
     @IBOutlet private var addGeneratorButton: NSButton!
@@ -22,7 +22,7 @@ class SettingsViewController: NSViewController {
     // MARK: Processors settings
 
     @IBOutlet private var applyToAllProcessorsButton: NSButton!
-    @IBOutlet private var processorsAmountField: TypedNSTextField!
+    @IBOutlet private var processorsAmountField: NSTextField!
 
     @IBOutlet private var deleteProcessorButton: NSButton!
     @IBOutlet private var addProcessorButton: NSButton!
@@ -30,6 +30,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet private var processorsTable: NSTableView!
 
     // MARK: - View Did Load
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,11 +41,24 @@ class SettingsViewController: NSViewController {
     }
 
     // MARK: View Will Appear
+
     override func viewWillAppear() {
         super.viewWillAppear()
 
         generatorsTable.reloadData()
         processorsTable.reloadData()
+
+        let properties = SimulationProperties.shared
+
+        generatorsAmountField.stringValue = String(properties.generatorsAmount)
+        processorsAmountField.stringValue = String(properties.processorsAmount)
+
+        if properties.bufferCapacity > 1 {
+            deleteGeneratorButton.isEnabled = true
+        }
+        if properties.processorsAmount > 1 {
+            deleteProcessorButton.isEnabled = true
+        }
     }
 
     // MARK: - Text fields actions
@@ -123,22 +137,39 @@ class SettingsViewController: NSViewController {
     @IBAction private func addGeneratorRow(_ sender: NSButton) {
         SimulationProperties.shared.addGeneratorProperties()
         generatorsTable.reloadData()
+        deleteGeneratorButton.isEnabled = true
     }
 
     @IBAction private func removeGeneratorRows(_ sender: NSButton) {
         let properties = SimulationProperties.shared
-        properties.removeGeneratorProperties(indices: generatorsTable.selectedRowIndexes)
+
+        if !generatorsTable.selectedRowIndexes.isEmpty {
+            properties.removeGeneratorProperties(indices: generatorsTable.selectedRowIndexes)
+        } else if properties.generatorsAmount > 1 {
+            properties.removeGeneratorProperties(index: properties.generatorsAmount - 1)
+        }
+        if properties.generatorsAmount < 2 {
+            deleteGeneratorButton.isEnabled = false
+        }
         generatorsTable.reloadData()
     }
 
     @IBAction private func addProcessorRow(_ sender: NSButton) {
         SimulationProperties.shared.addProcessorProperties()
         processorsTable.reloadData()
+        deleteProcessorButton.isEnabled = true
     }
     
     @IBAction private func removeProcessorRows(_ sender: NSButton) {
         let properties = SimulationProperties.shared
-        properties.removeProcessorProperties(indices: processorsTable.selectedRowIndexes)
+        if !processorsTable.selectedRowIndexes.isEmpty {
+            properties.removeProcessorProperties(indices: processorsTable.selectedRowIndexes)
+        } else if properties.processorsAmount > 1 {
+            properties.removeProcessorProperties(index: properties.processorsAmount - 1)
+        }
+        if properties.processorsAmount < 2 {
+            deleteProcessorButton.isEnabled = false
+        }
         processorsTable.reloadData()
     }
 
@@ -159,30 +190,18 @@ class SettingsViewController: NSViewController {
     }
 
     @IBAction private func generatorsAmountFieldValueChanged(_ sender: NSTextField) {
-        let properties = SimulationProperties.shared
-        if sender.integerValue > properties.generatorsAmount {
-            for _ in 1 ... sender.integerValue - Int(properties.generatorsAmount) {
-                properties.addGeneratorProperties()
-            }
-        } else if sender.integerValue > properties.generatorsAmount {
-            for _ in 1 ... Int(properties.generatorsAmount) - sender.integerValue {
-                properties.removeGeneratorProperties(index: properties.generatorsAmount - 1)
-            }
+        guard sender.integerValue > 0 else {
+            return
         }
+        SimulationProperties.shared.setGeneratorsAmount(UInt(sender.integerValue))
         generatorsTable.reloadData()
     }
 
     @IBAction private func processorsAmountFieldValueChanged(_ sender: NSTextField) {
-        let properties = SimulationProperties.shared
-        if sender.integerValue > properties.processorsAmount {
-            for _ in 1 ... sender.integerValue - Int(properties.processorsAmount) {
-                properties.addProcessorProperties()
-            }
-        } else if sender.integerValue > properties.processorsAmount {
-            for _ in 1 ... Int(properties.processorsAmount) - sender.integerValue {
-                properties.removeProcessorProperties(index: properties.processorsAmount - 1)
-            }
+        guard sender.integerValue > 0 else {
+            return
         }
+        SimulationProperties.shared.setProcessorsAmount(UInt(sender.integerValue))
         processorsTable.reloadData()
     }
 }
@@ -296,10 +315,10 @@ extension SettingsViewController: NSTableViewDelegate {
         if id  == "settingsGeneratorsTable" {
             if tableView.numberOfSelectedRows == 1 {
                 applyToAllGeneratorsButton.isEnabled = true
-                deleteGeneratorButton.isEnabled = true
+                deleteGeneratorButton.isEnabled = !(tableView.selectedRow == 0 && SimulationProperties.shared.generatorsAmount == 1)
             } else if tableView.numberOfSelectedRows > 1 {
                 applyToAllGeneratorsButton.isEnabled = false
-                deleteGeneratorButton.isEnabled = true
+                deleteGeneratorButton.isEnabled = (tableView.numberOfSelectedRows < SimulationProperties.shared.generatorsAmount)
             } else if tableView.numberOfSelectedRows == 0 {
                 applyToAllGeneratorsButton.isEnabled = false
                 deleteGeneratorButton.isEnabled = false
@@ -309,10 +328,10 @@ extension SettingsViewController: NSTableViewDelegate {
         if id  == "settingsProcessorsTable" {
             if tableView.numberOfSelectedRows == 1 {
                 applyToAllProcessorsButton.isEnabled = true
-                deleteProcessorButton.isEnabled = true
+                deleteProcessorButton.isEnabled = !(tableView.selectedRow == 0 && SimulationProperties.shared.processorsAmount == 1)
             } else if tableView.numberOfSelectedRows > 1 {
                 applyToAllProcessorsButton.isEnabled = false
-                deleteProcessorButton.isEnabled = true
+                deleteProcessorButton.isEnabled = (tableView.numberOfSelectedRows < SimulationProperties.shared.processorsAmount)
             } else if tableView.numberOfSelectedRows == 0 {
                 applyToAllProcessorsButton.isEnabled = false
                 deleteProcessorButton.isEnabled = false

@@ -18,10 +18,10 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
 
     // MARK: Text fields
 
-    @IBOutlet private var generatorsAmountField: TypedNSTextField!
-    @IBOutlet private var bufferCapacityField: TypedNSTextField!
-    @IBOutlet private var processorsAmountField: TypedNSTextField!
-    @IBOutlet private var autoSimulationIterationsField: TypedNSTextField!
+    @IBOutlet private var generatorsAmountField: NSTextField!
+    @IBOutlet private var bufferCapacityField: NSTextField!
+    @IBOutlet private var processorsAmountField: NSTextField!
+    @IBOutlet private var iterationsCountField: NSTextField!
 
     // MARK: Buttons
 
@@ -45,10 +45,6 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        generatorsAmountField.type = .positiveInt
-        bufferCapacityField.type = .positiveInt
-        processorsAmountField.type = .positiveInt
-
         processorsAmountField.delegate = self
 
         autoGeneratorsTable.delegate = self
@@ -57,8 +53,53 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
         autoProcessorsTable.dataSource = self
     }
 
-    @IBAction private func textFieldValueChanged(_ sender: Any) {
-        validateAutoSettings()
+    // MARK: - View will appear
+
+    override func viewWillAppear() {
+        super.viewWillAppear()
+
+        let properties = SimulationProperties.shared
+
+        generatorsAmountField.stringValue = String(properties.generatorsAmount)
+        processorsAmountField.stringValue = String(properties.processorsAmount)
+        bufferCapacityField.stringValue = String(properties.bufferCapacity)
+        iterationsCountField.stringValue = String(properties.iterationsCount)
+
+        validateSettings()
+    }
+
+    // MARK: - Text Fields
+
+    @IBAction private func iterationsCountTextFieldValueChanged(_ sender: NSTextField) {
+        guard sender.integerValue > 0 else {
+            return
+        }
+        SimulationProperties.shared.iterationsCount = UInt(sender.integerValue)
+        validateSettings()
+    }
+
+    @IBAction private func generatorsAmountFieldValueChanged(_ sender: NSTextField) {
+        guard sender.integerValue > 0 else {
+            return
+        }
+        SimulationProperties.shared.setGeneratorsAmount(UInt(sender.integerValue))
+        validateSettings()
+    }
+
+    @IBAction private func processorsAmountFieldValueChanged(_ sender: NSTextField) {
+        guard sender.integerValue > 0 else {
+            return
+        }
+        SimulationProperties.shared.setProcessorsAmount(UInt(sender.integerValue))
+        validateSettings()
+    }
+
+    @IBAction private func bufferCapacityFieldValueChanged(_ sender: NSTextField) {
+        guard sender.integerValue > 0 else {
+            return
+        }
+        SimulationProperties.shared.bufferCapacity = UInt(sender.integerValue)
+        validateSettings()
     }
 
     // MARK: - Automatic mode
@@ -69,7 +110,7 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
         guard let generatorsCount = UInt(generatorsAmountField.stringValue),
               let processorsCount = UInt(processorsAmountField.stringValue),
               let bufferCapacity = UInt(bufferCapacityField.stringValue),
-              let iterationsCount = UInt(autoSimulationIterationsField.stringValue) else {
+              let iterationsCount = UInt(iterationsCountField.stringValue) else {
             return
         }
 
@@ -115,9 +156,6 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
         startAutoSimulationTouchBarButton.isEnabled = true
         stopAutoSimulationTouchBarButton.isEnabled = false
 
-        autoSimulationProgressIndicator.doubleValue = 0.0
-        autoSimulationProgressIndicator.isHidden = true
-
         autoGeneratorsTable.reloadData()
         autoProcessorsTable.reloadData()
     }
@@ -132,14 +170,15 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
 
     // MARK: - Validation
 
-    func mainSettingsAreValid() -> Bool {
-        generatorsAmountField.validateType()
-            && bufferCapacityField.validateType()
-            && processorsAmountField.validateType()
-    }
-
-    func validateAutoSettings() {
-        let valid = mainSettingsAreValid() && autoSimulationIterationsField.validateType()
+    func validateSettings() {
+        var valid = true
+        let textFields = [generatorsAmountField, processorsAmountField, bufferCapacityField, iterationsCountField]
+        for textField in textFields {
+            if textField?.integerValue == nil {
+                valid = false
+                break
+            }
+        }
         startAutoSimulationButton.isEnabled = valid
         startAutoSimulationTouchBarButton.isEnabled = valid
     }
