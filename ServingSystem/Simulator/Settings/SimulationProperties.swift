@@ -83,9 +83,10 @@ class SimulationProperties {
     }
 
     func removeGeneratorProperties(index: UInt) {
-        if index < currentGenerationProperties.count - 1 {
-            currentGenerationProperties.remove(at: Int(index))
+        guard index < currentGenerationProperties.count - 1 else {
+            return
         }
+        currentGenerationProperties.remove(at: Int(index))
     }
 
     func removeGeneratorProperties(indices: IndexSet) {
@@ -99,9 +100,11 @@ class SimulationProperties {
     }
 
     func replaceGeneratorProperties(with newProperties: GenerationProperties, at index: UInt) {
-        if index < currentGenerationProperties.count {
-            currentGenerationProperties[Int(index)] = newProperties
+        guard index < currentGenerationProperties.count else {
+            return
         }
+        currentGenerationProperties[Int(index)] = newProperties
+
     }
 
     // MARK: - Processors
@@ -142,6 +145,9 @@ class SimulationProperties {
     }
 
     func addProcessorProperties(properties: ProcessingProperties) {
+        guard properties.maxTime >= properties.minTime else {
+            return
+        }
         currentProcessingProperties.append(properties)
     }
 
@@ -162,9 +168,10 @@ class SimulationProperties {
     }
 
     func replaceProcessorProperties(with newProperties: ProcessingProperties, at index: UInt) {
-        if index < currentProcessingProperties.count {
-            currentProcessingProperties[Int(index)] = newProperties
+        guard newProperties.maxTime >= newProperties.minTime, index < currentProcessingProperties.count else {
+            return
         }
+        currentProcessingProperties[Int(index)] = newProperties
     }
 }
 

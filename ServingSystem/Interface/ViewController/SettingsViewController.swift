@@ -14,8 +14,8 @@ class SettingsViewController: NSViewController {
     @IBOutlet private var applyToAllGeneratorsButton: NSButton!
     @IBOutlet private var generatorsAmountField: TypedNSTextField!
 
-    @IBOutlet var deleteGeneratorButton: NSButton!
-    @IBOutlet var addGeneratorButton: NSButton!
+    @IBOutlet private var deleteGeneratorButton: NSButton!
+    @IBOutlet private var addGeneratorButton: NSButton!
 
     @IBOutlet private var generatorsTable: NSTableView!
 
@@ -24,8 +24,8 @@ class SettingsViewController: NSViewController {
     @IBOutlet private var applyToAllProcessorsButton: NSButton!
     @IBOutlet private var processorsAmountField: TypedNSTextField!
 
-    @IBOutlet var deleteProcessorButton: NSButton!
-    @IBOutlet var addProcessorButton: NSButton!
+    @IBOutlet private var deleteProcessorButton: NSButton!
+    @IBOutlet private var addProcessorButton: NSButton!
 
     @IBOutlet private var processorsTable: NSTableView!
 
