@@ -164,11 +164,9 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
     func validateSettings() {
         var valid = true
         let textFields = [generatorsAmountField, processorsAmountField, bufferCapacityField]
-        for textField in textFields {
-            if textField?.integerValue == nil {
-                valid = false
-                break
-            }
+        for textField in textFields where textField?.integerValue == nil {
+            valid = false
+            break
         }
         makeStepButton.isEnabled = valid
         stopStepsSimulationButton.isEnabled = valid

@@ -173,11 +173,9 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
     func validateSettings() {
         var valid = true
         let textFields = [generatorsAmountField, processorsAmountField, bufferCapacityField, iterationsCountField]
-        for textField in textFields {
-            if textField?.integerValue == nil {
-                valid = false
-                break
-            }
+        for textField in textFields where textField?.integerValue == nil {
+            valid = false
+            break
         }
         startAutoSimulationButton.isEnabled = valid
         startAutoSimulationTouchBarButton.isEnabled = valid
