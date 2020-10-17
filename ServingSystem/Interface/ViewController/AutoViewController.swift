@@ -12,6 +12,7 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
     // MARK: General properties
 
     var autoSimulator: Simulator?
+    var simulationThread: SimulationThread?
 
     private let emptyString = " ––– "
     private let debug = false
@@ -116,11 +117,10 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
 
         autoSimulationProgressIndicator.startAnimation(self)
 
-        DispatchQueue.global(qos: .background).async {
-            guard let simulator = self.autoSimulator else {
-                return
-            }
-            simulator.startAutoSimulation(initialRequestsAmount: SimulationProperties.shared.iterationsCount)
+        guard let simulator = self.autoSimulator else {
+            return
+        }
+        simulationThread = SimulationThread(simulator: simulator, completion: ({
             DispatchQueue.main.async {
                 self.startAutoSimulationButton.isEnabled = true
                 self.stopAutoSimulationButton.isEnabled = false
@@ -133,19 +133,16 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
                 self.autoProcessorsTable.reloadData()
                 self.autoGeneratorsTable.reloadData()
             }
-        }
+        }))
+        simulationThread?.start()
     }
 
     @IBAction private func stopAutoSimulation(_ sender: Any) {
+        simulationThread?.cancel()
         autoSimulator = nil
-        startAutoSimulationButton.isEnabled = true
+
         stopAutoSimulationButton.isEnabled = false
-
-        startAutoSimulationTouchBarButton.isEnabled = true
         stopAutoSimulationTouchBarButton.isEnabled = false
-
-        autoGeneratorsTable.reloadData()
-        autoProcessorsTable.reloadData()
     }
 
     // MARK: - Make touch bar
@@ -298,7 +295,7 @@ extension AutoViewController: NSTableViewDelegate {
 extension AutoViewController: NSTableViewDataSource {
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-
+        
         guard let autoSimulator = self.autoSimulator else {
             return 0
         }

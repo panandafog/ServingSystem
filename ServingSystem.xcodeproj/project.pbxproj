@@ -14,6 +14,7 @@
 		0B2C2A702537981100F1DA66 /* ProcessingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */; };
 		0B2C2A772537987400F1DA66 /* GenerationFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A762537987400F1DA66 /* GenerationFunction.swift */; };
 		0B459AB7253504E200351FBA /* Maths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459AB6253504E200351FBA /* Maths.swift */; };
+		0B546DD6253BABAE00661487 /* SimulationThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B546DD5253BABAE00661487 /* SimulationThread.swift */; };
 		0B584E432535E3D00089B37E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E422535E3D00089B37E /* SettingsViewController.swift */; };
 		0B584E4D2535E7010089B37E /* AutoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E4C2535E7010089B37E /* AutoViewController.swift */; };
 		0B584E522535E71E0089B37E /* StepsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E512535E71E0089B37E /* StepsViewController.swift */; };
@@ -64,6 +65,7 @@
 		0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingFunction.swift; sourceTree = "<group>"; };
 		0B2C2A762537987400F1DA66 /* GenerationFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationFunction.swift; sourceTree = "<group>"; };
 		0B459AB6253504E200351FBA /* Maths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maths.swift; sourceTree = "<group>"; };
+		0B546DD5253BABAE00661487 /* SimulationThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationThread.swift; sourceTree = "<group>"; };
 		0B584E422535E3D00089B37E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		0B584E4C2535E7010089B37E /* AutoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoViewController.swift; sourceTree = "<group>"; };
 		0B584E512535E71E0089B37E /* StepsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepsViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				0B6C959225192F46006DC0DD /* Generator.swift */,
 				0B6C95AE2519501A006DC0DD /* Processor.swift */,
 				0B6C958C25192E03006DC0DD /* Request.swift */,
+				0B546DD5253BABAE00661487 /* SimulationThread.swift */,
 			);
 			path = Simulator;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				0B2C2A772537987400F1DA66 /* GenerationFunction.swift in Sources */,
 				0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */,
 				0B584E4D2535E7010089B37E /* AutoViewController.swift in Sources */,
+				0B546DD6253BABAE00661487 /* SimulationThread.swift in Sources */,
 				0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

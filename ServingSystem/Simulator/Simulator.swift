@@ -42,42 +42,6 @@ class Simulator {
         }
     }
 
-    func makeSteps(_ steps: UInt) {
-        for _ in 1...steps {
-            makeStep(debug: false)
-        }
-    }
-
-    func startAutoSimulation(initialRequestsAmount: UInt) {
-        var previousRequestAmount = initialRequestsAmount
-        var currentRequestsAmount = previousRequestAmount
-
-        makeSteps(currentRequestsAmount)
-        var currentRejectProbability = getRejectProbability()
-        var previousRejectProbability = currentRejectProbability
-
-        repeat {
-            previousRequestAmount = currentRequestsAmount
-            if currentRejectProbability == 0 {
-                break
-            }
-            currentRequestsAmount = previousRequestAmount + UInt((2.699_449 * (1.0 - currentRejectProbability)) / (currentRejectProbability * 0.01))
-
-            Swift.print("req amount: " + String(currentRequestsAmount))
-            Swift.print("rej prob:   " + String(currentRejectProbability))
-            makeSteps(currentRequestsAmount)
-
-            previousRejectProbability = currentRejectProbability
-            currentRejectProbability = getRejectProbability()
-        } while abs(previousRejectProbability - currentRejectProbability) >= (0.1 * previousRejectProbability)
-
-        showCompletionAlert(iterations: currentRequestsAmount)
-//        Swift.print("End auto simulation")
-//        Swift.print(String(previousRejectProbability))
-//        Swift.print(String(currentRejectProbability))
-//        Swift.print(String(previousRequestAmount))
-    }
-
     func getRejectProbability() -> Double {
         Double(getRejectedRequestsAmount()) / Double(getGeneratedRequestsAmount())
     }
@@ -186,7 +150,7 @@ class Simulator {
         }
     }
 
-    private func showCompletionAlert(iterations: UInt) {
+    func showCompletionAlert(iterations: UInt) {
         DispatchQueue.main.async {
             let alert = NSAlert()
             alert.messageText = "Simulation finished"
