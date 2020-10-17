@@ -17,25 +17,10 @@ class Generator {
 
     private var writeToLog: ((String) -> Void)?
 
-    init(priority: Int, cooldown: Double, bufferInserter: BufferInserter) {
-        self.cooldown = cooldown
+    init(priority: Int, bufferInserter: BufferInserter, writeToLog: @escaping ((String) -> Void)) {
         self.priority = priority
+        self.cooldown = SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) ?? 1.0
         self.bufferInserter = bufferInserter
-    }
-
-    convenience init(priority: Int, cooldown: Double, bufferInserter: BufferInserter, initialTime: Double) {
-        self.init(priority: priority, cooldown: cooldown, bufferInserter: bufferInserter)
-        self.time = initialTime
-    }
-
-    convenience init(priority: Int, cooldown: Double, bufferInserter: BufferInserter, writeToLog: @escaping ((String) -> Void)) {
-        self.init(priority: priority, cooldown: cooldown, bufferInserter: bufferInserter)
-        self.writeToLog = writeToLog
-    }
-
-    convenience init(priority: Int, cooldown: Double, bufferInserter: BufferInserter, initialTime: Double, writeToLog: @escaping ((String) -> Void)) {
-        self.init(priority: priority, cooldown: cooldown, bufferInserter: bufferInserter)
-        self.time = initialTime
         self.writeToLog = writeToLog
     }
 
@@ -58,12 +43,12 @@ class Generator {
 extension Generator: SpecialConditioned {
 
     func getNextSCTime() -> Double {
-        time + cooldown
+        time + (SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) ?? 1.0)
     }
 
     func makeStep() {
         generateRequest()
-        time += cooldown
+        time += SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) ?? 1.0
 
         writeToLog?("Generator #" + String(priority)
                         + " generated request #"

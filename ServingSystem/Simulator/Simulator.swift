@@ -22,22 +22,21 @@ class Simulator {
     private(set) var eventLog = ""
     private(set) var isEnabled = false
 
-    init(generatorsCount: UInt, generatorsCooldown: Double, processorsCount: UInt, processorsCooldown: Double, bufferCapacity: UInt) {
+    init() {
+        let properties = SimulationProperties.shared
 
-        buffer = Buffer(capacity: bufferCapacity)
+        buffer = Buffer(capacity: properties.bufferCapacity)
         bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: generatorsCount)
+        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: properties.generatorsAmount)
 
-        for index in 1...generatorsCount {
+        for index in 1...Int(properties.generatorsAmount) {
             generators.append(Generator(priority: Int(index),
-                                        cooldown: generatorsCooldown + 0.1 * Double(index),
                                         bufferInserter: bufferInserter,
                                         writeToLog: self.writeToLog(_:)))
         }
 
-        for index in 1...processorsCount {
+        for index in 1...properties.processorsAmount {
             processors.append(Processor(number: index,
-                                        initialCooldown: processorsCooldown + 0.1 * Double(index),
                                         bufferPicker: bufferPicker,
                                         writeToLog: self.writeToLog(_:)))
         }

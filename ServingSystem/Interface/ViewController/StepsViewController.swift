@@ -103,13 +103,6 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
     // MARK: - Step by step mode
 
     @IBAction private func makeStep(_ sender: Any) {
-        let generatorsCooldown = 1.0
-
-        guard let generatorsCount = UInt(generatorsAmountField.stringValue),
-              let processorsCount = UInt(processorsAmountField.stringValue),
-              let bufferCapacity = UInt(bufferCapacityField.stringValue) else {
-            return
-        }
 
         makeStepButton.isEnabled = false
         stopStepsSimulationButton.isEnabled = false
@@ -119,11 +112,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
 
         DispatchQueue.global(qos: .background).async {
             if self.stepsSimulator == nil {
-                self.stepsSimulator = Simulator(generatorsCount: generatorsCount,
-                                                generatorsCooldown: generatorsCooldown,
-                                                processorsCount: processorsCount,
-                                                processorsCooldown: 1.0,
-                                                bufferCapacity: bufferCapacity)
+                self.stepsSimulator = Simulator()
             }
             self.stepsSimulator?.makeStep(debug: self.debug)
             DispatchQueue.main.async {
@@ -150,6 +139,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
         stepsGeneratorsTable.reloadData()
         stepsProcessorsTable.reloadData()
         stepsBufferTable.reloadData()
+        stopStepsSimulationButton.isEnabled = false
     }
 
     // MARK: - Make touch bar
@@ -169,7 +159,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
             break
         }
         makeStepButton.isEnabled = valid
-        stopStepsSimulationButton.isEnabled = valid
+        stopStepsSimulationButton.isEnabled = valid && stepsSimulator != nil
     }
 }
 
@@ -246,7 +236,7 @@ extension StepsViewController: NSTableViewDelegate {
         case "cooldownColumn":
             guard let cellView = stepsProcessorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cooldownCell"),
                                                                owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = stepsSimulator.processors[row].cooldown
+            cellView.textField?.doubleValue = stepsSimulator.processors[row].cooldown 
             return cellView
 
         case "currentRequestColumn":

@@ -15,6 +15,8 @@ class Processor {
     private(set) var time = 0.0
     private(set) var bisyTime = 0.0
     private(set) var cooldown: Double
+    private(set) var minCooldown: Double
+    private(set) var maxCooldown: Double
     private(set) var requestsCount = 0
 
     private(set) var request: Request?
@@ -22,33 +24,21 @@ class Processor {
 
     private var writeToLog: ((String) -> Void)?
 
-    init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker) {
-        self.cooldown = initialCooldown
-        self.bufferPicker = bufferPicker
+    init(number: UInt, bufferPicker: BufferPicker, writeToLog: @escaping ((String) -> Void)) {
         self.number = number
-    }
-
-    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, initialTime: Double) {
-        self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
-        self.time = initialTime
-    }
-
-    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, writeToLog: @escaping ((String) -> Void)) {
-        self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
+        let properties = SimulationProperties.shared.currentProcessingProperties[Int(number) - 1]
+        self.minCooldown = properties.minTime
+        self.maxCooldown = properties.maxTime
+        self.bufferPicker = bufferPicker
         self.writeToLog = writeToLog
-    }
-
-    convenience init(number: UInt, initialCooldown: Double, bufferPicker: BufferPicker, initialTime: Double, writeToLog: @escaping ((String) -> Void)) {
-        self.init(number: number, initialCooldown: initialCooldown, bufferPicker: bufferPicker)
-        self.time = initialTime
-        self.writeToLog = writeToLog
+        self.cooldown = SimulationProperties.shared.getProcessingCooldown(processorNumber: number) ?? 1.0
     }
 
     private func getRequest() {
         request = bufferPicker.pick()
         if request != nil {
             request?.pickTime = self.time
-            self.cooldown = exp(Double.random(in: 0.0..<1.0))
+            self.cooldown = SimulationProperties.shared.getProcessingCooldown(processorNumber: number) ?? 1.0
         }
     }
 

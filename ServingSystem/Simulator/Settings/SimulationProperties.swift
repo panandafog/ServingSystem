@@ -44,12 +44,12 @@ class SimulationProperties {
 
     // MARK: - Generators
 
-    func getGeneratorCooldown(generatorNumber: UInt) -> Double? {
-        guard generatorNumber < generatorsAmount else {
+    func getGenerationCooldown(generatorNumber: UInt) -> Double? {
+        guard generatorNumber <= generatorsAmount else {
             return nil
         }
 
-        let currentProperties = currentGenerationProperties[Int(generatorNumber)]
+        let currentProperties = currentGenerationProperties[Int(generatorNumber - 1)]
 
         switch currentProperties.function {
         case .linear:
@@ -127,11 +127,11 @@ class SimulationProperties {
     // MARK: - Processors
 
     func getProcessingCooldown(processorNumber: UInt) -> Double? {
-        guard processorNumber < processorsAmount else {
+        guard processorNumber <= processorsAmount else {
             return nil
         }
 
-        let currentProcessingTime = currentProcessingProperties[Int(processorNumber)]
+        let currentProcessingTime = currentProcessingProperties[Int(processorNumber - 1)]
 
         switch currentProcessingTime.function {
         case .random:

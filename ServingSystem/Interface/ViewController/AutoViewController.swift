@@ -105,20 +105,8 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
     // MARK: - Automatic mode
 
     @IBAction private func startAutoSimulation(_ sender: Any) {
-        let generatorsCooldown = 1.0
 
-        guard let generatorsCount = UInt(generatorsAmountField.stringValue),
-              let processorsCount = UInt(processorsAmountField.stringValue),
-              let bufferCapacity = UInt(bufferCapacityField.stringValue),
-              let iterationsCount = UInt(iterationsCountField.stringValue) else {
-            return
-        }
-
-        autoSimulator = Simulator(generatorsCount: generatorsCount,
-                                  generatorsCooldown: generatorsCooldown,
-                                  processorsCount: processorsCount,
-                                  processorsCooldown: 1.0,
-                                  bufferCapacity: bufferCapacity)
+        autoSimulator = Simulator()
 
         startAutoSimulationButton.isEnabled = false
         stopAutoSimulationButton.isEnabled = true
@@ -132,7 +120,7 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
             guard let simulator = self.autoSimulator else {
                 return
             }
-            simulator.startAutoSimulation(initialRequestsAmount: iterationsCount)
+            simulator.startAutoSimulation(initialRequestsAmount: SimulationProperties.shared.iterationsCount)
             DispatchQueue.main.async {
                 self.startAutoSimulationButton.isEnabled = true
                 self.stopAutoSimulationButton.isEnabled = false
