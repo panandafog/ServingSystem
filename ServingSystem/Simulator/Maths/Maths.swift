@@ -22,6 +22,6 @@ class Maths {
     }
 
     static func dispersion(of mas: [Double]) -> Double {
-        return expectation(of: mas.map({ pow($0, 2) })) - pow(expectation(of: mas), 2)
+        expectation(of: mas.map({ pow($0, 2) })) - pow(expectation(of: mas), 2)
     }
 }

@@ -33,6 +33,7 @@ class SettingsViewController: NSViewController {
         processorsTable.dataSource = self
     }
 
+    // MARK: View Will Appear
     override func viewWillAppear() {
         super.viewWillAppear()
 
@@ -40,19 +41,8 @@ class SettingsViewController: NSViewController {
         processorsTable.reloadData()
     }
 
-    // MARK: - Radio buttons actions
-
-    @IBAction private func applyToAllGenerators(_ sender: Any) {
-
-        generatorsTable.reloadData()
-    }
-
-    @IBAction private func applyToAllProcessors(_ sender: Any) {
-
-        processorsTable.reloadData()
-    }
-
     // MARK: - Text fields actions
+
     @IBAction private func generatorsCooldownChanged(_ sender: NSTextField) {
         guard let row = sender.superview?.superview,
               let table = row.superview as? NSTableView else {
@@ -98,6 +88,42 @@ class SettingsViewController: NSViewController {
         processorsTable.reloadData()
     }
 
+    // MARK: - Buttons actions
+
+    @IBAction private func generatorsFunctionSelected(_ sender: NSComboBox) {
+        guard let row = sender.superview?.superview,
+              let table = row.superview as? NSTableView else {
+            return
+        }
+
+        let rowInd = table.row(for: sender)
+        var properties = SimulationProperties.shared.currentGenerationProperties[rowInd]
+        properties.function = GenerationFunction.allCases[sender.indexOfSelectedItem]
+        SimulationProperties.shared.replaceGeneratorProperties(with: properties, at: UInt(rowInd))
+    }
+
+    @IBAction private func processorsFunctionSelected(_ sender: NSComboBox) {
+        guard let row = sender.superview?.superview,
+              let table = row.superview as? NSTableView else {
+            return
+        }
+
+        let rowInd = table.row(for: sender)
+        var properties = SimulationProperties.shared.currentProcessingProperties[rowInd]
+        properties.function = ProcessingFunction.allCases[sender.indexOfSelectedItem]
+        SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
+    }
+
+    @IBAction private func applyToAllGenerators(_ sender: Any) {
+
+        generatorsTable.reloadData()
+    }
+
+    @IBAction private func applyToAllProcessors(_ sender: Any) {
+
+        processorsTable.reloadData()
+    }
+
     @IBAction private func generatorsAmountFieldValueChanged(_ sender: Any) {
     }
 
@@ -131,8 +157,8 @@ extension SettingsViewController: NSTableViewDelegate {
 
         case "functionColumn":
             guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "functionCell"),
-                                                          owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.stringValue = "<coming soon>"
+                                                          owner: self) as? GeneratorFunctionCellView else { return nil }
+            cellView.selectFunction(properties.currentGenerationProperties[row].function)
             return cellView
 
         case "deleteColumn":
@@ -175,8 +201,8 @@ extension SettingsViewController: NSTableViewDelegate {
 
         case "functionColumn":
             guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "functionCell"),
-                                                          owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.stringValue = "<coming soon>"
+                                                          owner: self) as? ProcessorFunctionCellView else { return nil }
+            cellView.selectFunction(properties.currentProcessingProperties[row].function)
             return cellView
 
         case "deleteColumn":
@@ -191,7 +217,6 @@ extension SettingsViewController: NSTableViewDelegate {
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-
         if tableView.identifier?.rawValue ?? "" == "settingsGeneratorsTable" {
             return viewForGeneratorsTable(columnId: tableColumn?.identifier.rawValue, row: row)
         }
@@ -202,13 +227,16 @@ extension SettingsViewController: NSTableViewDelegate {
 
         return nil
     }
+
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        20
+    }
 }
 
 // MARK: - NSTableViewDataSource
 extension SettingsViewController: NSTableViewDataSource {
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-
         switch tableView.identifier?.rawValue ?? "" {
 
         case "settingsGeneratorsTable":

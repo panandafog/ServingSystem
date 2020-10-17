@@ -256,7 +256,6 @@ extension AutoViewController: NSTableViewDelegate {
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-
         if tableView.identifier?.rawValue ?? "" == "autoGeneratorsTable" {
             return viewForAutoGeneratorsTable(columnId: tableColumn?.identifier.rawValue, row: row)
         }

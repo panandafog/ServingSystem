@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B060442253A51D900226BD1 /* GeneratorFunctionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B060441253A51D900226BD1 /* GeneratorFunctionCellView.swift */; };
+		0B060447253A52C000226BD1 /* ProcessorFunctionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B060446253A52C000226BD1 /* ProcessorFunctionCellView.swift */; };
 		0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07B7AF2519FDAD00B03D46 /* Simulator.swift */; };
 		0B2C2A682537939500F1DA66 /* SimulationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A672537939500F1DA66 /* SimulationProperties.swift */; };
 		0B2C2A702537981100F1DA66 /* ProcessingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */; };
@@ -57,6 +59,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B060441253A51D900226BD1 /* GeneratorFunctionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorFunctionCellView.swift; sourceTree = "<group>"; };
+		0B060446253A52C000226BD1 /* ProcessorFunctionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessorFunctionCellView.swift; sourceTree = "<group>"; };
 		0B07B7AF2519FDAD00B03D46 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
 		0B2C2A672537939500F1DA66 /* SimulationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationProperties.swift; sourceTree = "<group>"; };
 		0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingFunction.swift; sourceTree = "<group>"; };
@@ -130,6 +134,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B06043F253A51A900226BD1 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0B584E4C2535E7010089B37E /* AutoViewController.swift */,
+				0B584E422535E3D00089B37E /* SettingsViewController.swift */,
+				0B584E562535E7310089B37E /* SidebarViewController.swift */,
+				0B584E602535E8560089B37E /* SplitViewController.swift */,
+				0B584E512535E71E0089B37E /* StepsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0B060440253A51BC00226BD1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B8FE41925175D0B00E3CB46 /* TypedNSTextField.swift */,
+				0B060441253A51D900226BD1 /* GeneratorFunctionCellView.swift */,
+				0B060446253A52C000226BD1 /* ProcessorFunctionCellView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		0B07B7AE2519FD8800B03D46 /* Buffer */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,8 +169,6 @@
 		0B2C2A742537984E00F1DA66 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				0B2C2A762537987400F1DA66 /* GenerationFunction.swift */,
-				0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */,
 				0B2C2A672537939500F1DA66 /* SimulationProperties.swift */,
 				0BBF15672537A59600D72FD6 /* GenerationProperties.swift */,
 				0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */,
@@ -233,12 +257,8 @@
 		0B8FE41825175CEE00E3CB46 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
-				0B584E4C2535E7010089B37E /* AutoViewController.swift */,
-				0B584E422535E3D00089B37E /* SettingsViewController.swift */,
-				0B584E562535E7310089B37E /* SidebarViewController.swift */,
-				0B584E602535E8560089B37E /* SplitViewController.swift */,
-				0B584E512535E71E0089B37E /* StepsViewController.swift */,
-				0B8FE41925175D0B00E3CB46 /* TypedNSTextField.swift */,
+				0B060440253A51BC00226BD1 /* View */,
+				0B06043F253A51A900226BD1 /* ViewController */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -246,6 +266,8 @@
 		0B8FE41E25175D2900E3CB46 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0B2C2A762537987400F1DA66 /* GenerationFunction.swift */,
+				0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */,
 				0B8FE41F25175D4200E3CB46 /* TextFieldType.swift */,
 				0B8FE42725175D6200E3CB46 /* SimulationMode.swift */,
 			);
@@ -492,7 +514,9 @@
 			files = (
 				0BBF15682537A59600D72FD6 /* GenerationProperties.swift in Sources */,
 				0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */,
+				0B060442253A51D900226BD1 /* GeneratorFunctionCellView.swift in Sources */,
 				0B8FE41A25175D0B00E3CB46 /* TypedNSTextField.swift in Sources */,
+				0B060447253A52C000226BD1 /* ProcessorFunctionCellView.swift in Sources */,
 				0B6C95A52519348F006DC0DD /* BufferPicker.swift in Sources */,
 				0B6C958D25192E03006DC0DD /* Request.swift in Sources */,
 				0B2C2A682537939500F1DA66 /* SimulationProperties.swift in Sources */,

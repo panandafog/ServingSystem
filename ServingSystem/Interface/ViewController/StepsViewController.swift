@@ -300,7 +300,6 @@ extension StepsViewController: NSTableViewDelegate {
 extension StepsViewController: NSTableViewDataSource {
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-
         switch tableView.identifier?.rawValue ?? "" {
 
         case "stepsGeneratorsTable":
