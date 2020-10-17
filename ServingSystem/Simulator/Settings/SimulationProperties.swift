@@ -11,9 +11,6 @@ class SimulationProperties {
 
     static let shared = SimulationProperties()
 
-    private (set) var commonGenerationProperties: GenerationProperties?
-    private (set) var commonProcessingProperties: ProcessingProperties?
-
     private let initialGenerationProperties = GenerationProperties(cooldown: 1.0, function: .linear)
     private let initialGeneratorsAmount = 5
 
@@ -35,21 +32,12 @@ class SimulationProperties {
     // MARK: - init
 
     private init() {
-
-        commonGenerationProperties = initialGenerationProperties
-        commonProcessingProperties = initialProcessingProperties
-
-        guard let commonGenerationProperties = commonGenerationProperties,
-              let commonProcessingProperties = commonProcessingProperties else {
-            return
-        }
-
         for _ in 1 ... initialGeneratorsAmount {
-            currentGenerationProperties.append(commonGenerationProperties)
+            currentGenerationProperties.append(initialGenerationProperties)
         }
 
         for _ in 1 ... initialProcessorsAmount {
-            currentProcessingProperties.append(commonProcessingProperties)
+            currentProcessingProperties.append(initialProcessingProperties)
         }
     }
 
@@ -76,8 +64,6 @@ class SimulationProperties {
             currentGenerationProperties[ind].function = function
             currentGenerationProperties[ind].cooldown = cooldown
         }
-
-        commonGenerationProperties = GenerationProperties(cooldown: cooldown, function: function)
     }
 
     func applyToAllGenerators(properties: GenerationProperties) {
@@ -85,35 +71,35 @@ class SimulationProperties {
     }
 
     func addGeneratorProperties() {
-        if commonGenerationProperties != nil {
-            currentGenerationProperties.append(commonGenerationProperties!)
-        } else {
-            if !currentGenerationProperties.isEmpty {
-                let ind = currentGenerationProperties.count - 1
-                currentGenerationProperties.append(currentGenerationProperties[ind])
-            } else {
-                commonGenerationProperties = initialGenerationProperties
-                currentGenerationProperties.append(initialGenerationProperties)
-            }
+        guard let last = currentGenerationProperties.last else {
+            currentGenerationProperties.append(initialGenerationProperties)
+            return
         }
+        currentGenerationProperties.append(last)
     }
 
     func addGeneratorProperties(properties: GenerationProperties) {
-        commonGenerationProperties = nil
         currentGenerationProperties.append(properties)
     }
 
     func removeGeneratorProperties(index: UInt) {
-        if index < currentGenerationProperties.count {
+        if index < currentGenerationProperties.count - 1 {
             currentGenerationProperties.remove(at: Int(index))
         }
     }
 
+    func removeGeneratorProperties(indices: IndexSet) {
+        var intIndices = [Int]()
+        for index in indices {
+            if UInt(index) < currentGenerationProperties.count - 1 {
+                intIndices.append(index)
+            }
+        }
+        currentGenerationProperties.remove(at: intIndices)
+    }
+
     func replaceGeneratorProperties(with newProperties: GenerationProperties, at index: UInt) {
         if index < currentGenerationProperties.count {
-            if index == currentGenerationProperties.count - 1 {
-                commonGenerationProperties = newProperties
-            }
             currentGenerationProperties[Int(index)] = newProperties
         }
     }
@@ -141,8 +127,6 @@ class SimulationProperties {
             currentProcessingProperties[ind].minTime = minTime
             currentProcessingProperties[ind].maxTime = maxTime
         }
-
-        commonProcessingProperties = ProcessingProperties(minTime: minTime, maxTime: maxTime, function: function)
     }
 
     func applyToAllProcessors(properties: ProcessingProperties) {
@@ -150,36 +134,49 @@ class SimulationProperties {
     }
 
     func addProcessorProperties() {
-        if commonProcessingProperties != nil {
-            currentProcessingProperties.append(commonProcessingProperties!)
-        } else {
-            if !currentProcessingProperties.isEmpty {
-                let ind = currentProcessingProperties.count - 1
-                currentProcessingProperties.append(currentProcessingProperties[ind])
-            } else {
-                commonProcessingProperties = initialProcessingProperties
-                currentProcessingProperties.append(initialProcessingProperties)
-            }
+        guard let last = currentProcessingProperties.last else {
+            currentProcessingProperties.append(initialProcessingProperties)
+            return
         }
+        currentProcessingProperties.append(last)
     }
 
     func addProcessorProperties(properties: ProcessingProperties) {
-        commonProcessingProperties = nil
         currentProcessingProperties.append(properties)
     }
 
     func removeProcessorProperties(index: UInt) {
-        if index < currentProcessingProperties.count {
+        if index < currentProcessingProperties.count - 1 {
             currentProcessingProperties.remove(at: Int(index))
         }
     }
 
+    func removeProcessorProperties(indices: IndexSet) {
+        var intIndices = [Int]()
+        for index in indices {
+            if UInt(index) < currentProcessingProperties.count - 1 {
+                intIndices.append(index)
+            }
+        }
+        currentProcessingProperties.remove(at: intIndices)
+    }
+
     func replaceProcessorProperties(with newProperties: ProcessingProperties, at index: UInt) {
         if index < currentProcessingProperties.count {
-            if index == currentProcessingProperties.count - 1 {
-                commonProcessingProperties = newProperties
-            }
             currentProcessingProperties[Int(index)] = newProperties
+        }
+    }
+}
+
+extension Array {
+    mutating func remove(at indices: [Int]) {
+        var lastIndex: Int?
+        for index in indices.sorted(by: >) {
+            guard lastIndex != index else {
+                continue
+            }
+            remove(at: index)
+            lastIndex = index
         }
     }
 }

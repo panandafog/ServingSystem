@@ -14,12 +14,18 @@ class SettingsViewController: NSViewController {
     @IBOutlet private var applyToAllGeneratorsButton: NSButton!
     @IBOutlet private var generatorsAmountField: TypedNSTextField!
 
+    @IBOutlet var deleteGeneratorButton: NSButton!
+    @IBOutlet var addGeneratorButton: NSButton!
+
     @IBOutlet private var generatorsTable: NSTableView!
 
     // MARK: Processors settings
 
     @IBOutlet private var applyToAllProcessorsButton: NSButton!
     @IBOutlet private var processorsAmountField: TypedNSTextField!
+
+    @IBOutlet var deleteProcessorButton: NSButton!
+    @IBOutlet var addProcessorButton: NSButton!
 
     @IBOutlet private var processorsTable: NSTableView!
 
@@ -114,20 +120,70 @@ class SettingsViewController: NSViewController {
         SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
     }
 
-    @IBAction private func applyToAllGenerators(_ sender: Any) {
+    @IBAction private func addGeneratorRow(_ sender: NSButton) {
+        SimulationProperties.shared.addGeneratorProperties()
+        generatorsTable.reloadData()
+    }
 
+    @IBAction private func removeGeneratorRows(_ sender: NSButton) {
+        let properties = SimulationProperties.shared
+        properties.removeGeneratorProperties(indices: generatorsTable.selectedRowIndexes)
+        generatorsTable.reloadData()
+    }
+
+    @IBAction private func addProcessorRow(_ sender: NSButton) {
+        SimulationProperties.shared.addProcessorProperties()
+        processorsTable.reloadData()
+    }
+    
+    @IBAction private func removeProcessorRows(_ sender: NSButton) {
+        let properties = SimulationProperties.shared
+        properties.removeProcessorProperties(indices: processorsTable.selectedRowIndexes)
+        processorsTable.reloadData()
+    }
+
+    @IBAction private func applyToAllGenerators(_ sender: Any) {
+        if generatorsTable.numberOfSelectedRows == 1 {
+            SimulationProperties.shared.applyToAllGenerators(
+                properties: SimulationProperties.shared.currentGenerationProperties[generatorsTable.selectedRow])
+        }
         generatorsTable.reloadData()
     }
 
     @IBAction private func applyToAllProcessors(_ sender: Any) {
-
+        if processorsTable.numberOfSelectedRows == 1 {
+            SimulationProperties.shared.applyToAllProcessors(
+                properties: SimulationProperties.shared.currentProcessingProperties[processorsTable.selectedRow])
+        }
         processorsTable.reloadData()
     }
 
-    @IBAction private func generatorsAmountFieldValueChanged(_ sender: Any) {
+    @IBAction private func generatorsAmountFieldValueChanged(_ sender: NSTextField) {
+        let properties = SimulationProperties.shared
+        if sender.integerValue > properties.generatorsAmount {
+            for _ in 1 ... sender.integerValue - Int(properties.generatorsAmount) {
+                properties.addGeneratorProperties()
+            }
+        } else if sender.integerValue > properties.generatorsAmount {
+            for _ in 1 ... Int(properties.generatorsAmount) - sender.integerValue {
+                properties.removeGeneratorProperties(index: properties.generatorsAmount - 1)
+            }
+        }
+        generatorsTable.reloadData()
     }
 
-    @IBAction private func processorsAmountFieldValueChanged(_ sender: Any) {
+    @IBAction private func processorsAmountFieldValueChanged(_ sender: NSTextField) {
+        let properties = SimulationProperties.shared
+        if sender.integerValue > properties.processorsAmount {
+            for _ in 1 ... sender.integerValue - Int(properties.processorsAmount) {
+                properties.addProcessorProperties()
+            }
+        } else if sender.integerValue > properties.processorsAmount {
+            for _ in 1 ... Int(properties.processorsAmount) - sender.integerValue {
+                properties.removeProcessorProperties(index: properties.processorsAmount - 1)
+            }
+        }
+        processorsTable.reloadData()
     }
 }
 
@@ -230,6 +286,38 @@ extension SettingsViewController: NSTableViewDelegate {
 
     func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
         20
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        guard let tableView = notification.object as? NSTableView, let id = tableView.identifier?.rawValue else {
+            return
+        }
+
+        if id  == "settingsGeneratorsTable" {
+            if tableView.numberOfSelectedRows == 1 {
+                applyToAllGeneratorsButton.isEnabled = true
+                deleteGeneratorButton.isEnabled = true
+            } else if tableView.numberOfSelectedRows > 1 {
+                applyToAllGeneratorsButton.isEnabled = false
+                deleteGeneratorButton.isEnabled = true
+            } else if tableView.numberOfSelectedRows == 0 {
+                applyToAllGeneratorsButton.isEnabled = false
+                deleteGeneratorButton.isEnabled = false
+            }
+        }
+
+        if id  == "settingsProcessorsTable" {
+            if tableView.numberOfSelectedRows == 1 {
+                applyToAllProcessorsButton.isEnabled = true
+                deleteProcessorButton.isEnabled = true
+            } else if tableView.numberOfSelectedRows > 1 {
+                applyToAllProcessorsButton.isEnabled = false
+                deleteProcessorButton.isEnabled = true
+            } else if tableView.numberOfSelectedRows == 0 {
+                applyToAllProcessorsButton.isEnabled = false
+                deleteProcessorButton.isEnabled = false
+            }
+        }
     }
 }
 
