@@ -55,8 +55,7 @@ class SimulationProperties {
         case .linear:
             return currentProperties.cooldown
         case .poisson:
-            // TODO
-            return currentProperties.cooldown
+            return -1.0 / currentProperties.cooldown * log(Double.random(in: 0..<1))
         }
     }
 

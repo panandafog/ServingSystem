@@ -682,7 +682,7 @@
         <scene sceneID="BBh-aO-5Zp">
             <objects>
                 <windowController id="kRq-fL-Sf4" sceneMemberID="viewController">
-                    <window key="window" title="Queureing System" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" toolbarStyle="expanded" id="epE-N7-H2u">
+                    <window key="window" title="Serving System" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" titlebarAppearsTransparent="YES" toolbarStyle="expanded" id="epE-N7-H2u">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="268" y="340" width="480" height="270"/>

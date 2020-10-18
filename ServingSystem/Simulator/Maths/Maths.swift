@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class Maths {
+enum Maths {
 
     static func expectation(of mas: [Double]) -> Double {
         var sum = 0.0
