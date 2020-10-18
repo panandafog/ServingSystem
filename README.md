@@ -5,7 +5,7 @@ Educational project
 
 ## Installation
 
-- Download <a id="raw-url" href="https://github.com/panandafog/ServingSystem/tree/master/Products/ServingSystem.dng">.dmg file</a>
+- Download <a id="raw-url" href="https://github.com/panandafog/ServingSystem/tree/master/Products/ServingSystem.dmg">.dmg file</a>
 - Double-click
 
 ## Launch Xcode project
