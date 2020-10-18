@@ -5,7 +5,7 @@ Educational project
 
 ## Installation
 
-- Download <a id="raw-url" href="https://github.com/panandafog/ServingSystem/tree/master/Products/ServingSystem.app">.app file</a>
+- Download <a id="raw-url" href="https://github.com/panandafog/ServingSystem/tree/master/Products/ServingSystem.dng">.app file</a>
 - Double-click
 
 ## Launch Xcode project
