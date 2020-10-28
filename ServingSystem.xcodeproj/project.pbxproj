@@ -33,6 +33,7 @@
 		0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE42725175D6200E3CB46 /* SimulationMode.swift */; };
 		0BBF15682537A59600D72FD6 /* GenerationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF15672537A59600D72FD6 /* GenerationProperties.swift */; };
 		0BBF156D2537A5A500D72FD6 /* ProcessingProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */; };
+		0BFD71452549914A00E46CDF /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD71442549914A00E46CDF /* AnalysisViewController.swift */; };
 		DFAC86B7C4AF8CE66A2D72CF /* Pods_ServingSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD68E926E5BB2F810C777DBA /* Pods_ServingSystem.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +71,7 @@
 		0B8FE42725175D6200E3CB46 /* SimulationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationMode.swift; sourceTree = "<group>"; };
 		0BBF15672537A59600D72FD6 /* GenerationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationProperties.swift; sourceTree = "<group>"; };
 		0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingProperties.swift; sourceTree = "<group>"; };
+		0BFD71442549914A00E46CDF /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		2766CC4C25FB609E2F562DBB /* Pods-ServingSystem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServingSystem.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ServingSystem/Pods-ServingSystem.debug.xcconfig"; sourceTree = "<group>"; };
 		355DC5D00BAA57E1786C19AC /* Pods_ServingSystem_ServingSystemUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ServingSystem_ServingSystemUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51EDA65BC428656D7FC171F6 /* Pods_ServingSystemTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ServingSystemTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -96,6 +98,7 @@
 		0B06043F253A51A900226BD1 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0BFD71442549914A00E46CDF /* AnalysisViewController.swift */,
 				0B584E4C2535E7010089B37E /* AutoViewController.swift */,
 				0B584E422535E3D00089B37E /* SettingsViewController.swift */,
 				0B584E562535E7310089B37E /* SidebarViewController.swift */,
@@ -377,6 +380,7 @@
 				0B6C95A52519348F006DC0DD /* BufferPicker.swift in Sources */,
 				0B6C958D25192E03006DC0DD /* Request.swift in Sources */,
 				0B2C2A682537939500F1DA66 /* SimulationProperties.swift in Sources */,
+				0BFD71452549914A00E46CDF /* AnalysisViewController.swift in Sources */,
 				0BBF156D2537A5A500D72FD6 /* ProcessingProperties.swift in Sources */,
 				0B2C2A702537981100F1DA66 /* ProcessingFunction.swift in Sources */,
 				0B6C95982519325C006DC0DD /* SpecialConditioned.swift in Sources */,
