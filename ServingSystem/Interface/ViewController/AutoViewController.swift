@@ -269,7 +269,7 @@ extension AutoViewController: NSTableViewDelegate {
         case "usingRateColumn":
             guard let cellView = autoProcessorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "usingRateCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = autoSimulator.processors[row].bisyTime / autoSimulator.realisationTime
+            cellView.textField?.doubleValue = autoSimulator.getProcessorUsingRate(index: UInt(row))
             return cellView
 
         default:

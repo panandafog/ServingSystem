@@ -1417,6 +1417,7 @@
                                 <viewController key="viewController" id="ysm-FE-khF">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7SM-sU-wXK">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7V5-KM-HPa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1431,6 +1432,7 @@
                                 <viewController key="viewController" id="rqV-eF-GFj">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b5K-3E-B63">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gAz-GA-VLZ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2864,11 +2866,108 @@
                     <view key="view" id="zEc-9O-vjG">
                         <rect key="frame" x="0.0" y="0.0" width="1265" height="750"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="JWe-cy-f35" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="234" y="91" width="798" height="568"/>
+                            </customView>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YaQ-Ea-fCn">
+                                <rect key="frame" x="1217" y="10" width="40" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="7uc-JZ-LR7"/>
+                                    <constraint firstAttribute="width" constant="26" id="Wv4-rJ-IjW"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="eJp-HD-klO">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="openStartWindow:" target="84E-58-WpG" id="gSq-UM-2op"/>
+                                </connections>
+                            </button>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iuH-Gm-exV">
+                                <rect key="frame" x="1185" y="7" width="40" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="LyS-dd-VdL"/>
+                                    <constraint firstAttribute="width" constant="26" id="Ns8-PA-vmS"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="only" alignment="center" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3HP-ps-WGS">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="stop:" target="84E-58-WpG" id="Czc-1g-gaB"/>
+                                </connections>
+                            </button>
+                            <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="l3w-WB-L0h">
+                                <rect key="frame" x="1168" y="19" width="16" height="16"/>
+                            </progressIndicator>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="YaQ-Ea-fCn" secondAttribute="bottom" constant="17" id="4Bo-Kd-CuP"/>
+                            <constraint firstAttribute="bottom" secondItem="JWe-cy-f35" secondAttribute="bottom" constant="91" id="CiU-iK-ww7"/>
+                            <constraint firstAttribute="trailing" secondItem="JWe-cy-f35" secondAttribute="trailing" constant="233" id="GoI-Mt-FCj"/>
+                            <constraint firstAttribute="trailing" secondItem="YaQ-Ea-fCn" secondAttribute="trailing" constant="15" id="HWl-UR-6pe"/>
+                            <constraint firstItem="iuH-Gm-exV" firstAttribute="centerY" secondItem="l3w-WB-L0h" secondAttribute="centerY" id="Ktj-WP-7FW"/>
+                            <constraint firstItem="YaQ-Ea-fCn" firstAttribute="centerY" secondItem="l3w-WB-L0h" secondAttribute="centerY" id="ZNM-2G-DdU"/>
+                            <constraint firstItem="iuH-Gm-exV" firstAttribute="leading" secondItem="l3w-WB-L0h" secondAttribute="trailing" constant="8" symbolic="YES" id="fmQ-qq-UII"/>
+                            <constraint firstItem="JWe-cy-f35" firstAttribute="leading" secondItem="zEc-9O-vjG" secondAttribute="leading" constant="234" id="n8h-Tu-Nbt"/>
+                            <constraint firstItem="JWe-cy-f35" firstAttribute="top" secondItem="zEc-9O-vjG" secondAttribute="top" constant="91" id="qhi-XV-Cvu"/>
+                            <constraint firstItem="YaQ-Ea-fCn" firstAttribute="leading" secondItem="iuH-Gm-exV" secondAttribute="trailing" constant="6" id="zJX-UP-zZg"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="chart1" destination="JWe-cy-f35" id="IS2-t7-zRU"/>
+                        <outlet property="progressIndicator" destination="l3w-WB-L0h" id="o2o-Q5-JdG"/>
+                        <outlet property="startButton" destination="YaQ-Ea-fCn" id="Lr1-4G-82W"/>
+                        <outlet property="stopButton" destination="iuH-Gm-exV" id="w4v-S8-SZz"/>
+                    </connections>
                 </viewController>
                 <customObject id="3Wx-Fw-DaE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-382.5" y="5610"/>
+        </scene>
+        <!--AnalysisSettingsViewController-->
+        <scene sceneID="VJn-NR-gDC">
+            <objects>
+                <viewController title="AnalysisSettingsViewController" identifier="AnalysisSettingsViewController" storyboardIdentifier="AnalysisSettingsViewController" id="cO7-AV-FpC" customClass="AnalysisSettingsViewController" customModule="ServingSystem" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Ons-na-5D0">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jMm-eD-8q6">
+                                <rect key="frame" x="416" y="7" width="56" height="32"/>
+                                <buttonCell key="cell" type="push" title="Go!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="avA-Zj-aMI">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="startButtonPressed:" target="cO7-AV-FpC" id="LDY-Vz-Hi8"/>
+                                </connections>
+                            </button>
+                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="af5-We-38n">
+                                <rect key="frame" x="186" y="192" width="108" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ZC1-X2-Z7v">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment width="32"/>
+                                        <segment width="32" selected="YES" tag="1"/>
+                                        <segment width="32">
+                                            <nil key="label"/>
+                                        </segment>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="jMm-eD-8q6" secondAttribute="trailing" constant="15" id="Mo9-Jf-kgd"/>
+                            <constraint firstAttribute="bottom" secondItem="jMm-eD-8q6" secondAttribute="bottom" constant="14" id="azV-4r-grR"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="F4B-PF-p1K" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="11" y="6275"/>
         </scene>
     </scenes>
     <resources>

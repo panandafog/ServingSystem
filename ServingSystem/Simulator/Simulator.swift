@@ -41,6 +41,66 @@ class Simulator {
                                         writeToLog: self.writeToLog(_:)))
         }
     }
+    
+    init(bufferCapacity: UInt) {
+        let properties = SimulationProperties.shared
+
+        buffer = Buffer(capacity: bufferCapacity)
+        bufferPicker = BufferPicker(buffer: buffer)
+        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: properties.generatorsAmount)
+
+        for index in 1...Int(properties.generatorsAmount) {
+            generators.append(Generator(priority: Int(index),
+                                        bufferInserter: bufferInserter,
+                                        writeToLog: self.writeToLog(_:)))
+        }
+
+        for index in 1...properties.processorsAmount {
+            processors.append(Processor(number: index,
+                                        bufferPicker: bufferPicker,
+                                        writeToLog: self.writeToLog(_:)))
+        }
+    }
+    
+    init(generatorsAmount: UInt) {
+        let properties = SimulationProperties.shared
+
+        buffer = Buffer(capacity: properties.bufferCapacity)
+        bufferPicker = BufferPicker(buffer: buffer)
+        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: generatorsAmount)
+
+        for index in 1...Int(generatorsAmount) {
+            generators.append(Generator(priority: Int(index),
+                                        bufferInserter: bufferInserter,
+                                        writeToLog: self.writeToLog(_:)))
+        }
+
+        for index in 1...properties.processorsAmount {
+            processors.append(Processor(number: index,
+                                        bufferPicker: bufferPicker,
+                                        writeToLog: self.writeToLog(_:)))
+        }
+    }
+    
+    init(processorsAmount: UInt) {
+        let properties = SimulationProperties.shared
+
+        buffer = Buffer(capacity: properties.bufferCapacity)
+        bufferPicker = BufferPicker(buffer: buffer)
+        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: properties.generatorsAmount)
+
+        for index in 1...Int(properties.generatorsAmount) {
+            generators.append(Generator(priority: Int(index),
+                                        bufferInserter: bufferInserter,
+                                        writeToLog: self.writeToLog(_:)))
+        }
+
+        for index in 1...processorsAmount {
+            processors.append(Processor(number: index,
+                                        bufferPicker: bufferPicker,
+                                        writeToLog: self.writeToLog(_:)))
+        }
+    }
 
     func getRejectProbability() -> Double {
         Double(getRejectedRequestsAmount()) / Double(getGeneratedRequestsAmount())
@@ -95,6 +155,19 @@ class Simulator {
     func getRejectedRequests() -> [[Request]] {
         bufferInserter.rejectedRequests
     }
+    
+    func getAverageRequestStayTime() -> Double {
+        guard !generators.isEmpty else {
+            return -1.0
+        }
+        var totalTime = 0.0
+        
+        for index in 1...generators.count {
+            totalTime += getAverageRequestStayTime(generatorNumber: UInt(index))
+        }
+        
+        return totalTime / Double(generators.count)
+    }
 
     func getAverageRequestStayTime(generatorNumber: UInt) -> Double {
         let requests = getCompletedRequests(from: generatorNumber)
@@ -133,6 +206,24 @@ class Simulator {
             }
         })
         return totalTime / Double(requests.count)
+    }
+    
+    func getAverageProcessorUsingRate() -> Double {
+        guard !processors.isEmpty else {
+            return -1.0
+        }
+        var totalRate = 0.0
+        for index in 0...processors.count - 1 {
+            totalRate += getProcessorUsingRate(index: UInt(index))
+        }
+        return totalRate / Double(processors.count)
+    }
+    
+    func getProcessorUsingRate(index: UInt) -> Double {
+        guard index < processors.count && index >= 0 else {
+            return -1.0
+        }
+        return processors[Int(index)].bisyTime / realisationTime
     }
 
     func writeToLog(_ string: String) {

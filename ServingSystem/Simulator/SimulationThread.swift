@@ -9,6 +9,7 @@ import Foundation
 
 class SimulationThread: Thread {
 
+    var alerts = true
     private let simulator: Simulator
     private let completion: () -> Void
 
@@ -41,7 +42,7 @@ class SimulationThread: Thread {
             } while abs(previousRejectProbability - currentRejectProbability) >= (0.1 * previousRejectProbability) && !isCancelled
         }
         completion()
-        if !isCancelled {
+        if !isCancelled && alerts {
             simulator.showCompletionAlert(iterations: currentRequestsAmount)
         }
     }
