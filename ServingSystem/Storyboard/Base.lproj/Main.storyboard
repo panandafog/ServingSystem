@@ -1417,7 +1417,6 @@
                                 <viewController key="viewController" id="ysm-FE-khF">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7SM-sU-wXK">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7V5-KM-HPa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1432,7 +1431,6 @@
                                 <viewController key="viewController" id="rqV-eF-GFj">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b5K-3E-B63">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gAz-GA-VLZ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1461,7 +1459,7 @@
                 </viewController>
                 <customObject id="cOK-0f-hnF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-382" y="3799"/>
+            <point key="canvasLocation" x="-382" y="3827"/>
         </scene>
         <!--Steps View Controller-->
         <scene sceneID="jdP-qO-xzS">
@@ -2260,8 +2258,7 @@
                             <touchBarItem id="AMW-p9-MMQ">
                                 <viewController key="viewController" id="iXx-g4-DoI">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FvD-av-ww7">
-                                        <rect key="frame" x="7" y="-5" width="72" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LIW-LN-o8A">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2275,8 +2272,7 @@
                             <touchBarItem id="bpl-CW-39h">
                                 <viewController key="viewController" id="th4-1U-ff0">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2eL-iF-4pu">
-                                        <rect key="frame" x="7" y="-5" width="72" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Mh-DM-WiI">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2857,7 +2853,7 @@
                 </viewController>
                 <customObject id="yGp-xY-aL3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-376" y="5519"/>
+            <point key="canvasLocation" x="-376" y="5726"/>
         </scene>
         <!--AnalysisViewController-->
         <scene sceneID="awe-l2-Dy7">
@@ -2933,18 +2929,52 @@
                             <constraint firstItem="YaQ-Ea-fCn" firstAttribute="leading" secondItem="iuH-Gm-exV" secondAttribute="trailing" constant="6" id="zJX-UP-zZg"/>
                         </constraints>
                     </view>
+                    <touchBar key="touchBar" id="du5-Yr-PtT">
+                        <touchBarItems>
+                            <touchBarItem id="eEa-We-y5S">
+                                <viewController key="viewController" id="UQG-f4-o1L">
+                                    <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5J3-96-uZy">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dcc-ni-LlL">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="stop:" target="84E-58-WpG" id="Xoy-Vb-lrf"/>
+                                        </connections>
+                                    </button>
+                                </viewController>
+                            </touchBarItem>
+                            <touchBarItem id="5fI-xh-btD">
+                                <viewController key="viewController" id="bNv-S0-ftm">
+                                    <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="boG-te-ciO">
+                                        <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tFm-wR-N28">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="openStartWindow:" target="84E-58-WpG" id="Gge-lC-G21"/>
+                                        </connections>
+                                    </button>
+                                </viewController>
+                            </touchBarItem>
+                        </touchBarItems>
+                    </touchBar>
                     <connections>
                         <outlet property="progressIndicator" destination="l3w-WB-L0h" id="o2o-Q5-JdG"/>
                         <outlet property="rejectProbabilityChart" destination="JWe-cy-f35" id="IS2-t7-zRU"/>
                         <outlet property="startButton" destination="YaQ-Ea-fCn" id="Lr1-4G-82W"/>
+                        <outlet property="startTouchBarButton" destination="boG-te-ciO" id="TlP-nT-XE4"/>
                         <outlet property="stayTimeChart" destination="Tnc-o3-mEh" id="rk7-YK-647"/>
                         <outlet property="stopButton" destination="iuH-Gm-exV" id="w4v-S8-SZz"/>
+                        <outlet property="stopTouchBarButton" destination="5J3-96-uZy" id="14p-bG-Uhp"/>
                         <outlet property="usingRateChart" destination="G1p-sF-2Ny" id="aCH-Z9-XMU"/>
                     </connections>
                 </viewController>
                 <customObject id="3Wx-Fw-DaE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375" y="4660"/>
+            <point key="canvasLocation" x="-375" y="4737"/>
         </scene>
         <!--AnalysisSettingsViewController-->
         <scene sceneID="VJn-NR-gDC">

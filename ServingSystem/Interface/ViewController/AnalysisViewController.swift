@@ -8,7 +8,7 @@
 import Charts
 import Cocoa
 
-class AnalysisViewController: NSViewController {
+class AnalysisViewController: NSViewController, NSTouchBarDelegate {
     
     var analyser: Analyser?
     
@@ -19,13 +19,21 @@ class AnalysisViewController: NSViewController {
     @IBOutlet private var usingRateChart: LineChartView!
     
     @IBOutlet private var startButton: NSButton!
+    @IBOutlet private var startTouchBarButton: NSButton!
     @IBOutlet private var stopButton: NSButton!
+    @IBOutlet private var stopTouchBarButton: NSButton!
+    
     @IBOutlet private var progressIndicator: NSProgressIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCharts()
+        
+        startButton.isEnabled = true
+        startTouchBarButton.isEnabled = true
+        stopButton.isEnabled = false
+        stopTouchBarButton.isEnabled = false
         
         self.analysisCompletion = { values, rejectProbability, stayTime, usingRate in
             guard let rejectProbability = rejectProbability,
@@ -36,6 +44,11 @@ class AnalysisViewController: NSViewController {
             }
             DispatchQueue.main.async {
                 self.progressIndicator.stopAnimation(self)
+                
+                self.startButton.isEnabled = true
+                self.startTouchBarButton.isEnabled = true
+                self.stopButton.isEnabled = false
+                self.stopTouchBarButton.isEnabled = false
             }
             self.drawCharts(values: values,
                             rejectProbability: rejectProbability,
@@ -50,7 +63,7 @@ class AnalysisViewController: NSViewController {
         animateCharts()
     }
     
-    @IBAction private func openStartWindow(_ sender: NSButton) {
+    @IBAction private func openStartWindow(_ sender: Any) {
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 810, height: 850),
             styleMask: [.titled, .closable],
@@ -69,6 +82,9 @@ class AnalysisViewController: NSViewController {
         contentViewController.onStartAction = {
             DispatchQueue.main.async {
                 self.progressIndicator.startAnimation(self)
+                
+                self.stopButton.isEnabled = true
+                self.stopTouchBarButton.isEnabled = true
             }
         }
         
@@ -82,6 +98,11 @@ class AnalysisViewController: NSViewController {
         analyser?.cancel()
         DispatchQueue.main.async {
             self.progressIndicator.stopAnimation(self)
+            
+            self.startButton.isEnabled = true
+            self.startTouchBarButton.isEnabled = true
+            self.stopButton.isEnabled = false
+            self.stopTouchBarButton.isEnabled = false
         }
     }
     
@@ -146,7 +167,7 @@ extension LineChartView {
         for index in 0...xData.count - 1 {
             entries.append(ChartDataEntry(x: Double(xData[index]), y: yData[index]))
         }
-
+        
         let data = LineChartData()
         let dataSet = LineChartDataSet(entries: entries, label: label)
         dataSet.valueTextColor = .textColor
@@ -160,7 +181,7 @@ extension LineChartView {
         }
         
         dataSet.drawValuesEnabled = xData.count < drawValuesLimit
-    
+        
         data.addDataSet(dataSet)
         
         self.data = data

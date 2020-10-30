@@ -145,14 +145,6 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
         stopAutoSimulationTouchBarButton.isEnabled = false
     }
 
-    // MARK: - Make touch bar
-
-    override func makeTouchBar() -> NSTouchBar? {
-        let touchBar = NSTouchBar()
-        touchBar.delegate = self
-        return touchBar
-    }
-
     // MARK: - Validation
 
     func validateSettings() {

@@ -47,6 +47,8 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        makeStepTouchBarButton.isEnabled = true
+        
         makeStepTouchBarButton.action = makeStepButton.action
         stopStepsSimulationTouchBarButton.action = stopStepsSimulationButton.action
 
@@ -140,13 +142,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
         stepsProcessorsTable.reloadData()
         stepsBufferTable.reloadData()
         stopStepsSimulationButton.isEnabled = false
-    }
-
-    // MARK: - Make touch bar
-    override func makeTouchBar() -> NSTouchBar? {
-        let touchBar = NSTouchBar()
-        touchBar.delegate = self
-        return touchBar
+        stopStepsSimulationTouchBarButton.isEnabled = false
     }
 
     // MARK: - Validation
@@ -159,7 +155,9 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
             break
         }
         makeStepButton.isEnabled = valid
+        makeStepTouchBarButton.isEnabled = valid
         stopStepsSimulationButton.isEnabled = valid && stepsSimulator != nil
+        stopStepsSimulationTouchBarButton.isEnabled = valid && stepsSimulator != nil
     }
 }
 
