@@ -32,9 +32,9 @@ class Analyser {
         working = true
         valuesAmount = maxValue - minValue + 1
 
-        rejectProbability = [Double](repeating: 0.0, count: valuesAmount)
-        stayTime = [Double](repeating: 0.0, count: valuesAmount)
-        usingRate = [Double](repeating: 0.0, count: valuesAmount)
+        rejectProbability = [Double](repeating: -1.0, count: valuesAmount)
+        stayTime = [Double](repeating: -1.0, count: valuesAmount)
+        usingRate = [Double](repeating: -1.0, count: valuesAmount)
         
         var index = -1
         for value in minValue...maxValue {
@@ -54,6 +54,8 @@ class Analyser {
             guard let nNsimulator = simulator else {
                 return
             }
+            
+            let index = index
         
             let simulationThread = SimulationThread(simulator: nNsimulator, completion: ({
                 self.rejectProbability[index] = nNsimulator.getRejectProbability()

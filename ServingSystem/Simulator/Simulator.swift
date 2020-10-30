@@ -161,12 +161,17 @@ class Simulator {
             return -1.0
         }
         var totalTime = 0.0
+        var totalCount = 0
         
         for index in 1...generators.count {
-            totalTime += getAverageRequestStayTime(generatorNumber: UInt(index))
+            let stayTime = getAverageRequestStayTime(generatorNumber: UInt(index))
+            if !stayTime.isNaN {
+                totalTime += stayTime
+                totalCount += 1
+            }
         }
         
-        return totalTime / Double(generators.count)
+        return totalTime / Double(totalCount)
     }
 
     func getAverageRequestStayTime(generatorNumber: UInt) -> Double {
