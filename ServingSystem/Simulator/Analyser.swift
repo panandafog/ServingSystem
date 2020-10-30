@@ -14,7 +14,7 @@ class Analyser {
     var minValue = Int(SimulationProperties.shared.generatorsAmount)
     var maxValue = Int(SimulationProperties.shared.generatorsAmount + 5)
     
-    var completion: ((_: [Double]?, _: [Double]?, _: [Double]?) -> Void)?
+    var completion: ((_: [Int]?, _: [Double]?, _: [Double]?, _: [Double]?) -> Void)?
     
     private (set) var working = false
     
@@ -71,7 +71,7 @@ class Analyser {
                         return
                     }
                     
-                    globalCompletion(self.rejectProbability, self.stayTime, self.usingRate)
+                    globalCompletion(Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
                 }
             }))
             simulationThread.alerts = false
@@ -89,7 +89,7 @@ class Analyser {
 
 extension Analyser {
     
-    enum Mode: String {
+    enum Mode: String, CaseIterable {
         case generatorsAmount = "Vary generators amount"
         case processorsAmount = "Vary processors amount"
         case bufferCapacity = "Vary buffer capacity"

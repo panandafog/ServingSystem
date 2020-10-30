@@ -2868,7 +2868,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="JWe-cy-f35" customClass="LineChartView" customModule="Charts">
-                                <rect key="frame" x="234" y="91" width="798" height="568"/>
+                                <rect key="frame" x="20" y="57" width="395" height="673"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="178" id="0iv-lF-pBW"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="384" id="vfe-Dx-vCU"/>
+                                </constraints>
                             </customView>
                             <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YaQ-Ea-fCn">
                                 <rect key="frame" x="1217" y="10" width="40" height="32"/>
@@ -2901,25 +2905,41 @@
                             <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="l3w-WB-L0h">
                                 <rect key="frame" x="1168" y="19" width="16" height="16"/>
                             </progressIndicator>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="G1p-sF-2Ny" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="850" y="57" width="395" height="673"/>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="Tnc-o3-mEh" customClass="LineChartView" customModule="Charts">
+                                <rect key="frame" x="435" y="57" width="395" height="673"/>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="YaQ-Ea-fCn" secondAttribute="bottom" constant="17" id="4Bo-Kd-CuP"/>
-                            <constraint firstAttribute="bottom" secondItem="JWe-cy-f35" secondAttribute="bottom" constant="91" id="CiU-iK-ww7"/>
-                            <constraint firstAttribute="trailing" secondItem="JWe-cy-f35" secondAttribute="trailing" constant="233" id="GoI-Mt-FCj"/>
+                            <constraint firstItem="iuH-Gm-exV" firstAttribute="top" secondItem="G1p-sF-2Ny" secondAttribute="bottom" constant="17" id="FKF-md-eAi"/>
                             <constraint firstAttribute="trailing" secondItem="YaQ-Ea-fCn" secondAttribute="trailing" constant="15" id="HWl-UR-6pe"/>
+                            <constraint firstItem="G1p-sF-2Ny" firstAttribute="width" secondItem="JWe-cy-f35" secondAttribute="width" id="Iba-2u-whs"/>
                             <constraint firstItem="iuH-Gm-exV" firstAttribute="centerY" secondItem="l3w-WB-L0h" secondAttribute="centerY" id="Ktj-WP-7FW"/>
+                            <constraint firstItem="Tnc-o3-mEh" firstAttribute="bottom" secondItem="JWe-cy-f35" secondAttribute="bottom" id="QAr-Zk-QcY"/>
+                            <constraint firstItem="Tnc-o3-mEh" firstAttribute="top" secondItem="zEc-9O-vjG" secondAttribute="top" constant="20" symbolic="YES" id="SHB-Tp-O86"/>
+                            <constraint firstItem="Tnc-o3-mEh" firstAttribute="width" secondItem="JWe-cy-f35" secondAttribute="width" id="TH7-3A-LZn"/>
+                            <constraint firstItem="JWe-cy-f35" firstAttribute="top" secondItem="zEc-9O-vjG" secondAttribute="top" constant="20" symbolic="YES" id="WFz-20-Nia"/>
+                            <constraint firstAttribute="trailing" secondItem="G1p-sF-2Ny" secondAttribute="trailing" constant="20" symbolic="YES" id="YfX-Va-ls9"/>
                             <constraint firstItem="YaQ-Ea-fCn" firstAttribute="centerY" secondItem="l3w-WB-L0h" secondAttribute="centerY" id="ZNM-2G-DdU"/>
+                            <constraint firstItem="G1p-sF-2Ny" firstAttribute="bottom" secondItem="JWe-cy-f35" secondAttribute="bottom" id="bkS-c5-uV9"/>
                             <constraint firstItem="iuH-Gm-exV" firstAttribute="leading" secondItem="l3w-WB-L0h" secondAttribute="trailing" constant="8" symbolic="YES" id="fmQ-qq-UII"/>
-                            <constraint firstItem="JWe-cy-f35" firstAttribute="leading" secondItem="zEc-9O-vjG" secondAttribute="leading" constant="234" id="n8h-Tu-Nbt"/>
-                            <constraint firstItem="JWe-cy-f35" firstAttribute="top" secondItem="zEc-9O-vjG" secondAttribute="top" constant="91" id="qhi-XV-Cvu"/>
+                            <constraint firstItem="G1p-sF-2Ny" firstAttribute="leading" secondItem="Tnc-o3-mEh" secondAttribute="trailing" constant="20" id="g1L-4t-VWt"/>
+                            <constraint firstItem="JWe-cy-f35" firstAttribute="leading" secondItem="zEc-9O-vjG" secondAttribute="leading" constant="20" symbolic="YES" id="ggq-8g-gxc"/>
+                            <constraint firstItem="G1p-sF-2Ny" firstAttribute="top" secondItem="zEc-9O-vjG" secondAttribute="top" constant="20" symbolic="YES" id="pz1-RU-f1m"/>
+                            <constraint firstItem="Tnc-o3-mEh" firstAttribute="leading" secondItem="JWe-cy-f35" secondAttribute="trailing" constant="20" id="wOW-4M-R7n"/>
                             <constraint firstItem="YaQ-Ea-fCn" firstAttribute="leading" secondItem="iuH-Gm-exV" secondAttribute="trailing" constant="6" id="zJX-UP-zZg"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="chart1" destination="JWe-cy-f35" id="IS2-t7-zRU"/>
                         <outlet property="progressIndicator" destination="l3w-WB-L0h" id="o2o-Q5-JdG"/>
+                        <outlet property="rejectProbabilityChart" destination="JWe-cy-f35" id="IS2-t7-zRU"/>
                         <outlet property="startButton" destination="YaQ-Ea-fCn" id="Lr1-4G-82W"/>
+                        <outlet property="stayTimeChart" destination="Tnc-o3-mEh" id="rk7-YK-647"/>
                         <outlet property="stopButton" destination="iuH-Gm-exV" id="w4v-S8-SZz"/>
+                        <outlet property="usingRateChart" destination="G1p-sF-2Ny" id="aCH-Z9-XMU"/>
                     </connections>
                 </viewController>
                 <customObject id="3Wx-Fw-DaE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -2931,11 +2951,84 @@
             <objects>
                 <viewController title="AnalysisSettingsViewController" identifier="AnalysisSettingsViewController" storyboardIdentifier="AnalysisSettingsViewController" id="cO7-AV-FpC" customClass="AnalysisSettingsViewController" customModule="ServingSystem" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Ons-na-5D0">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="166"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="af5-We-38n">
+                                <rect key="frame" x="13" y="101" width="454" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="450" id="Nbl-UY-yAw"/>
+                                </constraints>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ZC1-X2-Z7v">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Generators amount" width="144"/>
+                                        <segment label="Processors amount" width="143" selected="YES" tag="1"/>
+                                        <segment label="Buffer capacity" width="143"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="modeChanged:" target="cO7-AV-FpC" id="6gm-Sa-ebf"/>
+                                </connections>
+                            </segmentedControl>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LMX-Zr-fLk">
+                                <rect key="frame" x="13" y="136" width="35" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Vary:" id="EUv-W9-lXJ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fVL-g6-6hD">
+                                <rect key="frame" x="86" y="59" width="139" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="CiC-MA-Dmo"/>
+                                    <constraint firstAttribute="width" constant="139" id="fbL-0P-DHS"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="aCi-26-qOC">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="meh-w5-Hj1"/>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="textValueChanged:" target="cO7-AV-FpC" id="Dfa-BY-z5V"/>
+                                </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB0-a1-3FS">
+                                <rect key="frame" x="86" y="20" width="139" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="7Z9-2C-Czb"/>
+                                    <constraint firstAttribute="width" constant="139" id="Kbg-54-8zl"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" bezelStyle="round" id="JpM-PU-Vgj">
+                                    <numberFormatter key="formatter" formatterBehavior="default10_4" numberStyle="decimal" formatWidth="-1" minimumIntegerDigits="1" maximumIntegerDigits="2000000000" maximumFractionDigits="3" id="HYt-1u-B2Q"/>
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <action selector="textValueChanged:" target="cO7-AV-FpC" id="ADI-YQ-y7L"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hg8-xI-R8o">
+                                <rect key="frame" x="13" y="62" width="39" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="From:" id="Qoy-jj-A16">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fIa-Gj-SIa">
+                                <rect key="frame" x="13" y="22" width="23" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="To:" id="AQj-El-eqy">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jMm-eD-8q6">
-                                <rect key="frame" x="416" y="7" width="56" height="32"/>
+                                <rect key="frame" x="405" y="13" width="56" height="32"/>
                                 <buttonCell key="cell" type="push" title="Go!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="avA-Zj-aMI">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2944,30 +3037,36 @@
                                     <action selector="startButtonPressed:" target="cO7-AV-FpC" id="LDY-Vz-Hi8"/>
                                 </connections>
                             </button>
-                            <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="af5-We-38n">
-                                <rect key="frame" x="186" y="192" width="108" height="24"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ZC1-X2-Z7v">
-                                    <font key="font" metaFont="system"/>
-                                    <segments>
-                                        <segment width="32"/>
-                                        <segment width="32" selected="YES" tag="1"/>
-                                        <segment width="32">
-                                            <nil key="label"/>
-                                        </segment>
-                                    </segments>
-                                </segmentedCell>
-                            </segmentedControl>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="jMm-eD-8q6" secondAttribute="trailing" constant="15" id="Mo9-Jf-kgd"/>
-                            <constraint firstAttribute="bottom" secondItem="jMm-eD-8q6" secondAttribute="bottom" constant="14" id="azV-4r-grR"/>
+                            <constraint firstItem="LMX-Zr-fLk" firstAttribute="leading" secondItem="Ons-na-5D0" secondAttribute="leading" constant="15" id="5vi-OL-KVG"/>
+                            <constraint firstItem="fVL-g6-6hD" firstAttribute="top" secondItem="af5-We-38n" secondAttribute="bottom" constant="22" id="6wS-39-2le"/>
+                            <constraint firstItem="LMX-Zr-fLk" firstAttribute="top" secondItem="Ons-na-5D0" secondAttribute="top" constant="14" id="7oS-Gs-pDJ"/>
+                            <constraint firstItem="bB0-a1-3FS" firstAttribute="top" secondItem="fVL-g6-6hD" secondAttribute="bottom" constant="18" id="7pS-d5-uin"/>
+                            <constraint firstAttribute="trailing" secondItem="jMm-eD-8q6" secondAttribute="trailing" constant="26" id="8HJ-aN-eqd"/>
+                            <constraint firstItem="bB0-a1-3FS" firstAttribute="leading" secondItem="fVL-g6-6hD" secondAttribute="leading" id="9Lf-lJ-9Jq"/>
+                            <constraint firstItem="fIa-Gj-SIa" firstAttribute="leading" secondItem="Ons-na-5D0" secondAttribute="leading" constant="15" id="BKU-s0-8Tk"/>
+                            <constraint firstAttribute="bottom" secondItem="jMm-eD-8q6" secondAttribute="bottom" constant="20" symbolic="YES" id="Gim-L5-3Vw"/>
+                            <constraint firstItem="af5-We-38n" firstAttribute="top" secondItem="LMX-Zr-fLk" secondAttribute="bottom" constant="12" id="IIa-vy-Bx0"/>
+                            <constraint firstItem="hg8-xI-R8o" firstAttribute="leading" secondItem="Ons-na-5D0" secondAttribute="leading" constant="15" id="KJ4-8g-UwC"/>
+                            <constraint firstAttribute="trailing" secondItem="af5-We-38n" secondAttribute="trailing" constant="15" id="StL-ML-baC"/>
+                            <constraint firstItem="fIa-Gj-SIa" firstAttribute="top" secondItem="hg8-xI-R8o" secondAttribute="bottom" constant="24" id="TXJ-cP-Mhy"/>
+                            <constraint firstAttribute="bottom" secondItem="bB0-a1-3FS" secondAttribute="bottom" constant="20" symbolic="YES" id="WFx-al-FGY"/>
+                            <constraint firstItem="hg8-xI-R8o" firstAttribute="top" secondItem="af5-We-38n" secondAttribute="bottom" constant="24" id="XTG-Ge-Mpr"/>
+                            <constraint firstItem="fVL-g6-6hD" firstAttribute="leading" secondItem="hg8-xI-R8o" secondAttribute="trailing" constant="36" id="Xfd-bp-bRZ"/>
+                            <constraint firstItem="af5-We-38n" firstAttribute="leading" secondItem="Ons-na-5D0" secondAttribute="leading" constant="15" id="ghN-Jq-jQE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="analyseButton" destination="jMm-eD-8q6" id="ywE-X9-ePY"/>
+                        <outlet property="fromField" destination="fVL-g6-6hD" id="HEr-MQ-jdV"/>
+                        <outlet property="modeSegmentedControl" destination="af5-We-38n" id="RgC-do-jkI"/>
+                        <outlet property="toField" destination="bB0-a1-3FS" id="HcF-sh-Gaf"/>
+                    </connections>
                 </viewController>
                 <customObject id="F4B-PF-p1K" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11" y="6275"/>
+            <point key="canvasLocation" x="11" y="6223"/>
         </scene>
     </scenes>
     <resources>
