@@ -11,6 +11,8 @@ class AnalysisSettingsViewController: NSViewController {
     
     var analyser = Analyser()
     
+    var onStartAction: (() -> Void)?
+    
     @IBOutlet private var modeSegmentedControl: NSSegmentedControl!
     
     @IBOutlet private var fromField: NSTextField!
@@ -28,12 +30,15 @@ class AnalysisSettingsViewController: NSViewController {
     
     @IBAction private func modeChanged(_ sender: NSSegmentedControl) {
         analyser.mode = Analyser.Mode.allCases[sender.indexOfSelectedItem]
-        setupTextFields()
     }
     
     @IBAction private func startButtonPressed(_ sender: Any) {
         analyser.start()
         self.view.window?.close()
+        guard let onStartAction = self.onStartAction else {
+            return
+        }
+        onStartAction()
     }
     
     @IBAction private func textValueChanged(_ sender: NSTextField) {

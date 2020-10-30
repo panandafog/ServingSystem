@@ -34,10 +34,14 @@ class AnalysisViewController: NSViewController {
                   let values = values else {
                 return
             }
+            DispatchQueue.main.async {
+                self.progressIndicator.stopAnimation(self)
+            }
             self.drawCharts(values: values,
                             rejectProbability: rejectProbability,
                             stayTime: stayTime,
                             usingRate: usingRate)
+            self.animateCharts()
         }
     }
     
@@ -62,6 +66,11 @@ class AnalysisViewController: NSViewController {
         analyser.completion = analysisCompletion
         self.analyser = analyser
         contentViewController.analyser = analyser
+        contentViewController.onStartAction = {
+            DispatchQueue.main.async {
+                self.progressIndicator.startAnimation(self)
+            }
+        }
         
         window.contentViewController = contentViewController
         window.makeKeyAndOrderFront(nil)
@@ -71,6 +80,9 @@ class AnalysisViewController: NSViewController {
     
     @IBAction private func stop(_ sender: NSButton) {
         analyser?.cancel()
+        DispatchQueue.main.async {
+            self.progressIndicator.stopAnimation(self)
+        }
     }
     
     private func setupCharts() {
@@ -88,8 +100,10 @@ class AnalysisViewController: NSViewController {
             chart.rightAxis.labelTextColor = .textColor
             chart.chartDescription?.textColor = .textColor
             chart.legend.textColor = .textColor
+            chart.noDataTextColor = .textColor
             
             chart.gridBackgroundColor = .controlAccentColor
+            chart.rightAxis.drawLabelsEnabled = false
         }
         self.rejectProbabilityChart.chartDescription?.text = "Reject probability"
         self.stayTimeChart.chartDescription?.text = "Request stay time"
@@ -121,6 +135,9 @@ extension LineChartView {
     
     func setData(x xData: [Int], y yData: [Double], label: String) {
         
+        let drawCirclesLimit = 15
+        let drawValuesLimit = 15
+        
         guard xData.count == yData.count else {
             return
         }
@@ -133,7 +150,17 @@ extension LineChartView {
         let data = LineChartData()
         let dataSet = LineChartDataSet(entries: entries, label: label)
         dataSet.valueTextColor = .textColor
-        dataSet.colors = [NSUIColor.red]
+        dataSet.colors = [.controlAccentColor]
+        
+        if xData.count < drawCirclesLimit {
+            dataSet.circleRadius = 5
+            dataSet.setCircleColor(.controlAccentColor)
+        } else {
+            dataSet.drawCirclesEnabled = false
+        }
+        
+        dataSet.drawValuesEnabled = xData.count < drawValuesLimit
+    
         data.addDataSet(dataSet)
         
         self.data = data
