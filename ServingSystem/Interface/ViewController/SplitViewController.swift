@@ -28,8 +28,8 @@ class SplitViewController: NSSplitViewController {
         super.viewDidLoad()
         
         tabControllers = [
-            autoViewController,
             stepsViewController,
+            autoViewController,
             settingsViewController,
             analysisViewController
         ]
@@ -37,7 +37,7 @@ class SplitViewController: NSSplitViewController {
         sidebarViewController = self.children[0] as? SidebarViewController
         sidebarViewController?.switchTab = self.switchTab(_:)
         
-        self.addChild(self.autoViewController)
+        self.addChild(self.stepsViewController)
     }
     
     func switchTab(_ number: UInt) {

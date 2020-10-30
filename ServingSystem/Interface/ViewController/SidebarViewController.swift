@@ -22,13 +22,13 @@ class SidebarViewController: NSViewController {
         super.viewDidLoad()
         
         tabControllers = [
-            autoModeTabButton,
             stepsModeTabButton,
+            autoModeTabButton,
             settingsTabButton,
             analysisTabButton
         ]
         
-        disableTabSelectors(excluding: autoModeTabButton)
+        disableTabSelectors(excluding: stepsModeTabButton)
     }
     
     @IBAction private func switchTab(_ sender: NSButton) {

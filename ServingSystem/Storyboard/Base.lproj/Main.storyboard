@@ -732,7 +732,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="HXi-7p-lle">
-                                <rect key="frame" x="8" y="355" width="133" height="19"/>
+                                <rect key="frame" x="8" y="294" width="133" height="19"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="133" id="3hc-BI-wcf"/>
                                 </constraints>
@@ -745,7 +745,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VOo-c9-1Rp">
-                                <rect key="frame" x="8" y="314" width="133" height="19"/>
+                                <rect key="frame" x="8" y="335" width="133" height="19"/>
                                 <buttonCell key="cell" type="recessed" title="Step-by-step mode" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mLP-AD-eh5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -755,7 +755,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SAQ-2t-F5B">
-                                <rect key="frame" x="8" y="273" width="133" height="19"/>
+                                <rect key="frame" x="8" y="212" width="133" height="19"/>
                                 <buttonCell key="cell" type="recessed" title="Settings" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7H8-RA-lgN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -765,8 +765,8 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0S0-Wh-KEF">
-                                <rect key="frame" x="8" y="232" width="133" height="19"/>
-                                <buttonCell key="cell" type="recessed" title="Analysis" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ltU-lf-C7L">
+                                <rect key="frame" x="8" y="253" width="133" height="19"/>
+                                <buttonCell key="cell" type="recessed" title="Analysis mode" bezelStyle="recessed" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ltU-lf-C7L">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -776,16 +776,16 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="SAQ-2t-F5B" firstAttribute="top" secondItem="VOo-c9-1Rp" secondAttribute="bottom" constant="23" id="0KR-cB-ayV"/>
                             <constraint firstItem="SAQ-2t-F5B" firstAttribute="leading" secondItem="xL0-xz-ey5" secondAttribute="leading" constant="8" id="8P6-F3-OQ8"/>
-                            <constraint firstItem="HXi-7p-lle" firstAttribute="top" secondItem="xL0-xz-ey5" secondAttribute="top" constant="100" id="C9T-sf-GSI"/>
                             <constraint firstItem="VOo-c9-1Rp" firstAttribute="leading" secondItem="xL0-xz-ey5" secondAttribute="leading" constant="8" id="Cqr-Dh-6Gv"/>
-                            <constraint firstItem="X5C-cQ-SkD" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0S0-Wh-KEF" secondAttribute="bottom" constant="20" id="Dkr-qf-F5K"/>
+                            <constraint firstItem="VOo-c9-1Rp" firstAttribute="top" secondItem="X5C-cQ-SkD" secondAttribute="top" constant="100" id="Gl4-1t-c9O"/>
+                            <constraint firstItem="X5C-cQ-SkD" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="SAQ-2t-F5B" secondAttribute="bottom" constant="23" id="Nsy-W6-Ljo"/>
                             <constraint firstItem="0S0-Wh-KEF" firstAttribute="leading" secondItem="xL0-xz-ey5" secondAttribute="leading" constant="8" id="Nw6-TT-AFI"/>
-                            <constraint firstItem="0S0-Wh-KEF" firstAttribute="top" secondItem="SAQ-2t-F5B" secondAttribute="bottom" constant="23" id="Sbw-qY-Ws4"/>
+                            <constraint firstItem="SAQ-2t-F5B" firstAttribute="top" secondItem="0S0-Wh-KEF" secondAttribute="bottom" constant="23" id="VwR-G3-OqZ"/>
                             <constraint firstItem="HXi-7p-lle" firstAttribute="leading" secondItem="xL0-xz-ey5" secondAttribute="leading" constant="8" id="XvJ-l8-aQz"/>
-                            <constraint firstItem="VOo-c9-1Rp" firstAttribute="top" secondItem="HXi-7p-lle" secondAttribute="bottom" constant="23" id="ekO-h1-nxj"/>
+                            <constraint firstItem="0S0-Wh-KEF" firstAttribute="top" secondItem="HXi-7p-lle" secondAttribute="bottom" constant="23" id="aGF-jL-db3"/>
                             <constraint firstItem="xL0-xz-ey5" firstAttribute="trailing" secondItem="SAQ-2t-F5B" secondAttribute="trailing" constant="8" id="gDp-hf-eVC"/>
+                            <constraint firstItem="HXi-7p-lle" firstAttribute="top" secondItem="VOo-c9-1Rp" secondAttribute="bottom" constant="23" id="jTf-u3-rul"/>
                             <constraint firstItem="xL0-xz-ey5" firstAttribute="trailing" secondItem="0S0-Wh-KEF" secondAttribute="trailing" constant="8" id="m74-iP-4kN"/>
                             <constraint firstItem="xL0-xz-ey5" firstAttribute="trailing" secondItem="VOo-c9-1Rp" secondAttribute="trailing" constant="8" id="sCa-Oz-f0Q"/>
                             <constraint firstItem="xL0-xz-ey5" firstAttribute="trailing" secondItem="HXi-7p-lle" secondAttribute="trailing" constant="8" id="yEJ-cn-USy"/>
@@ -1461,7 +1461,7 @@
                 </viewController>
                 <customObject id="cOK-0f-hnF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-381" y="2925"/>
+            <point key="canvasLocation" x="-382" y="3799"/>
         </scene>
         <!--Steps View Controller-->
         <scene sceneID="jdP-qO-xzS">
@@ -2306,7 +2306,7 @@
                 </viewController>
                 <customObject id="z7f-nG-ivP" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-382" y="3825"/>
+            <point key="canvasLocation" x="-382" y="2929"/>
         </scene>
         <!--SettingsViewController-->
         <scene sceneID="DOC-AI-n75">
@@ -2857,7 +2857,7 @@
                 </viewController>
                 <customObject id="yGp-xY-aL3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-381.5" y="4748"/>
+            <point key="canvasLocation" x="-376" y="5519"/>
         </scene>
         <!--AnalysisViewController-->
         <scene sceneID="awe-l2-Dy7">
@@ -2944,7 +2944,7 @@
                 </viewController>
                 <customObject id="3Wx-Fw-DaE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-382.5" y="5610"/>
+            <point key="canvasLocation" x="-375" y="4660"/>
         </scene>
         <!--AnalysisSettingsViewController-->
         <scene sceneID="VJn-NR-gDC">
@@ -3066,7 +3066,7 @@
                 </viewController>
                 <customObject id="F4B-PF-p1K" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11" y="6223"/>
+            <point key="canvasLocation" x="-1318" y="4368"/>
         </scene>
     </scenes>
     <resources>
