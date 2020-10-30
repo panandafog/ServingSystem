@@ -17,8 +17,8 @@ class SimulationProperties {
     private let initialProcessingProperties = ProcessingProperties(minTime: 0.0, maxTime: 1.0, function: .randomWithExponent)
     private let initialProcessorsAmount = 3
 
-    private (set) var currentGenerationProperties = [GenerationProperties]()
-    private (set) var currentProcessingProperties = [ProcessingProperties]()
+    private var currentGenerationProperties = [GenerationProperties]()
+    private var currentProcessingProperties = [ProcessingProperties]()
 
     var bufferCapacity = UInt(2)
     var iterationsCount = UInt(1_000)
@@ -43,6 +43,14 @@ class SimulationProperties {
     }
 
     // MARK: - Generators
+    
+    func getGenerationProperties(index: Int) -> GenerationProperties {
+        if index < generatorsAmount {
+            return currentGenerationProperties[index]
+        } else {
+            return currentGenerationProperties.last ?? initialGenerationProperties
+        }
+    }
 
     func getGenerationCooldown(generatorNumber: UInt) -> Double? {
         guard generatorNumber <= generatorsAmount else {
@@ -124,6 +132,14 @@ class SimulationProperties {
     }
 
     // MARK: - Processors
+    
+    func getProcessingProperties(index: Int) -> ProcessingProperties {
+        if index < processorsAmount {
+            return currentProcessingProperties[index]
+        } else {
+            return currentProcessingProperties.last ?? initialProcessingProperties
+        }
+    }
 
     func getProcessingCooldown(processorNumber: UInt) -> Double? {
         guard processorNumber <= processorsAmount else {

@@ -26,7 +26,7 @@ class Processor {
 
     init(number: UInt, bufferPicker: BufferPicker, writeToLog: @escaping ((String) -> Void)) {
         self.number = number
-        let properties = SimulationProperties.shared.currentProcessingProperties[Int(number) - 1]
+        let properties = SimulationProperties.shared.getProcessingProperties(index: Int(number) - 1)
         self.minCooldown = properties.minTime
         self.maxCooldown = properties.maxTime
         self.bufferPicker = bufferPicker

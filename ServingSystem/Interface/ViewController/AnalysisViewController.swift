@@ -12,7 +12,7 @@ class AnalysisViewController: NSViewController, NSTouchBarDelegate {
     
     var analyser: Analyser?
     
-    private var analysisCompletion: ((_: [Int]?, _: [Double]?, _: [Double]?, _: [Double]?) -> Void)?
+    private var analysisCompletion: ((_: Analyser.Mode?, _: [Int]?, _: [Double]?, _: [Double]?, _: [Double]?) -> Void)?
     
     @IBOutlet private var rejectProbabilityChart: LineChartView!
     @IBOutlet private var stayTimeChart: LineChartView!
@@ -35,11 +35,12 @@ class AnalysisViewController: NSViewController, NSTouchBarDelegate {
         stopButton.isEnabled = false
         stopTouchBarButton.isEnabled = false
         
-        self.analysisCompletion = { values, rejectProbability, stayTime, usingRate in
+        self.analysisCompletion = { mode, values, rejectProbability, stayTime, usingRate in
             guard let rejectProbability = rejectProbability,
                   let stayTime = stayTime,
                   let usingRate = usingRate,
-                  let values = values else {
+                  let values = values,
+                  let mode = mode else {
                 return
             }
             DispatchQueue.main.async {
@@ -50,7 +51,8 @@ class AnalysisViewController: NSViewController, NSTouchBarDelegate {
                 self.stopButton.isEnabled = false
                 self.stopTouchBarButton.isEnabled = false
             }
-            self.drawCharts(values: values,
+            self.drawCharts(mode: mode,
+                            values: values,
                             rejectProbability: rejectProbability,
                             stayTime: stayTime,
                             usingRate: usingRate)
@@ -126,9 +128,9 @@ class AnalysisViewController: NSViewController, NSTouchBarDelegate {
             chart.gridBackgroundColor = .controlAccentColor
             chart.rightAxis.drawLabelsEnabled = false
         }
-        self.rejectProbabilityChart.chartDescription?.text = "Reject probability"
-        self.stayTimeChart.chartDescription?.text = "Request stay time"
-        self.usingRateChart.chartDescription?.text = "Processors using rate"
+        self.rejectProbabilityChart.chartDescription?.text = ""
+        self.stayTimeChart.chartDescription?.text = ""
+        self.usingRateChart.chartDescription?.text = ""
     }
     
     private func animateCharts() {
@@ -145,7 +147,12 @@ class AnalysisViewController: NSViewController, NSTouchBarDelegate {
         }
     }
     
-    private func drawCharts(values: [Int], rejectProbability: [Double], stayTime: [Double], usingRate: [Double]) {
+    private func drawCharts(mode: Analyser.Mode, values: [Int], rejectProbability: [Double], stayTime: [Double], usingRate: [Double]) {
+        
+        self.rejectProbabilityChart.chartDescription?.text = mode.rawValue
+        self.stayTimeChart.chartDescription?.text = mode.rawValue
+        self.usingRateChart.chartDescription?.text = mode.rawValue
+        
         rejectProbabilityChart.setData(x: values, y: rejectProbability, label: "Reject probability")
         stayTimeChart.setData(x: values, y: stayTime, label: "Request stay time")
         usingRateChart.setData(x: values, y: usingRate, label: "Processors using rate")

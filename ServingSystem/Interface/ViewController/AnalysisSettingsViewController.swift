@@ -29,7 +29,11 @@ class AnalysisSettingsViewController: NSViewController {
     }
     
     @IBAction private func modeChanged(_ sender: NSSegmentedControl) {
-        analyser.mode = Analyser.Mode.allCases[sender.indexOfSelectedItem]
+        let mode = Analyser.Mode.allCases[sender.indexOfSelectedItem]
+        analyser.updateValuesFor(mode: mode)
+        
+        fromField.integerValue = analyser.minValue
+        toField.integerValue = analyser.maxValue
     }
     
     @IBAction private func startButtonPressed(_ sender: Any) {

@@ -71,7 +71,7 @@ class SettingsViewController: NSViewController {
 
         let rowInd = table.row(for: sender)
         let newCooldown = sender.doubleValue
-        var properties = SimulationProperties.shared.currentGenerationProperties[rowInd]
+        var properties = SimulationProperties.shared.getGenerationProperties(index: rowInd)
         properties.cooldown = newCooldown
         SimulationProperties.shared.replaceGeneratorProperties(with: properties, at: UInt(rowInd))
 
@@ -86,7 +86,7 @@ class SettingsViewController: NSViewController {
 
         let rowInd = table.row(for: sender)
         let newCooldown = sender.doubleValue
-        var properties = SimulationProperties.shared.currentProcessingProperties[rowInd]
+        var properties = SimulationProperties.shared.getProcessingProperties(index: rowInd)
         properties.minTime = newCooldown
         SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
 
@@ -101,7 +101,7 @@ class SettingsViewController: NSViewController {
 
         let rowInd = table.row(for: sender)
         let newCooldown = sender.doubleValue
-        var properties = SimulationProperties.shared.currentProcessingProperties[rowInd]
+        var properties = SimulationProperties.shared.getProcessingProperties(index: rowInd)
         properties.maxTime = newCooldown
         SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
 
@@ -117,7 +117,7 @@ class SettingsViewController: NSViewController {
         }
 
         let rowInd = table.row(for: sender)
-        var properties = SimulationProperties.shared.currentGenerationProperties[rowInd]
+        var properties = SimulationProperties.shared.getGenerationProperties(index: rowInd)
         properties.function = GenerationFunction.allCases[sender.indexOfSelectedItem]
         SimulationProperties.shared.replaceGeneratorProperties(with: properties, at: UInt(rowInd))
     }
@@ -129,7 +129,7 @@ class SettingsViewController: NSViewController {
         }
 
         let rowInd = table.row(for: sender)
-        var properties = SimulationProperties.shared.currentProcessingProperties[rowInd]
+        var properties = SimulationProperties.shared.getProcessingProperties(index: rowInd)
         properties.function = ProcessingFunction.allCases[sender.indexOfSelectedItem]
         SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
     }
@@ -176,7 +176,7 @@ class SettingsViewController: NSViewController {
     @IBAction private func applyToAllGenerators(_ sender: Any) {
         if generatorsTable.numberOfSelectedRows == 1 {
             SimulationProperties.shared.applyToAllGenerators(
-                properties: SimulationProperties.shared.currentGenerationProperties[generatorsTable.selectedRow])
+                properties: SimulationProperties.shared.getGenerationProperties(index: generatorsTable.selectedRow))
         }
         generatorsTable.reloadData()
     }
@@ -184,7 +184,7 @@ class SettingsViewController: NSViewController {
     @IBAction private func applyToAllProcessors(_ sender: Any) {
         if processorsTable.numberOfSelectedRows == 1 {
             SimulationProperties.shared.applyToAllProcessors(
-                properties: SimulationProperties.shared.currentProcessingProperties[processorsTable.selectedRow])
+                properties: SimulationProperties.shared.getProcessingProperties(index: processorsTable.selectedRow))
         }
         processorsTable.reloadData()
     }
@@ -212,7 +212,7 @@ extension SettingsViewController: NSTableViewDelegate {
     func viewForGeneratorsTable(columnId: String?, row: Int) -> NSView? {
         let properties = SimulationProperties.shared
 
-        if (properties.currentGenerationProperties.count) - 1 < row {
+        if (properties.generatorsAmount) - 1 < row {
             return nil
         }
 
@@ -227,13 +227,13 @@ extension SettingsViewController: NSTableViewDelegate {
         case "cooldownColumn":
             guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "cooldownCell"),
                                                           owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = properties.currentGenerationProperties[row].cooldown
+            cellView.textField?.doubleValue = properties.getGenerationProperties(index: row).cooldown
             return cellView
 
         case "functionColumn":
             guard let cellView = generatorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "functionCell"),
                                                           owner: self) as? GeneratorFunctionCellView else { return nil }
-            cellView.selectFunction(properties.currentGenerationProperties[row].function)
+            cellView.selectFunction(properties.getGenerationProperties(index: row).function)
             return cellView
 
         case "deleteColumn":
@@ -250,7 +250,7 @@ extension SettingsViewController: NSTableViewDelegate {
     func viewForProcessorsTable(columnId: String?, row: Int) -> NSView? {
         let properties = SimulationProperties.shared
 
-        if (properties.currentProcessingProperties.count) - 1 < row {
+        if (properties.processorsAmount) - 1 < row {
             return nil
         }
 
@@ -265,19 +265,19 @@ extension SettingsViewController: NSTableViewDelegate {
         case "minCooldownColumn":
             guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "minCooldownCell"),
                                                           owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = properties.currentProcessingProperties[row].minTime
+            cellView.textField?.doubleValue = properties.getProcessingProperties(index: row).minTime
             return cellView
 
         case "maxCooldownColumn":
             guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "maxCooldownCell"),
                                                           owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = properties.currentProcessingProperties[row].maxTime
+            cellView.textField?.doubleValue = properties.getProcessingProperties(index: row).maxTime
             return cellView
 
         case "functionColumn":
             guard let cellView = processorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "functionCell"),
                                                           owner: self) as? ProcessorFunctionCellView else { return nil }
-            cellView.selectFunction(properties.currentProcessingProperties[row].function)
+            cellView.selectFunction(properties.getProcessingProperties(index: row).function)
             return cellView
 
         case "deleteColumn":

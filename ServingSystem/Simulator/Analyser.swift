@@ -9,12 +9,12 @@ import Foundation
 
 class Analyser {
     
-    var mode = Mode.generatorsAmount
+    var mode = Mode.processorsAmount
     
-    var minValue = Int(SimulationProperties.shared.generatorsAmount)
-    var maxValue = Int(SimulationProperties.shared.generatorsAmount + 5)
+    var minValue = Int(SimulationProperties.shared.processorsAmount)
+    var maxValue = Int(SimulationProperties.shared.processorsAmount + 5)
     
-    var completion: ((_: [Int]?, _: [Double]?, _: [Double]?, _: [Double]?) -> Void)?
+    var completion: ((_: Analyser.Mode?, _: [Int]?, _: [Double]?, _: [Double]?, _: [Double]?) -> Void)?
     
     private (set) var working = false
     
@@ -71,7 +71,7 @@ class Analyser {
                         return
                     }
                     
-                    globalCompletion(Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
+                    globalCompletion(self.mode, Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
                 }
             }))
             simulationThread.alerts = false
@@ -84,6 +84,22 @@ class Analyser {
             $0.cancel()
         })
         working = false
+    }
+    
+    func updateValuesFor(mode: Mode) {
+        self.mode = mode
+        
+        switch mode {
+        case .bufferCapacity:
+            minValue = Int(SimulationProperties.shared.bufferCapacity)
+            maxValue = Int(SimulationProperties.shared.bufferCapacity + 5)
+        case .generatorsAmount:
+            minValue = Int(SimulationProperties.shared.generatorsAmount)
+            maxValue = Int(SimulationProperties.shared.generatorsAmount + 5)
+        default:
+            minValue = Int(SimulationProperties.shared.processorsAmount)
+            maxValue = Int(SimulationProperties.shared.processorsAmount + 5)
+        }
     }
 }
 
