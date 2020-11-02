@@ -9,6 +9,8 @@ import Foundation
 
 class Analyser {
     
+    let packageCapacity = 100
+    
     var mode = Mode.processorsAmount
     
     var minValue = Int(SimulationProperties.shared.processorsAmount)
@@ -20,6 +22,9 @@ class Analyser {
     
     private var valuesAmount = 0
     private var completedValuesAmount = 0
+    
+    private var packageValuesAmount = 0
+    private var packageCompletedValuesAmount = 0
     private var threads = [SimulationThread]()
     
     private var rejectProbability = [Double]()
@@ -29,53 +34,18 @@ class Analyser {
     func start() {
         
         completedValuesAmount = 0
+        packageCompletedValuesAmount = 0
         working = true
         valuesAmount = maxValue - minValue + 1
-
+        
         rejectProbability = [Double](repeating: -1.0, count: valuesAmount)
         stayTime = [Double](repeating: -1.0, count: valuesAmount)
         usingRate = [Double](repeating: -1.0, count: valuesAmount)
         
-        var index = -1
-        for value in minValue...maxValue {
-            index += 1
-            
-            var simulator: Simulator?
-            
-            switch mode {
-            case .bufferCapacity:
-                simulator = Simulator(bufferCapacity: UInt(value))
-            case .generatorsAmount:
-                simulator = Simulator(generatorsAmount: UInt(value))
-            default:
-                simulator = Simulator(processorsAmount: UInt(value))
-            }
-            
-            guard let nNsimulator = simulator else {
-                return
-            }
-            
-            let index = index
-        
-            let simulationThread = SimulationThread(simulator: nNsimulator, completion: ({
-                self.rejectProbability[index] = nNsimulator.getRejectProbability()
-                self.stayTime[index] = nNsimulator.getAverageRequestStayTime()
-                self.usingRate[index] = nNsimulator.getAverageProcessorUsingRate()
-                
-                self.completedValuesAmount += 1
-                
-                if self.completedValuesAmount == self.valuesAmount {
-                    self.working = false
-                    
-                    guard let globalCompletion = self.completion else {
-                        return
-                    }
-                    
-                    globalCompletion(self.mode, Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
-                }
-            }))
-            simulationThread.alerts = false
-            simulationThread.start()
+        if valuesAmount > self.packageCapacity {
+            launchPackage(minValue: minValue, maxValue: minValue + packageCapacity - 1)
+        } else {
+            launchPackage(minValue: minValue, maxValue: maxValue)
         }
     }
     
@@ -99,6 +69,69 @@ class Analyser {
         default:
             minValue = Int(SimulationProperties.shared.processorsAmount)
             maxValue = Int(SimulationProperties.shared.processorsAmount + 5)
+        }
+    }
+    
+    private func launchPackage(minValue: Int, maxValue: Int) {
+        self.packageCompletedValuesAmount = 0
+        self.packageValuesAmount = maxValue - minValue + 1
+        
+        var index = completedValuesAmount - 1
+        for value in minValue...maxValue {
+            index += 1
+            
+            var simulator: Simulator?
+            
+            switch mode {
+            case .bufferCapacity:
+                simulator = Simulator(bufferCapacity: UInt(value))
+            case .generatorsAmount:
+                simulator = Simulator(generatorsAmount: UInt(value))
+            default:
+                simulator = Simulator(processorsAmount: UInt(value))
+            }
+            
+            guard let nNsimulator = simulator else {
+                return
+            }
+            
+            let index = index
+            
+            let simulationThread = SimulationThread(simulator: nNsimulator, completion: ({
+                self.rejectProbability[index] = nNsimulator.getRejectProbability()
+                self.stayTime[index] = nNsimulator.getAverageRequestStayTime()
+                self.usingRate[index] = nNsimulator.getAverageProcessorUsingRate()
+                
+                self.completedValuesAmount += 1
+                self.packageCompletedValuesAmount += 1
+                
+                print(self.completedValuesAmount)
+                
+                if self.packageCompletedValuesAmount == self.packageValuesAmount {
+                    
+                    guard let globalCompletion = self.completion else {
+                        return
+                    }
+                    
+                    //запуск следующего пакета
+                    if self.completedValuesAmount < self.valuesAmount {
+                        let minValue = self.minValue + self.completedValuesAmount
+                        var maxValue = minValue + self.packageCapacity
+                        if maxValue > self.maxValue {
+                            maxValue = self.maxValue
+                        }
+                        DispatchQueue.global().async {
+                            self.launchPackage(minValue: minValue, maxValue: maxValue)
+                        }
+                    } else {
+                        //если это последний
+                        globalCompletion(self.mode, Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
+                        self.working = false
+                    }
+                }
+            }))
+            simulationThread.alerts = false
+            simulationThread.start()
         }
     }
 }
