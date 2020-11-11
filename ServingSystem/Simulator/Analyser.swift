@@ -113,7 +113,6 @@ class Analyser {
                         return
                     }
                     
-                    //запуск следующего пакета
                     if self.completedValuesAmount < self.valuesAmount {
                         let minValue = self.minValue + self.completedValuesAmount
                         var maxValue = minValue + self.packageCapacity
@@ -124,7 +123,6 @@ class Analyser {
                             self.launchPackage(minValue: minValue, maxValue: maxValue)
                         }
                     } else {
-                        //если это последний
                         globalCompletion(self.mode, Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
                         self.working = false
                     }

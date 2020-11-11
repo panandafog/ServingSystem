@@ -207,6 +207,7 @@ class SettingsViewController: NSViewController {
 }
 
 // MARK: - NSTableViewDelegate
+
 extension SettingsViewController: NSTableViewDelegate {
 
     func viewForGeneratorsTable(columnId: String?, row: Int) -> NSView? {
@@ -341,6 +342,7 @@ extension SettingsViewController: NSTableViewDelegate {
 }
 
 // MARK: - NSTableViewDataSource
+
 extension SettingsViewController: NSTableViewDataSource {
 
     func numberOfRows(in tableView: NSTableView) -> Int {

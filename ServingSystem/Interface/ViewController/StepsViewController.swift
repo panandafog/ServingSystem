@@ -44,6 +44,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
     @IBOutlet private var stopStepsSimulationTouchBarButton: NSButton!
 
     // MARK: - View did load
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -162,6 +163,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
 }
 
 // MARK: - NSTableViewDelegate
+
 extension StepsViewController: NSTableViewDelegate {
 
     func viewForStepsGeneratorsTable(columnId: String?, row: Int) -> NSView? {
@@ -313,6 +315,7 @@ extension StepsViewController: NSTableViewDelegate {
 }
 
 // MARK: - NSTableViewDataSource
+
 extension StepsViewController: NSTableViewDataSource {
 
     func numberOfRows(in tableView: NSTableView) -> Int {

@@ -25,7 +25,9 @@ class ProcessorFunctionCellView: NSTableCellView {
         functionTypeComboBox.selectItem(at: ProcessingFunction.allCases.firstIndex(of: function) ?? 0)
     }
 }
+
 // MARK: - NSComboBoxDelegate
+
 extension ProcessorFunctionCellView: NSComboBoxDelegate {
 
     func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
@@ -34,6 +36,7 @@ extension ProcessorFunctionCellView: NSComboBoxDelegate {
 }
 
 // MARK: - NSComboBoxDataSource
+
 extension ProcessorFunctionCellView: NSComboBoxDataSource {
 
     func numberOfItems(in comboBox: NSComboBox) -> Int {

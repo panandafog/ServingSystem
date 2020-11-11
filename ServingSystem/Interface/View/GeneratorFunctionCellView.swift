@@ -25,7 +25,9 @@ class GeneratorFunctionCellView: NSTableCellView {
         functionTypeComboBox.selectItem(at: GenerationFunction.allCases.firstIndex(of: function) ?? 0)
     }
 }
+
 // MARK: - NSComboBoxDelegate
+
 extension GeneratorFunctionCellView: NSComboBoxDelegate {
 
     func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
@@ -34,6 +36,7 @@ extension GeneratorFunctionCellView: NSComboBoxDelegate {
 }
 
 // MARK: - NSComboBoxDataSource
+
 extension GeneratorFunctionCellView: NSComboBoxDataSource {
 
     func numberOfItems(in comboBox: NSComboBox) -> Int {
