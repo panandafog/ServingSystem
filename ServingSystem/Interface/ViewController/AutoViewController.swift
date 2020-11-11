@@ -196,19 +196,34 @@ extension AutoViewController: NSTableViewDelegate {
         case "stayTimeColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "stayTimeCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = autoSimulator.getAverageRequestStayTime(generatorNumber: UInt(row + 1))
+            let time = autoSimulator.getAverageRequestStayTime(generatorNumber: UInt(row + 1))
+            if time.isNaN {
+                cellView.textField?.stringValue = emptyString
+            } else {
+                cellView.textField?.doubleValue = time
+            }
             return cellView
 
         case "waitingTimeColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "waitingTimeCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = autoSimulator.getAverageRequestWaitingTime(generatorNumber: UInt(row + 1))
+            let time = autoSimulator.getAverageRequestWaitingTime(generatorNumber: UInt(row + 1))
+            if time.isNaN {
+                cellView.textField?.stringValue = emptyString
+            } else {
+                cellView.textField?.doubleValue = time
+            }
             return cellView
 
         case "processingTimeColumn":
             guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "processingTimeCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = autoSimulator.getAverageRequestProcessingTime(generatorNumber: UInt(row + 1))
+            let time = autoSimulator.getAverageRequestProcessingTime(generatorNumber: UInt(row + 1))
+            if time.isNaN {
+                cellView.textField?.stringValue = emptyString
+            } else {
+                cellView.textField?.doubleValue = time
+            }
             return cellView
 
         case "waitingTimeDispersionColumn":
