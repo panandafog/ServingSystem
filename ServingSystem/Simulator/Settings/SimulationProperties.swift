@@ -52,12 +52,14 @@ class SimulationProperties {
         }
     }
 
-    func getGenerationCooldown(generatorNumber: UInt) -> Double? {
-        guard generatorNumber <= generatorsAmount else {
-            return nil
+    func getGenerationCooldown(generatorNumber: UInt) -> Double {
+        let currentProperties: GenerationProperties
+        
+        if generatorNumber <= generatorsAmount {
+            currentProperties = currentGenerationProperties[Int(generatorNumber - 1)]
+        } else {
+            currentProperties = currentGenerationProperties.last ?? initialGenerationProperties
         }
-
-        let currentProperties = currentGenerationProperties[Int(generatorNumber - 1)]
 
         switch currentProperties.function {
         case .linear:
@@ -141,18 +143,20 @@ class SimulationProperties {
         }
     }
 
-    func getProcessingCooldown(processorNumber: UInt) -> Double? {
-        guard processorNumber <= processorsAmount else {
-            return nil
+    func getProcessingCooldown(processorNumber: UInt) -> Double {
+        let currentProperties: ProcessingProperties
+        
+        if processorNumber <= processorsAmount {
+            currentProperties = currentProcessingProperties[Int(processorNumber - 1)]
+        } else {
+            currentProperties = currentProcessingProperties.last ?? initialProcessingProperties
         }
 
-        let currentProcessingTime = currentProcessingProperties[Int(processorNumber - 1)]
-
-        switch currentProcessingTime.function {
+        switch currentProperties.function {
         case .random:
-            return Double.random(in: currentProcessingTime.minTime..<currentProcessingTime.maxTime)
+            return Double.random(in: currentProperties.minTime..<currentProperties.maxTime)
         case .randomWithExponent:
-            return exp(Double.random(in: currentProcessingTime.minTime..<currentProcessingTime.maxTime))
+            return exp(Double.random(in: currentProperties.minTime..<currentProperties.maxTime))
         }
     }
 

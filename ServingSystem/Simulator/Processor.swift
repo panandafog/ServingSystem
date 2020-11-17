@@ -31,14 +31,14 @@ class Processor {
         self.maxCooldown = properties.maxTime
         self.bufferPicker = bufferPicker
         self.writeToLog = writeToLog
-        self.cooldown = SimulationProperties.shared.getProcessingCooldown(processorNumber: number) ?? 1.0
+        self.cooldown = SimulationProperties.shared.getProcessingCooldown(processorNumber: number) 
     }
 
     private func getRequest() {
         request = bufferPicker.pick()
         if request != nil {
             request?.pickTime = self.time
-            self.cooldown = SimulationProperties.shared.getProcessingCooldown(processorNumber: number) ?? 1.0
+            self.cooldown = SimulationProperties.shared.getProcessingCooldown(processorNumber: number) 
         }
     }
 
