@@ -15,13 +15,13 @@ class Generator {
     private(set) var time = 0.0
     private(set) var requestsCount = 0
 
-    private var writeToLog: ((String) -> Void)?
+    private weak var simulator: Simulator?
 
-    init(priority: Int, bufferInserter: BufferInserter, writeToLog: @escaping ((String) -> Void)) {
+    init(priority: Int, bufferInserter: BufferInserter, simulator: Simulator?) {
         self.priority = priority
         self.cooldown = SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) 
         self.bufferInserter = bufferInserter
-        self.writeToLog = writeToLog
+        self.simulator = simulator
     }
 
     private func generateRequest() {
@@ -50,7 +50,7 @@ extension Generator: SpecialConditioned {
         generateRequest()
         time += SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) 
 
-        writeToLog?("Generator #" + String(priority)
+        simulator?.writeToLog("Generator #" + String(priority)
                         + " generated request #"
                         + String(requestsCount)
                         + " at " + String(time))

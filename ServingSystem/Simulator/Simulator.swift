@@ -32,13 +32,13 @@ class Simulator {
         for index in 1...Int(properties.generatorsAmount) {
             generators.append(Generator(priority: Int(index),
                                         bufferInserter: bufferInserter,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
 
         for index in 1...properties.processorsAmount {
             processors.append(Processor(number: index,
                                         bufferPicker: bufferPicker,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
     }
     
@@ -52,13 +52,13 @@ class Simulator {
         for index in 1...Int(properties.generatorsAmount) {
             generators.append(Generator(priority: Int(index),
                                         bufferInserter: bufferInserter,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
 
         for index in 1...properties.processorsAmount {
             processors.append(Processor(number: index,
                                         bufferPicker: bufferPicker,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
     }
     
@@ -72,13 +72,13 @@ class Simulator {
         for index in 1...Int(generatorsAmount) {
             generators.append(Generator(priority: Int(index),
                                         bufferInserter: bufferInserter,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
 
         for index in 1...properties.processorsAmount {
             processors.append(Processor(number: index,
                                         bufferPicker: bufferPicker,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
     }
     
@@ -92,13 +92,13 @@ class Simulator {
         for index in 1...Int(properties.generatorsAmount) {
             generators.append(Generator(priority: Int(index),
                                         bufferInserter: bufferInserter,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
 
         for index in 1...processorsAmount {
             processors.append(Processor(number: index,
                                         bufferPicker: bufferPicker,
-                                        writeToLog: self.writeToLog(_:)))
+                                        simulator: self))
         }
     }
 

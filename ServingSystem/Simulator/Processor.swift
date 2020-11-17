@@ -22,15 +22,15 @@ class Processor {
     private(set) var request: Request?
     private(set) var completedRequests = [Request]()
 
-    private var writeToLog: ((String) -> Void)?
+    private weak var simulator: Simulator?
 
-    init(number: UInt, bufferPicker: BufferPicker, writeToLog: @escaping ((String) -> Void)) {
+    init(number: UInt, bufferPicker: BufferPicker, simulator: Simulator?) {
         self.number = number
         let properties = SimulationProperties.shared.getProcessingProperties(index: Int(number) - 1)
         self.minCooldown = properties.minTime
         self.maxCooldown = properties.maxTime
         self.bufferPicker = bufferPicker
-        self.writeToLog = writeToLog
+        self.simulator = simulator
         self.cooldown = SimulationProperties.shared.getProcessingCooldown(processorNumber: number) 
     }
 
@@ -82,12 +82,12 @@ extension Processor: SpecialConditioned {
         getRequest()
 
         if request != nil {
-            writeToLog?("Processor #" + String(number)
+            simulator?.writeToLog("Processor #" + String(number)
                             + " got request "
                             + String(request?.name ?? "––")
                             + " at " + String(time))
         } else {
-            writeToLog?("Processor #" + String(number)
+            simulator?.writeToLog("Processor #" + String(number)
                             + " gone to sleep"
                             + " at " + String(time))
         }
@@ -101,7 +101,7 @@ extension Processor: SpecialConditioned {
         getRequest()
 
         if request != nil {
-            writeToLog?("Processor #" + String(number)
+            simulator?.writeToLog("Processor #" + String(number)
                             + " woke up and got request "
                             + String(request?.name ?? "––")
                             + " at " + String(time))
