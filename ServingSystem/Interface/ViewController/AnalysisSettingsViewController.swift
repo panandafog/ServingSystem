@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class AnalysisSettingsViewController: NSViewController {
+class AnalysisSettingsViewController: SavingTextViewController {
     
     var analyser = Analyser()
     
@@ -15,8 +15,8 @@ class AnalysisSettingsViewController: NSViewController {
     
     @IBOutlet private var modeSegmentedControl: NSSegmentedControl!
     
-    @IBOutlet private var fromField: NSTextField!
-    @IBOutlet private var toField: NSTextField!
+    @IBOutlet private var fromField: FocusAwareTextField!
+    @IBOutlet private var toField: FocusAwareTextField!
     
     @IBOutlet private var analyseButton: NSButton!
     
@@ -26,6 +26,9 @@ class AnalysisSettingsViewController: NSViewController {
         modeSegmentedControl.selectSegment(withTag: analyser.mode.hashValue)
         setupTextFields()
         validateSettings()
+        
+        setupTextDield(fromField)
+        setupTextDield(toField)
     }
     
     @IBAction private func modeChanged(_ sender: NSSegmentedControl) {
@@ -37,7 +40,7 @@ class AnalysisSettingsViewController: NSViewController {
     }
     
     @IBAction private func startButtonPressed(_ sender: Any) {
-        selectAllText()
+        saveText()
         
         analyser.start()
         self.view.window?.close()
@@ -61,10 +64,5 @@ class AnalysisSettingsViewController: NSViewController {
         analyser.maxValue = toField.integerValue
         
         analyseButton.isEnabled = analyser.minValue < analyser.maxValue
-    }
-    
-    private func selectAllText() {
-        toField.selectText(self)
-        fromField.selectText(self)
     }
 }

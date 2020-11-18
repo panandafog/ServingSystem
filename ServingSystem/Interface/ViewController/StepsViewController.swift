@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDelegate {
+class StepsViewController: SavingTextViewController, NSTouchBarDelegate {
 
     // MARK: General properties
 
@@ -18,9 +18,9 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
 
     // MARK: Text fields
 
-    @IBOutlet private var generatorsAmountField: NSTextField!
-    @IBOutlet private var bufferCapacityField: NSTextField!
-    @IBOutlet private var processorsAmountField: NSTextField!
+    @IBOutlet private var generatorsAmountField: FocusAwareTextField!
+    @IBOutlet private var bufferCapacityField: FocusAwareTextField!
+    @IBOutlet private var processorsAmountField: FocusAwareTextField!
 
     // MARK: Buttons
 
@@ -53,14 +53,16 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
         makeStepTouchBarButton.action = makeStepButton.action
         stopStepsSimulationTouchBarButton.action = stopStepsSimulationButton.action
 
-        processorsAmountField.delegate = self
-
         stepsGeneratorsTable.delegate = self
         stepsGeneratorsTable.dataSource = self
         stepsProcessorsTable.delegate = self
         stepsProcessorsTable.dataSource = self
         stepsBufferTable.delegate = self
         stepsBufferTable.dataSource = self
+        
+        setupTextDield(bufferCapacityField)
+        setupTextDield(generatorsAmountField)
+        setupTextDield(processorsAmountField)
     }
 
     // MARK: - View will appear
@@ -106,7 +108,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
     // MARK: - Step by step mode
 
     @IBAction private func makeStep(_ sender: Any) {
-        selectAllText()
+        saveText()
         makeStepButton.isEnabled = false
         stopStepsSimulationButton.isEnabled = false
         makeStepTouchBarButton.isEnabled = false
@@ -159,12 +161,6 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
         makeStepTouchBarButton.isEnabled = valid
         stopStepsSimulationButton.isEnabled = valid && stepsSimulator != nil
         stopStepsSimulationTouchBarButton.isEnabled = valid && stepsSimulator != nil
-    }
-    
-    private func selectAllText() {
-        processorsAmountField.selectText(self)
-        bufferCapacityField.selectText(self)
-        generatorsAmountField.selectText(self)
     }
 }
 

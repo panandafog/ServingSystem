@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kRq-fL-Sf4">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="kRq-fL-Sf4">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaDFRPlugin" version="17008"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17506"/>
         <capability name="NSView safe area layout guides" minToolsVersion="12.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
         <capability name="the Touch Bar" minToolsVersion="8.1" minSystemVersion="10.12.2" requiredIntegratedClassName="NSTouchBar"/>
@@ -840,7 +840,7 @@
                                     <action selector="stopAutoSimulation:" target="OnO-ou-0ED" id="oOM-ht-YjX"/>
                                 </connections>
                             </button>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c4C-9i-aYS">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c4C-9i-aYS" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="1094" y="19" width="75" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="75" id="T3Y-Gm-k5X"/>
@@ -1276,7 +1276,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ta1-j4-HAz" userLabel="Generators Amount Field">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ta1-j4-HAz" userLabel="Generators Amount Field" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="148" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="bfn-jZ-zzr"/>
@@ -1293,7 +1293,7 @@
                                     <action selector="generatorsAmountFieldValueChanged:" target="OnO-ou-0ED" id="cdz-xd-Rhh"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lF3-Pk-D3P">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lF3-Pk-D3P" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="411" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="dGu-J1-Cap"/>
@@ -1321,7 +1321,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="93f-Yy-obR" userLabel="Processors Amount Field">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="93f-Yy-obR" userLabel="Processors Amount Field" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="693" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="5Kb-HE-jow"/>
@@ -1417,6 +1417,7 @@
                                 <viewController key="viewController" id="ysm-FE-khF">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7SM-sU-wXK">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7V5-KM-HPa">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -1431,6 +1432,7 @@
                                 <viewController key="viewController" id="rqV-eF-GFj">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b5K-3E-B63">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gAz-GA-VLZ">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2124,7 +2126,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="13j-TY-6Xu" userLabel="Generators Amount Field">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="13j-TY-6Xu" userLabel="Generators Amount Field" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="148" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="Pw0-SO-Xky"/>
@@ -2152,7 +2154,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6iY-GP-FXR">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6iY-GP-FXR" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="411" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="w0P-5u-54r"/>
@@ -2180,7 +2182,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N3r-Pl-hai" userLabel="Processors Amount Field">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N3r-Pl-hai" userLabel="Processors Amount Field" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="693" y="19" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="111" id="K2M-tk-Vqo"/>
@@ -2259,6 +2261,7 @@
                                 <viewController key="viewController" id="iXx-g4-DoI">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FvD-av-ww7">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="LIW-LN-o8A">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2273,6 +2276,7 @@
                                 <viewController key="viewController" id="th4-1U-ff0">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2eL-iF-4pu">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8Mh-DM-WiI">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2935,6 +2939,7 @@
                                 <viewController key="viewController" id="UQG-f4-o1L">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5J3-96-uZy">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="square" catalog="system" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dcc-ni-LlL">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -2949,6 +2954,7 @@
                                 <viewController key="viewController" id="bNv-S0-ftm">
                                     <button key="view" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="boG-te-ciO">
                                         <rect key="frame" x="0.0" y="0.0" width="72" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSGoRightTemplate" imagePosition="overlaps" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tFm-wR-N28">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -3009,7 +3015,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fVL-g6-6hD">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fVL-g6-6hD" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="86" y="59" width="139" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="CiC-MA-Dmo"/>
@@ -3025,7 +3031,7 @@
                                     <action selector="textValueChanged:" target="cO7-AV-FpC" id="Dfa-BY-z5V"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB0-a1-3FS">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bB0-a1-3FS" customClass="FocusAwareTextField" customModule="ServingSystem" customModuleProvider="target">
                                 <rect key="frame" x="86" y="20" width="139" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="7Z9-2C-Czb"/>

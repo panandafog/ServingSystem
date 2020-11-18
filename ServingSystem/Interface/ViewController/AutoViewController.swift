@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDelegate {
+class AutoViewController: SavingTextViewController, NSTouchBarDelegate {
 
     // MARK: General properties
 
@@ -19,10 +19,10 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
 
     // MARK: Text fields
 
-    @IBOutlet private var generatorsAmountField: NSTextField!
-    @IBOutlet private var bufferCapacityField: NSTextField!
-    @IBOutlet private var processorsAmountField: NSTextField!
-    @IBOutlet private var iterationsCountField: NSTextField!
+    @IBOutlet private var generatorsAmountField: FocusAwareTextField!
+    @IBOutlet private var bufferCapacityField: FocusAwareTextField!
+    @IBOutlet private var processorsAmountField: FocusAwareTextField!
+    @IBOutlet private var iterationsCountField: FocusAwareTextField!
 
     // MARK: Buttons
 
@@ -46,12 +46,15 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        processorsAmountField.delegate = self
-
         autoGeneratorsTable.delegate = self
         autoGeneratorsTable.dataSource = self
         autoProcessorsTable.delegate = self
         autoProcessorsTable.dataSource = self
+        
+        setupTextDield(iterationsCountField)
+        setupTextDield(bufferCapacityField)
+        setupTextDield(generatorsAmountField)
+        setupTextDield(processorsAmountField)
     }
 
     // MARK: - View will appear
@@ -106,7 +109,7 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
     // MARK: - Automatic mode
 
     @IBAction private func startAutoSimulation(_ sender: Any) {
-        selectAllText()
+        saveText()
         
         autoSimulator = Simulator()
 
@@ -157,13 +160,6 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
         }
         startAutoSimulationButton.isEnabled = valid
         startAutoSimulationTouchBarButton.isEnabled = valid
-    }
-    
-    private func selectAllText() {
-        processorsAmountField.selectText(self)
-        bufferCapacityField.selectText(self)
-        iterationsCountField.selectText(self)
-        generatorsAmountField.selectText(self)
     }
 }
 

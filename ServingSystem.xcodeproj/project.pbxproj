@@ -27,12 +27,14 @@
 		0B6C95A52519348F006DC0DD /* BufferPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95A42519348F006DC0DD /* BufferPicker.swift */; };
 		0B6C95AA251934A9006DC0DD /* Buffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95A9251934A9006DC0DD /* Buffer.swift */; };
 		0B6C95AF2519501A006DC0DD /* Processor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6C95AE2519501A006DC0DD /* Processor.swift */; };
+		0B6E1CDB25652F2800969634 /* FocusAwareTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6E1CDA25652F2800969634 /* FocusAwareTextField.swift */; };
 		0B8EEB26254B5535009D5A71 /* AnalysisSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EEB25254B5535009D5A71 /* AnalysisSettingsViewController.swift */; };
 		0B8EEB2B254B5D09009D5A71 /* Analyser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EEB2A254B5D09009D5A71 /* Analyser.swift */; };
 		0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE3E925175CAD00E3CB46 /* AppDelegate.swift */; };
 		0B8FE3EE25175CAE00E3CB46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3ED25175CAE00E3CB46 /* Assets.xcassets */; };
 		0B8FE3F125175CAE00E3CB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3EF25175CAE00E3CB46 /* Main.storyboard */; };
 		0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE42725175D6200E3CB46 /* SimulationMode.swift */; };
+		0B9891F8256529A1001628E2 /* SavingTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9891F7256529A1001628E2 /* SavingTextViewController.swift */; };
 		0BBF15682537A59600D72FD6 /* GenerationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF15672537A59600D72FD6 /* GenerationProperties.swift */; };
 		0BBF156D2537A5A500D72FD6 /* ProcessingProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */; };
 		0BFD71452549914A00E46CDF /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD71442549914A00E46CDF /* AnalysisViewController.swift */; };
@@ -60,6 +62,7 @@
 		0B6C95A42519348F006DC0DD /* BufferPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferPicker.swift; sourceTree = "<group>"; };
 		0B6C95A9251934A9006DC0DD /* Buffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Buffer.swift; sourceTree = "<group>"; };
 		0B6C95AE2519501A006DC0DD /* Processor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Processor.swift; sourceTree = "<group>"; };
+		0B6E1CDA25652F2800969634 /* FocusAwareTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusAwareTextField.swift; sourceTree = "<group>"; };
 		0B8EEB25254B5535009D5A71 /* AnalysisSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisSettingsViewController.swift; sourceTree = "<group>"; };
 		0B8EEB2A254B5D09009D5A71 /* Analyser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyser.swift; sourceTree = "<group>"; };
 		0B8FE3E625175CAD00E3CB46 /* ServingSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ServingSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,6 +76,7 @@
 		0B8FE40725175CAE00E3CB46 /* ServingSystemUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingSystemUITests.swift; sourceTree = "<group>"; };
 		0B8FE40925175CAE00E3CB46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B8FE42725175D6200E3CB46 /* SimulationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationMode.swift; sourceTree = "<group>"; };
+		0B9891F7256529A1001628E2 /* SavingTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingTextViewController.swift; sourceTree = "<group>"; };
 		0BBF15672537A59600D72FD6 /* GenerationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationProperties.swift; sourceTree = "<group>"; };
 		0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingProperties.swift; sourceTree = "<group>"; };
 		0BFD71442549914A00E46CDF /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 				0B584E562535E7310089B37E /* SidebarViewController.swift */,
 				0B584E602535E8560089B37E /* SplitViewController.swift */,
 				0B584E512535E71E0089B37E /* StepsViewController.swift */,
+				0B6E1CDD256532D300969634 /* Parent */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -161,6 +166,22 @@
 			path = Simulator;
 			sourceTree = "<group>";
 		};
+		0B6E1CDD256532D300969634 /* Parent */ = {
+			isa = PBXGroup;
+			children = (
+				0B9891F7256529A1001628E2 /* SavingTextViewController.swift */,
+			);
+			path = Parent;
+			sourceTree = "<group>";
+		};
+		0B6E1CDF2565331600969634 /* Text */ = {
+			isa = PBXGroup;
+			children = (
+				0B6E1CDA25652F2800969634 /* FocusAwareTextField.swift */,
+			);
+			path = Text;
+			sourceTree = "<group>";
+		};
 		0B8FE3DD25175CAD00E3CB46 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +238,7 @@
 		0B8FE41825175CEE00E3CB46 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				0B6E1CDF2565331600969634 /* Text */,
 				0B060440253A51BC00226BD1 /* View */,
 				0B06043F253A51A900226BD1 /* ViewController */,
 			);
@@ -383,6 +405,7 @@
 			files = (
 				0BBF15682537A59600D72FD6 /* GenerationProperties.swift in Sources */,
 				0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */,
+				0B9891F8256529A1001628E2 /* SavingTextViewController.swift in Sources */,
 				0B060442253A51D900226BD1 /* GeneratorFunctionCellView.swift in Sources */,
 				0B060447253A52C000226BD1 /* ProcessorFunctionCellView.swift in Sources */,
 				0B6C95A52519348F006DC0DD /* BufferPicker.swift in Sources */,
@@ -391,6 +414,7 @@
 				0B2C2A682537939500F1DA66 /* SimulationProperties.swift in Sources */,
 				0BFD71452549914A00E46CDF /* AnalysisViewController.swift in Sources */,
 				0BBF156D2537A5A500D72FD6 /* ProcessingProperties.swift in Sources */,
+				0B6E1CDB25652F2800969634 /* FocusAwareTextField.swift in Sources */,
 				0B2C2A702537981100F1DA66 /* ProcessingFunction.swift in Sources */,
 				0B8EEB2B254B5D09009D5A71 /* Analyser.swift in Sources */,
 				0B6C95982519325C006DC0DD /* SpecialConditioned.swift in Sources */,
