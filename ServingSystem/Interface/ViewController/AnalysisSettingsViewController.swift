@@ -37,6 +37,8 @@ class AnalysisSettingsViewController: NSViewController {
     }
     
     @IBAction private func startButtonPressed(_ sender: Any) {
+        selectAllText()
+        
         analyser.start()
         self.view.window?.close()
         guard let onStartAction = self.onStartAction else {
@@ -59,5 +61,10 @@ class AnalysisSettingsViewController: NSViewController {
         analyser.maxValue = toField.integerValue
         
         analyseButton.isEnabled = analyser.minValue < analyser.maxValue
+    }
+    
+    private func selectAllText() {
+        toField.selectText(self)
+        fromField.selectText(self)
     }
 }

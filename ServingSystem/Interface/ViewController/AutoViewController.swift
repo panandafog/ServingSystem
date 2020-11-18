@@ -106,7 +106,8 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
     // MARK: - Automatic mode
 
     @IBAction private func startAutoSimulation(_ sender: Any) {
-
+        selectAllText()
+        
         autoSimulator = Simulator()
 
         startAutoSimulationButton.isEnabled = false
@@ -156,6 +157,13 @@ class AutoViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDeleg
         }
         startAutoSimulationButton.isEnabled = valid
         startAutoSimulationTouchBarButton.isEnabled = valid
+    }
+    
+    private func selectAllText() {
+        processorsAmountField.selectText(self)
+        bufferCapacityField.selectText(self)
+        iterationsCountField.selectText(self)
+        generatorsAmountField.selectText(self)
     }
 }
 

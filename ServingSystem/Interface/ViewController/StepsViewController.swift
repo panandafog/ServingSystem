@@ -106,7 +106,7 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
     // MARK: - Step by step mode
 
     @IBAction private func makeStep(_ sender: Any) {
-
+        selectAllText()
         makeStepButton.isEnabled = false
         stopStepsSimulationButton.isEnabled = false
         makeStepTouchBarButton.isEnabled = false
@@ -159,6 +159,12 @@ class StepsViewController: NSViewController, NSTextFieldDelegate, NSTouchBarDele
         makeStepTouchBarButton.isEnabled = valid
         stopStepsSimulationButton.isEnabled = valid && stepsSimulator != nil
         stopStepsSimulationTouchBarButton.isEnabled = valid && stepsSimulator != nil
+    }
+    
+    private func selectAllText() {
+        processorsAmountField.selectText(self)
+        bufferCapacityField.selectText(self)
+        generatorsAmountField.selectText(self)
     }
 }
 
