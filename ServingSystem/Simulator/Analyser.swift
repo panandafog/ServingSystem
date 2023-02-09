@@ -50,10 +50,11 @@ class Analyser {
     }
     
     func cancel() {
+        working = false
         threads.forEach({
             $0.cancel()
         })
-        working = false
+        threads = []
     }
     
     func updateValuesFor(mode: Mode) {
@@ -98,6 +99,10 @@ class Analyser {
             let index = index
             
             let simulationThread = SimulationThread(simulator: nNsimulator, completion: ({
+                guard self.working else {
+                    return
+                }
+                
                 self.rejectProbability[index] = nNsimulator.getRejectProbability()
                 self.stayTime[index] = nNsimulator.getAverageRequestStayTime()
                 self.usingRate[index] = nNsimulator.getAverageProcessorUsingRate()
@@ -108,11 +113,6 @@ class Analyser {
                 print(self.completedValuesAmount)
                 
                 if self.packageCompletedValuesAmount == self.packageValuesAmount {
-                    
-                    guard let globalCompletion = self.completion else {
-                        return
-                    }
-                    
                     if self.completedValuesAmount < self.valuesAmount {
                         let minValue = self.minValue + self.completedValuesAmount
                         var maxValue = minValue + self.packageCapacity
@@ -123,13 +123,14 @@ class Analyser {
                             self.launchPackage(minValue: minValue, maxValue: maxValue)
                         }
                     } else {
-                        globalCompletion(self.mode, Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
+                        self.completion?(self.mode, Array(self.minValue...self.maxValue), self.rejectProbability, self.stayTime, self.usingRate)
                         self.working = false
                     }
                 }
             }))
             simulationThread.alerts = false
             simulationThread.start()
+            threads.append(simulationThread)
         }
     }
 }

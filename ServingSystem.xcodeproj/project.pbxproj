@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -77,6 +77,7 @@
 		0B8FE40925175CAE00E3CB46 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B8FE42725175D6200E3CB46 /* SimulationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationMode.swift; sourceTree = "<group>"; };
 		0B9891F7256529A1001628E2 /* SavingTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingTextViewController.swift; sourceTree = "<group>"; };
+		0BB9652629953E4200E4F7CA /* BufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferTests.swift; sourceTree = "<group>"; };
 		0BBF15672537A59600D72FD6 /* GenerationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationProperties.swift; sourceTree = "<group>"; };
 		0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingProperties.swift; sourceTree = "<group>"; };
 		0BFD71442549914A00E46CDF /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
@@ -221,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				0B8FE3FC25175CAE00E3CB46 /* ServingSystemTests.swift */,
+				0BB9652629953E4200E4F7CA /* BufferTests.swift */,
 				0B8FE3FE25175CAE00E3CB46 /* Info.plist */,
 			);
 			path = ServingSystemTests;
