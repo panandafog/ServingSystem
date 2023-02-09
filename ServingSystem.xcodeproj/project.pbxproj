@@ -366,17 +366,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-ServingSystem/Pods-ServingSystem-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ServingSystem/Pods-ServingSystem-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ServingSystem/Pods-ServingSystem-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ServingSystem/Pods-ServingSystem-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ServingSystem/Pods-ServingSystem-frameworks.sh\"\n";
 		};
 		9F5154F6AA2CC60051133E66 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -6,6 +6,6 @@ target 'ServingSystem' do
   use_frameworks!
 
   # Pods for ServingSystem
-  pod 'Charts'
+  pod 'Charts', '~> 4.1.0'
   pod 'SwiftLint'
 end
