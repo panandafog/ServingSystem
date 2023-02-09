@@ -629,11 +629,12 @@
 				DEVELOPMENT_TEAM = 3HG9ZBM8AV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = ServingSystem/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ServingSystem;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = panandafog.ServingSystem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -652,11 +653,12 @@
 				DEVELOPMENT_TEAM = 3HG9ZBM8AV;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = ServingSystem/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ServingSystem;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = panandafog.ServingSystem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
