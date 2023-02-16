@@ -121,16 +121,16 @@ class AnalysisViewController: NSViewController, NSTouchBarDelegate {
             chart.xAxis.labelTextColor = .textColor
             chart.leftAxis.labelTextColor = .textColor
             chart.rightAxis.labelTextColor = .textColor
-            chart.chartDescription?.textColor = .textColor
+            chart.chartDescription.textColor = .textColor
             chart.legend.textColor = .textColor
             chart.noDataTextColor = .textColor
             
             chart.gridBackgroundColor = .controlAccentColor
             chart.rightAxis.drawLabelsEnabled = false
         }
-        self.rejectProbabilityChart.chartDescription?.text = ""
-        self.stayTimeChart.chartDescription?.text = ""
-        self.usingRateChart.chartDescription?.text = ""
+        self.rejectProbabilityChart.chartDescription.text = ""
+        self.stayTimeChart.chartDescription.text = ""
+        self.usingRateChart.chartDescription.text = ""
     }
     
     private func animateCharts() {
@@ -149,9 +149,9 @@ class AnalysisViewController: NSViewController, NSTouchBarDelegate {
     
     private func drawCharts(mode: Analyser.Mode, values: [Int], rejectProbability: [Double], stayTime: [Double], usingRate: [Double]) {
         
-        self.rejectProbabilityChart.chartDescription?.text = mode.rawValue
-        self.stayTimeChart.chartDescription?.text = mode.rawValue
-        self.usingRateChart.chartDescription?.text = mode.rawValue
+        self.rejectProbabilityChart.chartDescription.text = mode.rawValue
+        self.stayTimeChart.chartDescription.text = mode.rawValue
+        self.usingRateChart.chartDescription.text = mode.rawValue
         
         rejectProbabilityChart.setData(x: values, y: rejectProbability, label: "Reject probability")
         stayTimeChart.setData(x: values, y: stayTime, label: "Request stay time")
@@ -189,7 +189,7 @@ extension LineChartView {
         
         dataSet.drawValuesEnabled = xData.count < drawValuesLimit
         
-        data.addDataSet(dataSet)
+        data.append(dataSet)
         
         self.data = data
     }
