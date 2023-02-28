@@ -1,3 +1,7 @@
+analyzer_rules:
+- unused_declaration
+- unused_import
+
 disabled_rules:
 - discouraged_optional_collection
 - explicit_acl
@@ -16,29 +20,35 @@ disabled_rules:
 - vertical_whitespace_between_cases
 
 opt_in_rules:
-- anyobject_protocol
 - array_init
 - attributes
-- closure_body_length
 - closure_end_indentation
 - closure_spacing
 - collection_alignment
 - conditional_returns_on_newline
+- contains_over_filter_count
+- contains_over_filter_is_empty
 - contains_over_first_not_nil
 - convenience_type
+- contains_over_range_nil_comparison
+- discouraged_none_name
 - discouraged_object_literal
 - discouraged_optional_boolean
 - dynamic_inline
+- empty_collection_literal
 - empty_count
 - empty_string
 - empty_xctest_method
+- enum_case_associated_values_count
 - explicit_init
 - extension_access_modifier
 - fallthrough
 - fatal_error_message
+- file_header
 - file_name
 - first_where
 - function_default_parameter_at_end
+- flatmap_over_map_reduce
 - identical_operands
 - implicit_return
 - implicitly_unwrapped_optional
@@ -65,7 +75,7 @@ opt_in_rules:
 - overridden_super_call
 - override_in_extension
 - pattern_matching_keywords
-- prefixed_toplevel_constant
+- prefer_self_type_over_type_of_self
 - private_action
 - private_outlet
 - prohibited_super_call
@@ -75,23 +85,17 @@ opt_in_rules:
 - reduce_into
 - redundant_nil_coalescing
 - redundant_type_annotation
-- required_enum_case
-- shorthand_operator
 - single_test_class
 - sorted_first_last
 - sorted_imports
 - static_operator
-- strict_fileprivate
 - strong_iboutlet
-- switch_case_on_newline
-- todo
+- test_case_accessibility
 - toggle_bool
-- type_contents_order
 - unavailable_function
 - unneeded_parentheses_in_closure_argument
+- unowned_variable_capture
 - untyped_error_in_catch
-- unused_declaration
-- unused_import
 - vertical_parameter_alignment_on_call
 - xct_specific_matcher
 - yoda_condition
