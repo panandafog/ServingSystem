@@ -117,10 +117,8 @@ class SimulationProperties {
 
     func removeGeneratorProperties(indices: IndexSet) {
         var intIndices = [Int]()
-        for index in indices {
-            if UInt(index) < currentGenerationProperties.count {
-                intIndices.append(index)
-            }
+        for index in indices where UInt(index) < currentGenerationProperties.count {
+            intIndices.append(index)
         }
         currentGenerationProperties.remove(at: intIndices)
     }
@@ -212,10 +210,8 @@ class SimulationProperties {
 
     func removeProcessorProperties(indices: IndexSet) {
         var intIndices = [Int]()
-        for index in indices {
-            if UInt(index) < currentProcessingProperties.count {
-                intIndices.append(index)
-            }
+        for index in indices where UInt(index) < currentProcessingProperties.count {
+            intIndices.append(index)
         }
         currentProcessingProperties.remove(at: intIndices)
     }

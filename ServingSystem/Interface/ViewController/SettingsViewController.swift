@@ -313,7 +313,7 @@ extension SettingsViewController: NSTableViewDelegate {
             return
         }
 
-        if id  == "settingsGeneratorsTable" {
+        if id == "settingsGeneratorsTable" {
             if tableView.numberOfSelectedRows == 1 {
                 applyToAllGeneratorsButton.isEnabled = true
                 deleteGeneratorButton.isEnabled = !(tableView.selectedRow == 0 && SimulationProperties.shared.generatorsAmount == 1)
@@ -326,7 +326,7 @@ extension SettingsViewController: NSTableViewDelegate {
             }
         }
 
-        if id  == "settingsProcessorsTable" {
+        if id == "settingsProcessorsTable" {
             if tableView.numberOfSelectedRows == 1 {
                 applyToAllProcessorsButton.isEnabled = true
                 deleteProcessorButton.isEnabled = !(tableView.selectedRow == 0 && SimulationProperties.shared.processorsAmount == 1)

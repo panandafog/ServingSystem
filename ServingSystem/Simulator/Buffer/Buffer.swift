@@ -27,10 +27,8 @@ class Buffer {
     }
 
     func hasRequests() -> Bool {
-        for index in 1...capacity {
-            if queue[Int(index - 1)] != nil {
-                return true
-            }
+        for index in 1...capacity where queue[Int(index - 1)] != nil {
+            return true
         }
 
         return false

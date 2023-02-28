@@ -179,86 +179,120 @@ extension AutoViewController: NSTableViewDelegate {
         switch columnId {
 
         case "numberColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "numberCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.integerValue = autoSimulator.generators[row].priority
-            return cellView
+            return numberCell(row: row, autoSimulator: autoSimulator)
 
         case "requestsGeneratedColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "requestsGeneratedCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.integerValue = autoSimulator.generators[row].requestsCount
-            return cellView
+            return requestsGeneratedCell(row: row, autoSimulator: autoSimulator)
 
         case "rejectProbabilityColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "rejectProbabilityCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = Double(autoSimulator.getRejectedRequestsAmount(creatorNumber: UInt(autoSimulator.generators[row].priority)))
-                / Double(autoSimulator.generators[row].requestsCount)
-            return cellView
+            return rejectProbabilityCell(row: row, autoSimulator: autoSimulator)
 
         case "stayTimeColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "stayTimeCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            let time = autoSimulator.getAverageRequestStayTime(generatorNumber: UInt(row + 1))
-            if time.isNaN {
-                cellView.textField?.stringValue = emptyString
-            } else {
-                cellView.textField?.doubleValue = time
-            }
-            return cellView
+            return stayTimeCell(row: row, autoSimulator: autoSimulator)
 
         case "waitingTimeColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "waitingTimeCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            let time = autoSimulator.getAverageRequestWaitingTime(generatorNumber: UInt(row + 1))
-            if time.isNaN {
-                cellView.textField?.stringValue = emptyString
-            } else {
-                cellView.textField?.doubleValue = time
-            }
-            return cellView
+            return waitingTimeCell(row: row, autoSimulator: autoSimulator)
 
         case "processingTimeColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "processingTimeCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            let time = autoSimulator.getAverageRequestProcessingTime(generatorNumber: UInt(row + 1))
-            if time.isNaN {
-                cellView.textField?.stringValue = emptyString
-            } else {
-                cellView.textField?.doubleValue = time
-            }
-            return cellView
+            return processingTimeCell(row: row, autoSimulator: autoSimulator)
 
         case "waitingTimeDispersionColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "waitingTimeDispersionCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
-            var waitingTime = [Double]()
-
-            for request in requests where request.pickTime != nil {
-                waitingTime.append(request.pickTime! - request.creationTime)
-            }
-
-            cellView.textField?.doubleValue = Maths.dispersion(of: waitingTime)
-            return cellView
+            return waitingTimeDispersionCell(row: row, autoSimulator: autoSimulator)
 
         case "processingTimeDispersionColumn":
-            guard let cellView = autoGeneratorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "processingTimeDispersionCell"),
-                                                              owner: self) as? NSTableCellView else { return nil }
-            let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
-            var processingTime = [Double]()
-
-            for request in requests where (request.pickTime != nil && request.completionTime != nil) {
-                processingTime.append(request.completionTime! - request.pickTime!)
-            }
-
-            cellView.textField?.doubleValue = Maths.dispersion(of: processingTime)
-            return cellView
+            return processingTimeDispersionCell(row: row, autoSimulator: autoSimulator)
 
         default:
             return nil
         }
+    }
+    
+    func numberCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "numberCell")
+        cellView?.textField?.integerValue = autoSimulator.generators[row].priority
+        return cellView
+    }
+    
+    func requestsGeneratedCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "requestsGeneratedCell")
+        cellView?.textField?.integerValue = autoSimulator.generators[row].requestsCount
+        return cellView
+    }
+    
+    func rejectProbabilityCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "rejectProbabilityCell")
+        cellView?.textField?.doubleValue = Double(
+            autoSimulator.getRejectedRequestsAmount(
+                creatorNumber: UInt(autoSimulator.generators[row].priority)
+            )
+        ) / Double(autoSimulator.generators[row].requestsCount)
+        return cellView
+    }
+    
+    func stayTimeCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "stayTimeCell")
+        let time = autoSimulator.getAverageRequestStayTime(generatorNumber: UInt(row + 1))
+        if time.isNaN {
+            cellView?.textField?.stringValue = emptyString
+        } else {
+            cellView?.textField?.doubleValue = time
+        }
+        return cellView
+    }
+    
+    func waitingTimeCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "waitingTimeCell")
+        let time = autoSimulator.getAverageRequestWaitingTime(generatorNumber: UInt(row + 1))
+        if time.isNaN {
+            cellView?.textField?.stringValue = emptyString
+        } else {
+            cellView?.textField?.doubleValue = time
+        }
+        return cellView
+    }
+    
+    func processingTimeCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "processingTimeCell")
+        let time = autoSimulator.getAverageRequestProcessingTime(generatorNumber: UInt(row + 1))
+        if time.isNaN {
+            cellView?.textField?.stringValue = emptyString
+        } else {
+            cellView?.textField?.doubleValue = time
+        }
+        return cellView
+    }
+    
+    func waitingTimeDispersionCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "waitingTimeDispersionCell")
+        let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
+        var waitingTime = [Double]()
+
+        for request in requests where request.pickTime != nil {
+            waitingTime.append(request.pickTime! - request.creationTime)
+        }
+
+        cellView?.textField?.doubleValue = Maths.dispersion(of: waitingTime)
+        return cellView
+    }
+    
+    func processingTimeDispersionCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
+        let cellView = makeAutoGeneratorsCell(id: "processingTimeDispersionCell")
+        let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
+        var processingTime = [Double]()
+
+        for request in requests where (request.pickTime != nil && request.completionTime != nil) {
+            processingTime.append(request.completionTime! - request.pickTime!)
+        }
+
+        cellView?.textField?.doubleValue = Maths.dispersion(of: processingTime)
+        return cellView
+    }
+    
+    func makeAutoGeneratorsCell(id: String) -> NSTableCellView? {
+        autoGeneratorsTable.makeView(
+            withIdentifier: NSUserInterfaceItemIdentifier(rawValue: id),
+            owner: self
+        ) as? NSTableCellView
     }
 
     func viewForAutoProcessorsTable(columnId: String?, row: Int) -> NSView? {

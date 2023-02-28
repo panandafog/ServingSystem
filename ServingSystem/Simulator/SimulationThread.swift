@@ -32,7 +32,7 @@ class SimulationThread: Thread {
                 if currentRejectProbability == 0 {
                     break
                 }
-                currentRequestsAmount = previousRequestAmount + UInt((2.699_449 * (1.0 - currentRejectProbability)) / (currentRejectProbability * 0.01))
+                currentRequestsAmount = previousRequestAmount + UInt((2.699449 * (1.0 - currentRejectProbability)) / (currentRejectProbability * 0.01))
 
                 makeSteps(currentRequestsAmount)
 
