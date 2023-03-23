@@ -85,11 +85,11 @@ class Analyser {
             
             switch mode {
             case .bufferCapacity:
-                simulator = Simulator(bufferCapacity: value)
+                simulator = SimulatorImpl(bufferCapacity: value)
             case .generatorsAmount:
-                simulator = Simulator(generatorsAmount: value)
+                simulator = SimulatorImpl(generatorsAmount: value)
             default:
-                simulator = Simulator(processorsAmount: value)
+                simulator = SimulatorImpl(processorsAmount: value)
             }
             
             guard let nNsimulator = simulator else {

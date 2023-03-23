@@ -117,7 +117,7 @@ class StepsViewController: SavingTextViewController, NSTouchBarDelegate {
 
         DispatchQueue.global(qos: .background).async {
             if self.stepsSimulator == nil {
-                self.stepsSimulator = Simulator()
+                self.stepsSimulator = SimulatorImpl()
             }
             self.stepsSimulator?.makeStep(debug: self.debug)
             DispatchQueue.main.async {

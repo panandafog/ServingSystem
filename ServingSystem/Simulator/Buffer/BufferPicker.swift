@@ -5,7 +5,11 @@
 //  Created by panandafog on 21.09.2020.
 //
 
-class BufferPicker {
+protocol BufferPicker {
+    func pick() -> Request?
+}
+
+class BufferPickerImpl: BufferPicker {
 
     let buffer: Buffer
 

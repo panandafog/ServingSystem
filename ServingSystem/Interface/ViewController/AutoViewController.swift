@@ -111,7 +111,7 @@ class AutoViewController: SavingTextViewController, NSTouchBarDelegate {
     @IBAction private func startAutoSimulation(_ sender: Any) {
         saveText()
         
-        autoSimulator = Simulator()
+        autoSimulator = SimulatorImpl()
 
         startAutoSimulationButton.isEnabled = false
         stopAutoSimulationButton.isEnabled = true

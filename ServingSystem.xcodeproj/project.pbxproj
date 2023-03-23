@@ -16,6 +16,9 @@
 		0B3A5E2C29CC4AAA0034C6AD /* BufferInserterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E2B29CC4AAA0034C6AD /* BufferInserterTests.swift */; };
 		0B3A5E2E29CC4D850034C6AD /* BufferMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E2D29CC4D850034C6AD /* BufferMock.swift */; };
 		0B3A5E3029CC58E40034C6AD /* BufferPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E2F29CC58E40034C6AD /* BufferPickerTests.swift */; };
+		0B3A5E3229CC79B10034C6AD /* SimulatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E3129CC79B10034C6AD /* SimulatorTests.swift */; };
+		0B3A5E3429CC7BC90034C6AD /* ProcessorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E3329CC7BC90034C6AD /* ProcessorTests.swift */; };
+		0B3A5E3629CC7CD30034C6AD /* BufferPickerStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E3529CC7CD30034C6AD /* BufferPickerStub.swift */; };
 		0B459AB7253504E200351FBA /* Maths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459AB6253504E200351FBA /* Maths.swift */; };
 		0B546DD6253BABAE00661487 /* SimulationThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B546DD5253BABAE00661487 /* SimulationThread.swift */; };
 		0B584E432535E3D00089B37E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E422535E3D00089B37E /* SettingsViewController.swift */; };
@@ -67,6 +70,9 @@
 		0B3A5E2B29CC4AAA0034C6AD /* BufferInserterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferInserterTests.swift; sourceTree = "<group>"; };
 		0B3A5E2D29CC4D850034C6AD /* BufferMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferMock.swift; sourceTree = "<group>"; };
 		0B3A5E2F29CC58E40034C6AD /* BufferPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferPickerTests.swift; sourceTree = "<group>"; };
+		0B3A5E3129CC79B10034C6AD /* SimulatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulatorTests.swift; sourceTree = "<group>"; };
+		0B3A5E3329CC7BC90034C6AD /* ProcessorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessorTests.swift; sourceTree = "<group>"; };
+		0B3A5E3529CC7CD30034C6AD /* BufferPickerStub.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferPickerStub.swift; sourceTree = "<group>"; };
 		0B459AB6253504E200351FBA /* Maths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maths.swift; sourceTree = "<group>"; };
 		0B546DD5253BABAE00661487 /* SimulationThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationThread.swift; sourceTree = "<group>"; };
 		0B584E422535E3D00089B37E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -279,6 +285,8 @@
 				0BFB606F29C4A22C0079BCEA /* BufferTests.swift */,
 				0B3A5E2B29CC4AAA0034C6AD /* BufferInserterTests.swift */,
 				0B3A5E2F29CC58E40034C6AD /* BufferPickerTests.swift */,
+				0B3A5E3129CC79B10034C6AD /* SimulatorTests.swift */,
+				0B3A5E3329CC7BC90034C6AD /* ProcessorTests.swift */,
 			);
 			path = ServingSystemTests;
 			sourceTree = "<group>";
@@ -288,6 +296,7 @@
 			children = (
 				0B3A5E2D29CC4D850034C6AD /* BufferMock.swift */,
 				0BFB606B29C494B10079BCEA /* BufferInserterSpy.swift */,
+				0B3A5E3529CC7CD30034C6AD /* BufferPickerStub.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -515,10 +524,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B3A5E3629CC7CD30034C6AD /* BufferPickerStub.swift in Sources */,
 				0BFB607029C4A22C0079BCEA /* BufferTests.swift in Sources */,
 				0B3A5E3029CC58E40034C6AD /* BufferPickerTests.swift in Sources */,
+				0B3A5E3429CC7BC90034C6AD /* ProcessorTests.swift in Sources */,
 				0B3A5E2C29CC4AAA0034C6AD /* BufferInserterTests.swift in Sources */,
 				0BFB606C29C494B10079BCEA /* BufferInserterSpy.swift in Sources */,
+				0B3A5E3229CC79B10034C6AD /* SimulatorTests.swift in Sources */,
 				0B3A5E2E29CC4D850034C6AD /* BufferMock.swift in Sources */,
 				0BFB606929C462C50079BCEA /* GeneratorTests.swift in Sources */,
 			);

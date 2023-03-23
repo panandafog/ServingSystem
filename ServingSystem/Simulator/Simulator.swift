@@ -7,7 +7,64 @@
 
 import Cocoa
 
-class Simulator {
+protocol Simulator: AnyObject, SpecialConditioned {
+    
+    var generators: [Generator] { get }
+    var processors: [Processor] { get }
+    var buffer: Buffer { get }
+    var eventLog: String { get }
+    
+    func getRejectProbability() -> Double
+    
+    func getCompletedRequests(from generator: Int) -> [Request]
+    
+    func getCompletedRequestsAmount() -> Int
+    
+    func getGeneratedRequestsAmount() -> Int
+
+    func getRejectedRequestsAmount() -> Int
+
+    func getRejectedRequestsAmount(creatorNumber: Int) -> Int
+
+    func getAllRejectedRequests() -> [Request]
+
+    func getRejectedRequests() -> [[Request]]
+    
+    func getAverageRequestStayTime() -> Double
+
+    func getAverageRequestStayTime(generatorNumber: Int) -> Double
+
+    func getAverageRequestWaitingTime(generatorNumber: Int) -> Double
+
+    func getAverageRequestProcessingTime(generatorNumber: Int) -> Double
+    
+    func getAverageProcessorUsingRate() -> Double
+    
+    func getProcessorUsingRate(index: Int) -> Double
+    
+    func showCompletionAlert(iterations: Int)
+    
+    func makeStep(debug: Bool)
+    
+    func writeToLog(_ string: String)
+}
+
+extension Simulator {
+    func showCompletionAlert(iterations: Int) {
+        DispatchQueue.main.async {
+            let alert = NSAlert()
+            alert.messageText = "Simulation finished"
+            alert.informativeText = "Automatic simulation finished after "
+                + String(iterations)
+                + " iterations"
+            alert.alertStyle = .informational
+            alert.addButton(withTitle: "OK")
+            alert.runModal()
+        }
+    }
+}
+
+class SimulatorImpl: Simulator {
 
     var generators = [Generator]()
     var processors = [Processor]()
@@ -22,74 +79,49 @@ class Simulator {
     private(set) var eventLog = ""
     private(set) var isEnabled = false
 
-    init() {
-        let properties = SimulationProperties.shared
-
-        buffer = BufferImpl(capacity: properties.bufferCapacity)
-        bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: properties.generatorsAmount)
-
-        for index in 1...Int(properties.generatorsAmount) {
-            generators.append(Generator(priority: Int(index),
-                                        bufferInserter: bufferInserter,
-                                        simulator: self))
-        }
-
-        for index in 1...properties.processorsAmount {
-            processors.append(Processor(number: index,
-                                        bufferPicker: bufferPicker,
-                                        simulator: self))
-        }
+    convenience init(
+        properties: SimulationProperties = SimulationProperties.shared,
+        bufferCapacity: Int? = nil,
+        generatorsAmount: Int? = nil,
+        processorsAmount: Int? = nil
+    ) {
+        self.init(
+            bufferCapacity: bufferCapacity ?? properties.bufferCapacity,
+            generatorsAmount: generatorsAmount ?? properties.generatorsAmount,
+            processorsAmount: processorsAmount ?? properties.processorsAmount
+        )
     }
     
-    init(bufferCapacity: Int) {
-        let properties = SimulationProperties.shared
-
-        buffer = BufferImpl(capacity: bufferCapacity)
-        bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: properties.generatorsAmount)
-
-        for index in 1...Int(properties.generatorsAmount) {
-            generators.append(Generator(priority: Int(index),
-                                        bufferInserter: bufferInserter,
-                                        simulator: self))
-        }
-
-        for index in 1...properties.processorsAmount {
-            processors.append(Processor(number: index,
-                                        bufferPicker: bufferPicker,
-                                        simulator: self))
-        }
+    convenience init(
+        bufferCapacity: Int,
+        generatorsAmount: Int,
+        processorsAmount: Int
+    ) {
+        let buffer = BufferImpl(capacity: bufferCapacity)
+        let bufferPicker = BufferPickerImpl(buffer: buffer)
+        let bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: generatorsAmount)
+        
+        self.init(
+            buffer: buffer,
+            bufferPicker: bufferPicker,
+            bufferInserter: bufferInserter,
+            generatorsAmount: generatorsAmount,
+            processorsAmount: processorsAmount
+        )
     }
     
-    init(generatorsAmount: Int) {
-        let properties = SimulationProperties.shared
+    init(
+        buffer: Buffer,
+        bufferPicker: BufferPicker,
+        bufferInserter: BufferInserter,
+        generatorsAmount: Int,
+        processorsAmount: Int
+    ) {
+        self.buffer = buffer
+        self.bufferPicker = bufferPicker
+        self.bufferInserter = bufferInserter
 
-        buffer = BufferImpl(capacity: properties.bufferCapacity)
-        bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: generatorsAmount)
-
-        for index in 1...Int(generatorsAmount) {
-            generators.append(Generator(priority: Int(index),
-                                        bufferInserter: bufferInserter,
-                                        simulator: self))
-        }
-
-        for index in 1...properties.processorsAmount {
-            processors.append(Processor(number: index,
-                                        bufferPicker: bufferPicker,
-                                        simulator: self))
-        }
-    }
-    
-    init(processorsAmount: Int) {
-        let properties = SimulationProperties.shared
-
-        buffer = BufferImpl(capacity: properties.bufferCapacity)
-        bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: properties.generatorsAmount)
-
-        for index in 1...Int(properties.generatorsAmount) {
+        for index in 1...generatorsAmount {
             generators.append(Generator(priority: Int(index),
                                         bufferInserter: bufferInserter,
                                         simulator: self))
@@ -245,22 +277,9 @@ class Simulator {
             processors[index].print()
         }
     }
-
-    func showCompletionAlert(iterations: Int) {
-        DispatchQueue.main.async {
-            let alert = NSAlert()
-            alert.messageText = "Simulation finished"
-            alert.informativeText = "Automatic simulation finished after "
-                + String(iterations)
-                + " iterations"
-            alert.alertStyle = .informational
-            alert.addButton(withTitle: "OK")
-            alert.runModal()
-        }
-    }
 }
 
-extension Simulator: SpecialConditioned {
+extension SimulatorImpl: SpecialConditioned {
 
     var nextSCTime: Double {
         var nextSCTime = Double.infinity

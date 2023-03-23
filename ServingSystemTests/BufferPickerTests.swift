@@ -34,7 +34,7 @@ final class BufferPickerTests: XCTestCase {
         // create picker
         
         bufferMock = BufferMock(capacity: bufferCapacity, queue: bufferQueue)
-        bufferPicker = BufferPicker(buffer: bufferMock)
+        bufferPicker = BufferPickerImpl(buffer: bufferMock)
         
         // validate picked request
         
@@ -55,7 +55,7 @@ final class BufferPickerTests: XCTestCase {
         // create picker
         
         bufferMock = BufferMock(capacity: bufferCapacity, queue: bufferQueue)
-        bufferPicker = BufferPicker(buffer: bufferMock)
+        bufferPicker = BufferPickerImpl(buffer: bufferMock)
         
         // validate picked request
         
@@ -77,7 +77,7 @@ final class BufferPickerTests: XCTestCase {
         // create picker
         
         bufferMock = BufferMock(capacity: bufferCapacity, queue: bufferQueue)
-        bufferPicker = BufferPicker(buffer: bufferMock)
+        bufferPicker = BufferPickerImpl(buffer: bufferMock)
         
         // validate picked request
         
@@ -98,7 +98,7 @@ final class BufferPickerTests: XCTestCase {
         // create picker
         
         bufferMock = BufferMock(capacity: bufferCapacity, queue: bufferQueue)
-        bufferPicker = BufferPicker(buffer: bufferMock)
+        bufferPicker = BufferPickerImpl(buffer: bufferMock)
         
         // validate picked request
         

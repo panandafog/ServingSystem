@@ -49,7 +49,7 @@ class SimulationThread: Thread {
 
     private func makeSteps(_ steps: Int) {
         for _ in 1...steps {
-            simulator.makeStep(debug: false)
+            simulator.makeStep()
             if isCancelled {
                 return
             }
