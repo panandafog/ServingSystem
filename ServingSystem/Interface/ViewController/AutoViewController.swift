@@ -78,7 +78,7 @@ class AutoViewController: SavingTextViewController, NSTouchBarDelegate {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.iterationsCount = UInt(sender.integerValue)
+        SimulationProperties.shared.iterationsCount = sender.integerValue
         validateSettings()
     }
 
@@ -86,7 +86,7 @@ class AutoViewController: SavingTextViewController, NSTouchBarDelegate {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.setGeneratorsAmount(UInt(sender.integerValue))
+        SimulationProperties.shared.setGeneratorsAmount(sender.integerValue)
         validateSettings()
     }
 
@@ -94,7 +94,7 @@ class AutoViewController: SavingTextViewController, NSTouchBarDelegate {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.setProcessorsAmount(UInt(sender.integerValue))
+        SimulationProperties.shared.setProcessorsAmount(sender.integerValue)
         validateSettings()
     }
 
@@ -102,7 +102,7 @@ class AutoViewController: SavingTextViewController, NSTouchBarDelegate {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.bufferCapacity = UInt(sender.integerValue)
+        SimulationProperties.shared.bufferCapacity = sender.integerValue
         validateSettings()
     }
 
@@ -223,7 +223,7 @@ extension AutoViewController: NSTableViewDelegate {
         let cellView = makeAutoGeneratorsCell(id: "rejectProbabilityCell")
         cellView?.textField?.doubleValue = Double(
             autoSimulator.getRejectedRequestsAmount(
-                creatorNumber: UInt(autoSimulator.generators[row].priority)
+                creatorNumber: autoSimulator.generators[row].priority
             )
         ) / Double(autoSimulator.generators[row].requestsCount)
         return cellView
@@ -231,7 +231,7 @@ extension AutoViewController: NSTableViewDelegate {
     
     func stayTimeCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
         let cellView = makeAutoGeneratorsCell(id: "stayTimeCell")
-        let time = autoSimulator.getAverageRequestStayTime(generatorNumber: UInt(row + 1))
+        let time = autoSimulator.getAverageRequestStayTime(generatorNumber: row + 1)
         if time.isNaN {
             cellView?.textField?.stringValue = emptyString
         } else {
@@ -242,7 +242,7 @@ extension AutoViewController: NSTableViewDelegate {
     
     func waitingTimeCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
         let cellView = makeAutoGeneratorsCell(id: "waitingTimeCell")
-        let time = autoSimulator.getAverageRequestWaitingTime(generatorNumber: UInt(row + 1))
+        let time = autoSimulator.getAverageRequestWaitingTime(generatorNumber: row + 1)
         if time.isNaN {
             cellView?.textField?.stringValue = emptyString
         } else {
@@ -253,7 +253,7 @@ extension AutoViewController: NSTableViewDelegate {
     
     func processingTimeCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
         let cellView = makeAutoGeneratorsCell(id: "processingTimeCell")
-        let time = autoSimulator.getAverageRequestProcessingTime(generatorNumber: UInt(row + 1))
+        let time = autoSimulator.getAverageRequestProcessingTime(generatorNumber: row + 1)
         if time.isNaN {
             cellView?.textField?.stringValue = emptyString
         } else {
@@ -264,7 +264,7 @@ extension AutoViewController: NSTableViewDelegate {
     
     func waitingTimeDispersionCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
         let cellView = makeAutoGeneratorsCell(id: "waitingTimeDispersionCell")
-        let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
+        let requests = autoSimulator.getCompletedRequests(from: row + 1)
         var waitingTime = [Double]()
 
         for request in requests where request.pickTime != nil {
@@ -277,7 +277,7 @@ extension AutoViewController: NSTableViewDelegate {
     
     func processingTimeDispersionCell(row: Int, autoSimulator: Simulator) -> NSTableCellView? {
         let cellView = makeAutoGeneratorsCell(id: "processingTimeDispersionCell")
-        let requests = autoSimulator.getCompletedRequests(from: UInt(row + 1))
+        let requests = autoSimulator.getCompletedRequests(from: row + 1)
         var processingTime = [Double]()
 
         for request in requests where (request.pickTime != nil && request.completionTime != nil) {
@@ -314,7 +314,7 @@ extension AutoViewController: NSTableViewDelegate {
         case "usingRateColumn":
             guard let cellView = autoProcessorsTable.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: "usingRateCell"),
                                                               owner: self) as? NSTableCellView else { return nil }
-            cellView.textField?.doubleValue = autoSimulator.getProcessorUsingRate(index: UInt(row))
+            cellView.textField?.doubleValue = autoSimulator.getProcessorUsingRate(index: row)
             return cellView
 
         default:

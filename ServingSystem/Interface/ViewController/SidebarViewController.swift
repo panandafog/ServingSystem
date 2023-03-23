@@ -11,7 +11,7 @@ class SidebarViewController: NSViewController {
     
     var tabControllers = [NSButton]()
     
-    var switchTab: ((UInt) -> Void)?
+    var switchTab: ((Int) -> Void)?
     
     @IBOutlet private var autoModeTabButton: NSButton!
     @IBOutlet private var stepsModeTabButton: NSButton!
@@ -53,6 +53,6 @@ class SidebarViewController: NSViewController {
             return
         }
         
-        switchTab(UInt(senderInd))
+        switchTab(senderInd)
     }
 }

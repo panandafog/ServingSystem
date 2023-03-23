@@ -11,7 +11,7 @@ class Processor {
 
     private let bufferPicker: BufferPicker
 
-    private(set) var number: UInt = 0
+    private(set) var number = 0
     private(set) var time = 0.0
     private(set) var bisyTime = 0.0
     private(set) var cooldown: Double
@@ -24,7 +24,7 @@ class Processor {
 
     private weak var simulator: Simulator?
 
-    init(number: UInt, bufferPicker: BufferPicker, simulator: Simulator?) {
+    init(number: Int, bufferPicker: BufferPicker, simulator: Simulator?) {
         self.number = number
         let properties = SimulationProperties.shared.getProcessingProperties(index: Int(number) - 1)
         self.minCooldown = properties.minTime
@@ -67,8 +67,8 @@ class Processor {
 }
 
 extension Processor: SpecialConditioned {
-
-    func getNextSCTime() -> Double {
+    
+    var nextSCTime: Double {
         if request != nil {
             return time + cooldown
         }

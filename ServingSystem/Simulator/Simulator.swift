@@ -25,9 +25,9 @@ class Simulator {
     init() {
         let properties = SimulationProperties.shared
 
-        buffer = Buffer(capacity: properties.bufferCapacity)
+        buffer = BufferImpl(capacity: properties.bufferCapacity)
         bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: properties.generatorsAmount)
+        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: properties.generatorsAmount)
 
         for index in 1...Int(properties.generatorsAmount) {
             generators.append(Generator(priority: Int(index),
@@ -42,12 +42,12 @@ class Simulator {
         }
     }
     
-    init(bufferCapacity: UInt) {
+    init(bufferCapacity: Int) {
         let properties = SimulationProperties.shared
 
-        buffer = Buffer(capacity: bufferCapacity)
+        buffer = BufferImpl(capacity: bufferCapacity)
         bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: properties.generatorsAmount)
+        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: properties.generatorsAmount)
 
         for index in 1...Int(properties.generatorsAmount) {
             generators.append(Generator(priority: Int(index),
@@ -62,12 +62,12 @@ class Simulator {
         }
     }
     
-    init(generatorsAmount: UInt) {
+    init(generatorsAmount: Int) {
         let properties = SimulationProperties.shared
 
-        buffer = Buffer(capacity: properties.bufferCapacity)
+        buffer = BufferImpl(capacity: properties.bufferCapacity)
         bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: generatorsAmount)
+        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: generatorsAmount)
 
         for index in 1...Int(generatorsAmount) {
             generators.append(Generator(priority: Int(index),
@@ -82,12 +82,12 @@ class Simulator {
         }
     }
     
-    init(processorsAmount: UInt) {
+    init(processorsAmount: Int) {
         let properties = SimulationProperties.shared
 
-        buffer = Buffer(capacity: properties.bufferCapacity)
+        buffer = BufferImpl(capacity: properties.bufferCapacity)
         bufferPicker = BufferPicker(buffer: buffer)
-        bufferInserter = BufferInserter(buffer: buffer, generatorsCount: properties.generatorsAmount)
+        bufferInserter = BufferInserterImpl(buffer: buffer, generatorsCount: properties.generatorsAmount)
 
         for index in 1...Int(properties.generatorsAmount) {
             generators.append(Generator(priority: Int(index),
@@ -106,7 +106,7 @@ class Simulator {
         Double(getRejectedRequestsAmount()) / Double(getGeneratedRequestsAmount())
     }
 
-    func getCompletedRequests(from generator: UInt) -> [Request] {
+    func getCompletedRequests(from generator: Int) -> [Request] {
         var requests = [Request]()
         for processor in processors {
             processor.completedRequests.forEach({
@@ -118,27 +118,27 @@ class Simulator {
         return requests
     }
 
-    func getCompletedRequestsAmount() -> UInt {
-        var res = 0 as UInt
+    func getCompletedRequestsAmount() -> Int {
+        var res = 0
         processors.forEach({
-            res += UInt($0.requestsCount)
+            res += $0.requestsCount
         })
         return res
     }
 
-    func getGeneratedRequestsAmount() -> UInt {
-        var res = 0 as UInt
+    func getGeneratedRequestsAmount() -> Int {
+        var res = 0
         generators.forEach({
-            res += UInt($0.requestsCount)
+            res += $0.requestsCount
         })
         return res
     }
 
-    func getRejectedRequestsAmount() -> UInt {
+    func getRejectedRequestsAmount() -> Int {
         bufferInserter.getRejectedRequestsAmount()
     }
 
-    func getRejectedRequestsAmount(creatorNumber: UInt) -> UInt {
+    func getRejectedRequestsAmount(creatorNumber: Int) -> Int {
         bufferInserter.getRejectedRequestsAmount(creatorNumber: creatorNumber)
     }
 
@@ -164,7 +164,7 @@ class Simulator {
         var totalCount = 0
         
         for index in 1...generators.count {
-            let stayTime = getAverageRequestStayTime(generatorNumber: UInt(index))
+            let stayTime = getAverageRequestStayTime(generatorNumber: Int(index))
             if !stayTime.isNaN {
                 totalTime += stayTime
                 totalCount += 1
@@ -174,7 +174,7 @@ class Simulator {
         return totalTime / Double(totalCount)
     }
 
-    func getAverageRequestStayTime(generatorNumber: UInt) -> Double {
+    func getAverageRequestStayTime(generatorNumber: Int) -> Double {
         let requests = getCompletedRequests(from: generatorNumber)
 
         var totalTime = 0.0
@@ -187,7 +187,7 @@ class Simulator {
         return totalTime / Double(requests.count)
     }
 
-    func getAverageRequestWaitingTime(generatorNumber: UInt) -> Double {
+    func getAverageRequestWaitingTime(generatorNumber: Int) -> Double {
         let requests = getCompletedRequests(from: generatorNumber)
 
         var totalTime = 0.0
@@ -200,7 +200,7 @@ class Simulator {
         return totalTime / Double(requests.count)
     }
 
-    func getAverageRequestProcessingTime(generatorNumber: UInt) -> Double {
+    func getAverageRequestProcessingTime(generatorNumber: Int) -> Double {
         let requests = getCompletedRequests(from: generatorNumber)
 
         var totalTime = 0.0
@@ -219,12 +219,12 @@ class Simulator {
         }
         var totalRate = 0.0
         for index in 0...processors.count - 1 {
-            totalRate += getProcessorUsingRate(index: UInt(index))
+            totalRate += getProcessorUsingRate(index: Int(index))
         }
         return totalRate / Double(processors.count)
     }
     
-    func getProcessorUsingRate(index: UInt) -> Double {
+    func getProcessorUsingRate(index: Int) -> Double {
         guard index < processors.count && index >= 0 else {
             return -1.0
         }
@@ -246,7 +246,7 @@ class Simulator {
         }
     }
 
-    func showCompletionAlert(iterations: UInt) {
+    func showCompletionAlert(iterations: Int) {
         DispatchQueue.main.async {
             let alert = NSAlert()
             alert.messageText = "Simulation finished"
@@ -262,17 +262,17 @@ class Simulator {
 
 extension Simulator: SpecialConditioned {
 
-    func getNextSCTime() -> Double {
+    var nextSCTime: Double {
         var nextSCTime = Double.infinity
 
         processors.forEach({
-            if $0.getNextSCTime() < nextSCTime {
-                nextSCTime = $0.getNextSCTime()
+            if $0.nextSCTime < nextSCTime {
+                nextSCTime = $0.nextSCTime
             }
         })
         generators.forEach({
-            if $0.getNextSCTime() < nextSCTime {
-                nextSCTime = $0.getNextSCTime()
+            if $0.nextSCTime < nextSCTime {
+                nextSCTime = $0.nextSCTime
             }
         })
         return nextSCTime
@@ -289,26 +289,26 @@ extension Simulator: SpecialConditioned {
         var nextSCObject: SpecialConditioned?
 
         processors.forEach({
-            if $0.getNextSCTime() < nextSCTime {
-                nextSCTime = $0.getNextSCTime()
+            if $0.nextSCTime < nextSCTime {
+                nextSCTime = $0.nextSCTime
                 nextSCObject = $0
             }
         })
         var nextSCObjectIsGenerator = false
 
         generators.forEach({
-            if $0.getNextSCTime() < nextSCTime {
-                nextSCTime = $0.getNextSCTime()
+            if $0.nextSCTime < nextSCTime {
+                nextSCTime = $0.nextSCTime
                 nextSCObject = $0
                 nextSCObjectIsGenerator = true
             }
         })
-        realisationTime = nextSCObject?.getNextSCTime() ?? realisationTime
+        realisationTime = nextSCObject?.nextSCTime ?? realisationTime
         nextSCObject?.makeStep()
 
-        if nextSCObjectIsGenerator && buffer.hasRequests() {
+        if nextSCObjectIsGenerator && buffer.hasRequests {
             for index in 0...processors.count - 1 {
-                if buffer.hasRequests() {
+                if buffer.hasRequests {
                     if processors[index].request == nil {
                         processors[index].makeStep(time: nextSCTime)
                     }

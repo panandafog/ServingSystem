@@ -85,7 +85,7 @@ class StepsViewController: SavingTextViewController, NSTouchBarDelegate {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.setGeneratorsAmount(UInt(sender.integerValue))
+        SimulationProperties.shared.setGeneratorsAmount(sender.integerValue)
         validateSettings()
     }
 
@@ -93,7 +93,7 @@ class StepsViewController: SavingTextViewController, NSTouchBarDelegate {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.setProcessorsAmount(UInt(sender.integerValue))
+        SimulationProperties.shared.setProcessorsAmount(sender.integerValue)
         validateSettings()
     }
 
@@ -101,7 +101,7 @@ class StepsViewController: SavingTextViewController, NSTouchBarDelegate {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.bufferCapacity = UInt(sender.integerValue)
+        SimulationProperties.shared.bufferCapacity = sender.integerValue
         validateSettings()
     }
 

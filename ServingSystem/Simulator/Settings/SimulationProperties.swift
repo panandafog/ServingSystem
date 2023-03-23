@@ -20,14 +20,14 @@ class SimulationProperties {
     private var currentGenerationProperties = [GenerationProperties]()
     private var currentProcessingProperties = [ProcessingProperties]()
 
-    var bufferCapacity = UInt(2)
-    var iterationsCount = UInt(1_000)
+    var bufferCapacity = 2
+    var iterationsCount = 1000
 
-    var generatorsAmount: UInt {
-        UInt(currentGenerationProperties.count)
+    var generatorsAmount: Int {
+        currentGenerationProperties.count
     }
-    var processorsAmount: UInt {
-        UInt(currentProcessingProperties.count)
+    var processorsAmount: Int {
+        currentProcessingProperties.count
     }
 
     // MARK: - init
@@ -52,7 +52,7 @@ class SimulationProperties {
         }
     }
 
-    func getGenerationCooldown(generatorNumber: UInt) -> Double {
+    func getGenerationCooldown(generatorNumber: Int) -> Double {
         let currentProperties: GenerationProperties
         
         if generatorNumber <= generatorsAmount {
@@ -88,7 +88,7 @@ class SimulationProperties {
         currentGenerationProperties.append(last)
     }
 
-    func setGeneratorsAmount(_ newAmount: UInt) {
+    func setGeneratorsAmount(_ newAmount: Int) {
         guard newAmount > 0 else {
             return
         }
@@ -99,7 +99,7 @@ class SimulationProperties {
             }
         } else if generatorsAmount > newAmount {
             for _ in 1 ... generatorsAmount - newAmount {
-                removeGeneratorProperties(index: UInt(currentGenerationProperties.count - 1))
+                removeGeneratorProperties(index: currentGenerationProperties.count - 1)
             }
         }
     }
@@ -108,7 +108,7 @@ class SimulationProperties {
         currentGenerationProperties.append(properties)
     }
 
-    func removeGeneratorProperties(index: UInt) {
+    func removeGeneratorProperties(index: Int) {
         guard generatorsAmount > 1 && index < currentGenerationProperties.count else {
             return
         }
@@ -117,13 +117,13 @@ class SimulationProperties {
 
     func removeGeneratorProperties(indices: IndexSet) {
         var intIndices = [Int]()
-        for index in indices where UInt(index) < currentGenerationProperties.count {
+        for index in indices where Int(index) < currentGenerationProperties.count {
             intIndices.append(index)
         }
         currentGenerationProperties.remove(at: intIndices)
     }
 
-    func replaceGeneratorProperties(with newProperties: GenerationProperties, at index: UInt) {
+    func replaceGeneratorProperties(with newProperties: GenerationProperties, at index: Int) {
         guard index < currentGenerationProperties.count else {
             return
         }
@@ -141,7 +141,7 @@ class SimulationProperties {
         }
     }
 
-    func getProcessingCooldown(processorNumber: UInt) -> Double {
+    func getProcessingCooldown(processorNumber: Int) -> Double {
         let currentProperties: ProcessingProperties
         
         if processorNumber <= processorsAmount {
@@ -185,7 +185,7 @@ class SimulationProperties {
         currentProcessingProperties.append(properties)
     }
 
-    func setProcessorsAmount(_ newAmount: UInt) {
+    func setProcessorsAmount(_ newAmount: Int) {
         guard newAmount > 0 else {
             return
         }
@@ -196,12 +196,12 @@ class SimulationProperties {
             }
         } else if processorsAmount > newAmount {
             for _ in 1 ... processorsAmount - newAmount {
-                removeProcessorProperties(index: UInt(currentProcessingProperties.count - 1))
+                removeProcessorProperties(index: Int(currentProcessingProperties.count - 1))
             }
         }
     }
 
-    func removeProcessorProperties(index: UInt) {
+    func removeProcessorProperties(index: Int) {
         guard processorsAmount > 1 && index < currentProcessingProperties.count else {
             return
         }
@@ -210,13 +210,13 @@ class SimulationProperties {
 
     func removeProcessorProperties(indices: IndexSet) {
         var intIndices = [Int]()
-        for index in indices where UInt(index) < currentProcessingProperties.count {
+        for index in indices where Int(index) < currentProcessingProperties.count {
             intIndices.append(index)
         }
         currentProcessingProperties.remove(at: intIndices)
     }
 
-    func replaceProcessorProperties(with newProperties: ProcessingProperties, at index: UInt) {
+    func replaceProcessorProperties(with newProperties: ProcessingProperties, at index: Int) {
         guard newProperties.maxTime >= newProperties.minTime, index < currentProcessingProperties.count else {
             return
         }

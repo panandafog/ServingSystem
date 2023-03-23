@@ -13,6 +13,9 @@
 		0B2C2A682537939500F1DA66 /* SimulationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A672537939500F1DA66 /* SimulationProperties.swift */; };
 		0B2C2A702537981100F1DA66 /* ProcessingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */; };
 		0B2C2A772537987400F1DA66 /* GenerationFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A762537987400F1DA66 /* GenerationFunction.swift */; };
+		0B3A5E2C29CC4AAA0034C6AD /* BufferInserterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E2B29CC4AAA0034C6AD /* BufferInserterTests.swift */; };
+		0B3A5E2E29CC4D850034C6AD /* BufferMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E2D29CC4D850034C6AD /* BufferMock.swift */; };
+		0B3A5E3029CC58E40034C6AD /* BufferPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A5E2F29CC58E40034C6AD /* BufferPickerTests.swift */; };
 		0B459AB7253504E200351FBA /* Maths.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B459AB6253504E200351FBA /* Maths.swift */; };
 		0B546DD6253BABAE00661487 /* SimulationThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B546DD5253BABAE00661487 /* SimulationThread.swift */; };
 		0B584E432535E3D00089B37E /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B584E422535E3D00089B37E /* SettingsViewController.swift */; };
@@ -34,10 +37,12 @@
 		0B8FE3EE25175CAE00E3CB46 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3ED25175CAE00E3CB46 /* Assets.xcassets */; };
 		0B8FE3F125175CAE00E3CB46 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0B8FE3EF25175CAE00E3CB46 /* Main.storyboard */; };
 		0B8FE42825175D6200E3CB46 /* SimulationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8FE42725175D6200E3CB46 /* SimulationMode.swift */; };
-		0B9802842995516D0028F442 /* SimulationThreadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9802832995516D0028F442 /* SimulationThreadTests.swift */; };
 		0B9891F8256529A1001628E2 /* SavingTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9891F7256529A1001628E2 /* SavingTextViewController.swift */; };
 		0BBF15682537A59600D72FD6 /* GenerationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF15672537A59600D72FD6 /* GenerationProperties.swift */; };
 		0BBF156D2537A5A500D72FD6 /* ProcessingProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */; };
+		0BFB606929C462C50079BCEA /* GeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB606829C462C50079BCEA /* GeneratorTests.swift */; };
+		0BFB606C29C494B10079BCEA /* BufferInserterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB606B29C494B10079BCEA /* BufferInserterSpy.swift */; };
+		0BFB607029C4A22C0079BCEA /* BufferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFB606F29C4A22C0079BCEA /* BufferTests.swift */; };
 		0BFD71452549914A00E46CDF /* AnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFD71442549914A00E46CDF /* AnalysisViewController.swift */; };
 		DFAC86B7C4AF8CE66A2D72CF /* Pods_ServingSystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD68E926E5BB2F810C777DBA /* Pods_ServingSystem.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +64,9 @@
 		0B2C2A672537939500F1DA66 /* SimulationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationProperties.swift; sourceTree = "<group>"; };
 		0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingFunction.swift; sourceTree = "<group>"; };
 		0B2C2A762537987400F1DA66 /* GenerationFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationFunction.swift; sourceTree = "<group>"; };
+		0B3A5E2B29CC4AAA0034C6AD /* BufferInserterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferInserterTests.swift; sourceTree = "<group>"; };
+		0B3A5E2D29CC4D850034C6AD /* BufferMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferMock.swift; sourceTree = "<group>"; };
+		0B3A5E2F29CC58E40034C6AD /* BufferPickerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferPickerTests.swift; sourceTree = "<group>"; };
 		0B459AB6253504E200351FBA /* Maths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Maths.swift; sourceTree = "<group>"; };
 		0B546DD5253BABAE00661487 /* SimulationThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationThread.swift; sourceTree = "<group>"; };
 		0B584E422535E3D00089B37E /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -84,10 +92,12 @@
 		0B8FE3F325175CAE00E3CB46 /* ServingSystem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ServingSystem.entitlements; sourceTree = "<group>"; };
 		0B8FE42725175D6200E3CB46 /* SimulationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationMode.swift; sourceTree = "<group>"; };
 		0B98027629954FB90028F442 /* ServingSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ServingSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0B9802832995516D0028F442 /* SimulationThreadTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimulationThreadTests.swift; sourceTree = "<group>"; };
 		0B9891F7256529A1001628E2 /* SavingTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingTextViewController.swift; sourceTree = "<group>"; };
 		0BBF15672537A59600D72FD6 /* GenerationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationProperties.swift; sourceTree = "<group>"; };
 		0BBF156C2537A5A500D72FD6 /* ProcessingProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingProperties.swift; sourceTree = "<group>"; };
+		0BFB606829C462C50079BCEA /* GeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorTests.swift; sourceTree = "<group>"; };
+		0BFB606B29C494B10079BCEA /* BufferInserterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferInserterSpy.swift; sourceTree = "<group>"; };
+		0BFB606F29C4A22C0079BCEA /* BufferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BufferTests.swift; sourceTree = "<group>"; };
 		0BFD71442549914A00E46CDF /* AnalysisViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisViewController.swift; sourceTree = "<group>"; };
 		2766CC4C25FB609E2F562DBB /* Pods-ServingSystem.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServingSystem.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ServingSystem/Pods-ServingSystem.debug.xcconfig"; sourceTree = "<group>"; };
 		BA0472FAA0E15911F2FE843C /* Pods-ServingSystem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ServingSystem.release.xcconfig"; path = "Pods/Target Support Files/Pods-ServingSystem/Pods-ServingSystem.release.xcconfig"; sourceTree = "<group>"; };
@@ -264,9 +274,22 @@
 		0B98027729954FB90028F442 /* ServingSystemTests */ = {
 			isa = PBXGroup;
 			children = (
-				0B9802832995516D0028F442 /* SimulationThreadTests.swift */,
+				0BFB606A29C494090079BCEA /* Helpers */,
+				0BFB606829C462C50079BCEA /* GeneratorTests.swift */,
+				0BFB606F29C4A22C0079BCEA /* BufferTests.swift */,
+				0B3A5E2B29CC4AAA0034C6AD /* BufferInserterTests.swift */,
+				0B3A5E2F29CC58E40034C6AD /* BufferPickerTests.swift */,
 			);
 			path = ServingSystemTests;
+			sourceTree = "<group>";
+		};
+		0BFB606A29C494090079BCEA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0B3A5E2D29CC4D850034C6AD /* BufferMock.swift */,
+				0BFB606B29C494B10079BCEA /* BufferInserterSpy.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		5AC9BC4C41669ABD2678EFAD /* Pods */ = {
@@ -492,7 +515,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B9802842995516D0028F442 /* SimulationThreadTests.swift in Sources */,
+				0BFB607029C4A22C0079BCEA /* BufferTests.swift in Sources */,
+				0B3A5E3029CC58E40034C6AD /* BufferPickerTests.swift in Sources */,
+				0B3A5E2C29CC4AAA0034C6AD /* BufferInserterTests.swift in Sources */,
+				0BFB606C29C494B10079BCEA /* BufferInserterSpy.swift in Sources */,
+				0B3A5E2E29CC4D850034C6AD /* BufferMock.swift in Sources */,
+				0BFB606929C462C50079BCEA /* GeneratorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

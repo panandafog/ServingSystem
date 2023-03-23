@@ -1,11 +1,19 @@
 //
-//  BufferInserter.swift
+//  BufferInserterImpl.swift
 //  ServingSystem
 //
 //  Created by panandafog on 21.09.2020.
 //
 
-class BufferInserter {
+protocol BufferInserter {
+    var rejectedRequests: [[Request]] { get }
+    
+    func insert(request: Request)
+    func getRejectedRequestsAmount() -> Int
+    func getRejectedRequestsAmount(creatorNumber: Int) -> Int
+}
+
+class BufferInserterImpl: BufferInserter {
 
     let buffer: Buffer
 
@@ -13,7 +21,7 @@ class BufferInserter {
 
     private var writeToLog: ((String) -> Void)?
 
-    init(buffer: Buffer, generatorsCount: UInt) {
+    init(buffer: Buffer, generatorsCount: Int) {
         self.buffer = buffer
 
         for _ in 1...generatorsCount {
@@ -21,7 +29,7 @@ class BufferInserter {
         }
     }
 
-    convenience init(buffer: Buffer, generatorsCount: UInt, writeToLog: @escaping ((String) -> Void)) {
+    convenience init(buffer: Buffer, generatorsCount: Int, writeToLog: @escaping ((String) -> Void)) {
         self.init(buffer: buffer, generatorsCount: generatorsCount)
         self.writeToLog = writeToLog
     }
@@ -39,18 +47,18 @@ class BufferInserter {
         writeToLog?("Inserted request #" + String(request.name) + "at buffer to position #" + String(nNind + 1))
     }
 
-    func getRejectedRequestsAmount() -> UInt {
-        var res = 0 as UInt
+    func getRejectedRequestsAmount() -> Int {
+        var res = 0
         rejectedRequests.forEach({
-            res += UInt($0.count)
+            res += $0.count
         })
         return res
     }
 
-    func getRejectedRequestsAmount(creatorNumber: UInt) -> UInt {
+    func getRejectedRequestsAmount(creatorNumber: Int) -> Int {
         if creatorNumber < 1 {
             return 0
         }
-        return UInt(rejectedRequests[Int(creatorNumber) - 1].count)
+        return Int(rejectedRequests[Int(creatorNumber) - 1].count)
     }
 }

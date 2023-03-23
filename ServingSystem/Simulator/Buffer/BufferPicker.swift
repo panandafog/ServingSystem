@@ -17,7 +17,7 @@ class BufferPicker {
         var result: Request?
         var resultIndex: Int?
 
-        for index in 0...Int(buffer.capacity) - 1 {
+        for index in 0...buffer.capacity - 1 {
 
             if buffer.queue[index] == nil { continue }
 

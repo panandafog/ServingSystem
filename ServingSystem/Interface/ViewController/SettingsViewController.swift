@@ -73,7 +73,7 @@ class SettingsViewController: NSViewController {
         let newCooldown = sender.doubleValue
         var properties = SimulationProperties.shared.getGenerationProperties(index: rowInd)
         properties.cooldown = newCooldown
-        SimulationProperties.shared.replaceGeneratorProperties(with: properties, at: UInt(rowInd))
+        SimulationProperties.shared.replaceGeneratorProperties(with: properties, at: rowInd)
 
         generatorsTable.reloadData()
     }
@@ -88,7 +88,7 @@ class SettingsViewController: NSViewController {
         let newCooldown = sender.doubleValue
         var properties = SimulationProperties.shared.getProcessingProperties(index: rowInd)
         properties.minTime = newCooldown
-        SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
+        SimulationProperties.shared.replaceProcessorProperties(with: properties, at: rowInd)
 
         processorsTable.reloadData()
     }
@@ -103,7 +103,7 @@ class SettingsViewController: NSViewController {
         let newCooldown = sender.doubleValue
         var properties = SimulationProperties.shared.getProcessingProperties(index: rowInd)
         properties.maxTime = newCooldown
-        SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
+        SimulationProperties.shared.replaceProcessorProperties(with: properties, at: rowInd)
 
         processorsTable.reloadData()
     }
@@ -119,7 +119,7 @@ class SettingsViewController: NSViewController {
         let rowInd = table.row(for: sender)
         var properties = SimulationProperties.shared.getGenerationProperties(index: rowInd)
         properties.function = GenerationFunction.allCases[sender.indexOfSelectedItem]
-        SimulationProperties.shared.replaceGeneratorProperties(with: properties, at: UInt(rowInd))
+        SimulationProperties.shared.replaceGeneratorProperties(with: properties, at: rowInd)
     }
 
     @IBAction private func processorsFunctionSelected(_ sender: NSComboBox) {
@@ -131,7 +131,7 @@ class SettingsViewController: NSViewController {
         let rowInd = table.row(for: sender)
         var properties = SimulationProperties.shared.getProcessingProperties(index: rowInd)
         properties.function = ProcessingFunction.allCases[sender.indexOfSelectedItem]
-        SimulationProperties.shared.replaceProcessorProperties(with: properties, at: UInt(rowInd))
+        SimulationProperties.shared.replaceProcessorProperties(with: properties, at: rowInd)
     }
 
     @IBAction private func addGeneratorRow(_ sender: NSButton) {
@@ -193,7 +193,7 @@ class SettingsViewController: NSViewController {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.setGeneratorsAmount(UInt(sender.integerValue))
+        SimulationProperties.shared.setGeneratorsAmount(sender.integerValue)
         generatorsTable.reloadData()
     }
 
@@ -201,7 +201,7 @@ class SettingsViewController: NSViewController {
         guard sender.integerValue > 0 else {
             return
         }
-        SimulationProperties.shared.setProcessorsAmount(UInt(sender.integerValue))
+        SimulationProperties.shared.setProcessorsAmount(sender.integerValue)
         processorsTable.reloadData()
     }
 }

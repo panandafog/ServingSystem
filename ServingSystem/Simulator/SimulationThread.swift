@@ -32,7 +32,7 @@ class SimulationThread: Thread {
                 if currentRejectProbability == 0 {
                     break
                 }
-                currentRequestsAmount = previousRequestAmount + UInt((2.699449 * (1.0 - currentRejectProbability)) / (currentRejectProbability * 0.01))
+                currentRequestsAmount = previousRequestAmount + Int((2.699449 * (1.0 - currentRejectProbability)) / (currentRejectProbability * 0.01))
 
                 makeSteps(currentRequestsAmount)
 
@@ -47,7 +47,7 @@ class SimulationThread: Thread {
         }
     }
 
-    private func makeSteps(_ steps: UInt) {
+    private func makeSteps(_ steps: Int) {
         for _ in 1...steps {
             simulator.makeStep(debug: false)
             if isCancelled {

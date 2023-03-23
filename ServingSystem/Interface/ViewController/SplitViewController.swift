@@ -40,10 +40,10 @@ class SplitViewController: NSSplitViewController {
         self.addChild(self.stepsViewController)
     }
     
-    func switchTab(_ number: UInt) {
+    func switchTab(_ number: Int) {
         if number < tabControllers.count {
             removeChild(at: self.children.count - 1)
-            addChild(tabControllers[Int(number)])
+            addChild(tabControllers[number])
         }
     }
 }

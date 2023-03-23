@@ -19,7 +19,7 @@ class Generator {
 
     init(priority: Int, bufferInserter: BufferInserter, simulator: Simulator?) {
         self.priority = priority
-        self.cooldown = SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) 
+        self.cooldown = SimulationProperties.shared.getGenerationCooldown(generatorNumber: priority)
         self.bufferInserter = bufferInserter
         self.simulator = simulator
     }
@@ -42,13 +42,15 @@ class Generator {
 
 extension Generator: SpecialConditioned {
 
-    func getNextSCTime() -> Double {
-        time + (SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) )
+    var nextSCTime: Double {
+        time + SimulationProperties.shared.getGenerationCooldown(
+            generatorNumber: priority
+        )
     }
 
     func makeStep() {
         generateRequest()
-        time += SimulationProperties.shared.getGenerationCooldown(generatorNumber: UInt(priority)) 
+        time = nextSCTime
 
         simulator?.writeToLog("Generator #" + String(priority)
                         + " generated request #"
