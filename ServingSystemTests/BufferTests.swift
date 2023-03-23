@@ -22,6 +22,13 @@ final class BufferTests: XCTestCase {
     }
 
     func testCapacity() throws {
-        XCTAssertEqual(buffer.queue.count, bufferCapacity)
+        
+        // validate queue capacity
+        
+        XCTAssertEqual(
+            buffer.queue.count,
+            bufferCapacity,
+            "queue capacity should be equal to buffer capacity"
+        )
     }
 }

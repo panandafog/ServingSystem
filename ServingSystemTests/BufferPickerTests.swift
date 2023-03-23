@@ -24,6 +24,7 @@ final class BufferPickerTests: XCTestCase {
     }
 
     func testPriorityPick() throws {
+        
         // fill the queue
         
         let bufferCapacity = 5
@@ -43,6 +44,7 @@ final class BufferPickerTests: XCTestCase {
     }
     
     func testPriorityPick2() throws {
+        
         // fill the queue
         
         let bufferQueue: [Request?] = [
@@ -60,10 +62,15 @@ final class BufferPickerTests: XCTestCase {
         // validate picked request
         
         let pickedRequest = bufferPicker.pick()
-        XCTAssertEqual(pickedRequest?.creatorNumber, 1)
+        XCTAssertEqual(
+            pickedRequest?.creatorNumber,
+            1,
+            "picker should choose request with highest priority"
+        )
     }
     
     func testTimePick() throws {
+        
         // fill the queue
         
         let bufferQueue: [Request?] = [
@@ -82,10 +89,19 @@ final class BufferPickerTests: XCTestCase {
         // validate picked request
         
         let pickedRequest = bufferPicker.pick()
-        XCTAssertEqual(pickedRequest?.creatorNumber, 1)
-        XCTAssertEqual(pickedRequest?.creationTime, 0.0)
+        XCTAssertEqual(
+            pickedRequest?.creatorNumber,
+            1,
+            "picker should choose request with highest priority"
+        )
+        XCTAssertEqual(
+            pickedRequest?.creationTime,
+            0.0,
+            "picker should choose request with highest priority"
+        )
     }
     func testTimePick2() throws {
+        
         // fill the queue
         
         let bufferQueue: [Request?] = [
@@ -103,6 +119,10 @@ final class BufferPickerTests: XCTestCase {
         // validate picked request
         
         let pickedRequest = bufferPicker.pick()
-        XCTAssertEqual(pickedRequest?.creatorNumber, 1)
+        XCTAssertEqual(
+            pickedRequest?.creatorNumber,
+            1,
+            "picker should choose request with highest priority"
+        )
     }
 }

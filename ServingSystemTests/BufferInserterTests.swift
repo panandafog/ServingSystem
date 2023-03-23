@@ -27,17 +27,35 @@ final class BufferInserterTests: XCTestCase {
     }
     
     func testInitialState() throws {
-        // validate initial state
         
-        XCTAssertEqual(bufferInserter.rejectedRequests.count, generatorsCount)
-        XCTAssertEqual(bufferInserter.getRejectedRequestsAmount(), 0)
+        // validate initial buffer inserter state
+        
+        XCTAssertEqual(
+            bufferInserter.rejectedRequests.count,
+            generatorsCount,
+            "rejected requests 2d array should have the same size as count of generators"
+        )
+        XCTAssertEqual(
+            bufferInserter.getRejectedRequestsAmount(),
+            0,
+            "buffer should not have rejected requests"
+        )
         for generatorIndex in 0..<generatorsCount {
-            XCTAssertEqual(bufferInserter.rejectedRequests[generatorIndex].count, 0)
-            XCTAssertEqual(bufferInserter.getRejectedRequestsAmount(creatorNumber: generatorIndex), 0)
+            XCTAssertEqual(
+                bufferInserter.rejectedRequests[generatorIndex].count,
+                0,
+                "buffer should not have rejected requests"
+            )
+            XCTAssertEqual(
+                bufferInserter.getRejectedRequestsAmount(creatorNumber: generatorIndex),
+                0,
+                "buffer should not have rejected requests"
+            )
         }
     }
     
     func testFullfilled() throws {
+        
         // insert max requests count
         
         for generatorNumber in 1...generatorsCount {
@@ -47,19 +65,39 @@ final class BufferInserterTests: XCTestCase {
         
         // validate fullfilled state
         
-        XCTAssertEqual(bufferInserter.rejectedRequests.count, generatorsCount)
-        XCTAssertEqual(bufferInserter.getRejectedRequestsAmount(), 0)
+        XCTAssertEqual(
+            bufferInserter.rejectedRequests.count,
+            generatorsCount,
+            "rejected requests 2d array should have the same size as count of generators"
+        )
+        XCTAssertEqual(
+            bufferInserter.getRejectedRequestsAmount(),
+            0,
+            "buffer should not have rejected requests"
+        )
+        
         for generatorIndex in 0..<generatorsCount {
-            XCTAssertEqual(bufferInserter.rejectedRequests[generatorIndex].count, 0)
-            XCTAssertEqual(bufferInserter.getRejectedRequestsAmount(creatorNumber: generatorIndex), 0)
+            XCTAssertEqual(
+                bufferInserter.rejectedRequests[generatorIndex].count,
+                0,
+                "buffer should not have rejected requests"
+            )
+            XCTAssertEqual(
+                bufferInserter.getRejectedRequestsAmount(creatorNumber: generatorIndex),
+                0,
+                "buffer should not have rejected requests"
+            )
         }
         
         for queueEntryIndex in 0..<bufferCapacity {
-            XCTAssertNotNil(bufferMock.queue[queueEntryIndex])
+            XCTAssertNotNil(
+                bufferMock.queue[queueEntryIndex],
+                "buffer queue should be full"
+            )
         }
     }
 
-    func testInsertion() throws {
+    func testBufferOverflow() throws {
         
         // simulate buffer overflow
         
@@ -78,8 +116,16 @@ final class BufferInserterTests: XCTestCase {
         // validate overflowed buffer state
         
         for generatorNumber in additionalRequestsGeneratorNumbers {
-            XCTAssertEqual(bufferInserter.rejectedRequests[generatorNumber - 1].count, 1)
-            XCTAssertEqual(bufferInserter.getRejectedRequestsAmount(creatorNumber: generatorNumber), 1)
+            XCTAssertEqual(
+                bufferInserter.rejectedRequests[generatorNumber - 1].count,
+                1,
+                "buffer should have 1 rejected request"
+            )
+            XCTAssertEqual(
+                bufferInserter.getRejectedRequestsAmount(creatorNumber: generatorNumber),
+                1,
+                "buffer should have 1 rejected request"
+            )
         }
     }
 }

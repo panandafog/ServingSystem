@@ -24,49 +24,85 @@ final class GeneratorTests: XCTestCase {
     }
     
     func testGeneratorInsertingRequests() throws {
-        let requestsCount = 10
         
+        // generate requests
+        
+        let requestsCount = 10
         Array(0..<requestsCount).forEach { _ in
             generator.makeStep()
         }
         
+        // check count of inserted requests
+        
         XCTAssertEqual(
             bufferInserterSpy.insertedRequests.count,
-            requestsCount
+            requestsCount,
+            "count of inserted requests should be equal to count of generated requests"
         )
+        
+        // check generator of inserted requests
+        
+        for request in bufferInserterSpy.insertedRequests {
+            XCTAssertEqual(
+                request.creatorNumber,
+                generator.priority,
+                "all inserted requests should be created by generator #" + String(generator.priority)
+            )
+        }
     }
     
     func testGeneratorInsertedRequestsTime() throws {
+        
+        // save initial time
+        
         let nextTime = generator.nextSCTime
+        
+        // make first step
+        
         generator.makeStep()
-        XCTAssertEqual(
-            bufferInserterSpy.insertedRequests.last?.creationTime,
-            0.0
-        )
-        generator.makeStep()
+        
+        // validate creation time of request
         
         XCTAssertEqual(
             bufferInserterSpy.insertedRequests.last?.creationTime,
-            nextTime
+            0.0,
+            "last request creation time should be equal to initial generator's time"
+        )
+        
+        // make second step
+        
+        generator.makeStep()
+        
+        // validate creation time of last request
+        
+        XCTAssertEqual(
+            bufferInserterSpy.insertedRequests.last?.creationTime,
+            nextTime,
+            "last request creation time should be equal to generator's time after first step"
         )
     }
     
     func testGeneratorOff() throws {
-        let nextTime = generator.nextSCTime
+        
+        // make steps
+        
         generator.makeStep()
         generator.makeStep()
         
-        XCTAssertEqual(
-            bufferInserterSpy.insertedRequests.last?.creationTime,
-            nextTime
-        )
+        // stop generator
         
         generator.off()
+        
+        // make one more step
+        
         generator.makeStep()
-        // FIXME: после off время д.б. 0?
+        
+        // validate creation time of last request
+        
         XCTAssertEqual(
             bufferInserterSpy.insertedRequests.last?.creationTime,
-            0.0
+            Double.infinity
         )
     }
 }
+
