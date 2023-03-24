@@ -10,6 +10,7 @@
 		0B060442253A51D900226BD1 /* GeneratorFunctionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B060441253A51D900226BD1 /* GeneratorFunctionCellView.swift */; };
 		0B060447253A52C000226BD1 /* ProcessorFunctionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B060446253A52C000226BD1 /* ProcessorFunctionCellView.swift */; };
 		0B07B7B02519FDAD00B03D46 /* Simulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B07B7AF2519FDAD00B03D46 /* Simulator.swift */; };
+		0B1F78F029CCFE5B0095EE6E /* Double+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1F78EF29CCFE5B0095EE6E /* Double+Extensions.swift */; };
 		0B2C2A682537939500F1DA66 /* SimulationProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A672537939500F1DA66 /* SimulationProperties.swift */; };
 		0B2C2A702537981100F1DA66 /* ProcessingFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */; };
 		0B2C2A772537987400F1DA66 /* GenerationFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2C2A762537987400F1DA66 /* GenerationFunction.swift */; };
@@ -64,6 +65,7 @@
 		0B060441253A51D900226BD1 /* GeneratorFunctionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneratorFunctionCellView.swift; sourceTree = "<group>"; };
 		0B060446253A52C000226BD1 /* ProcessorFunctionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessorFunctionCellView.swift; sourceTree = "<group>"; };
 		0B07B7AF2519FDAD00B03D46 /* Simulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Simulator.swift; sourceTree = "<group>"; };
+		0B1F78EF29CCFE5B0095EE6E /* Double+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extensions.swift"; sourceTree = "<group>"; };
 		0B2C2A672537939500F1DA66 /* SimulationProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationProperties.swift; sourceTree = "<group>"; };
 		0B2C2A6F2537981100F1DA66 /* ProcessingFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessingFunction.swift; sourceTree = "<group>"; };
 		0B2C2A762537987400F1DA66 /* GenerationFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerationFunction.swift; sourceTree = "<group>"; };
@@ -163,6 +165,14 @@
 			path = Buffer;
 			sourceTree = "<group>";
 		};
+		0B1F78EE29CCFE460095EE6E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0B1F78EF29CCFE5B0095EE6E /* Double+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		0B2C2A742537984E00F1DA66 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +247,7 @@
 		0B8FE3E825175CAD00E3CB46 /* ServingSystem */ = {
 			isa = PBXGroup;
 			children = (
+				0B1F78EE29CCFE460095EE6E /* Extensions */,
 				0B8FE42C25175DB100E3CB46 /* Storyboard */,
 				0B8FE41825175CEE00E3CB46 /* Interface */,
 				0B8FE41E25175D2900E3CB46 /* Model */,
@@ -512,6 +523,7 @@
 				0B6C959325192F46006DC0DD /* Generator.swift in Sources */,
 				0B6C95AF2519501A006DC0DD /* Processor.swift in Sources */,
 				0B459AB7253504E200351FBA /* Maths.swift in Sources */,
+				0B1F78F029CCFE5B0095EE6E /* Double+Extensions.swift in Sources */,
 				0B2C2A772537987400F1DA66 /* GenerationFunction.swift in Sources */,
 				0B8FE3EA25175CAD00E3CB46 /* AppDelegate.swift in Sources */,
 				0B584E4D2535E7010089B37E /* AutoViewController.swift in Sources */,

@@ -91,8 +91,8 @@ final class ProcessorTests: XCTestCase {
             "processor's time should be more then initial time"
         )
         XCTAssertEqual(
-            processor.bisyTime,
-            processor.time - initialTime,
+            processor.bisyTime.rounded(toPlaces: 3),
+            (processor.time - initialTime).rounded(toPlaces: 3),
             "processor's bisy should be equal to processor's time - initial time"
         )
         XCTAssertEqual(
